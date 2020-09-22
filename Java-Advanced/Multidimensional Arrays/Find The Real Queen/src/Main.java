@@ -8,13 +8,13 @@ public class Main {
         int sizeOfBoard = 8;
         char[][] matrix = readCharMatrix(scanner, 8, 8);
 
-        for (int rol = 0; rol < 8; rol++) {
+        for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                char curr = matrix[rol][col];
+                char curr = matrix[row][col];
 
                 if (curr == 'q') {
-                    if (isValid(matrix, rol, col)) {
-                        System.out.println(rol + " " + col);
+                    if (isValid(matrix, row, col)) {
+                        System.out.println(row + " " + col);
                         break;
                     }
                 }
@@ -22,101 +22,101 @@ public class Main {
         }
     }
 
-    private static boolean isValid(char[][] matrix, int rol, int col) {
-        int rolOriginal = rol;
+    private static boolean isValid(char[][] matrix, int row, int col) {
+        int rolOriginal = row;
         int colOriginal = col;
         //UP
-        while (rol >= 1) {
-            rol--;
-            char curr = matrix[rol][col];
+        while (row >= 1) {
+            row--;
+            char curr = matrix[row][col];
             if (curr == 'q') {
                 return false;
             }
         }
-        rol = rolOriginal;
+        row = rolOriginal;
         col = colOriginal;
 
         //DOWN
-        while (rol < matrix.length - 1) {
-            rol++;
-            char curr = matrix[rol][col];
+        while (row < matrix.length - 1) {
+            row++;
+            char curr = matrix[row][col];
             if (curr == 'q') {
                 return false;
             }
         }
-        rol = rolOriginal;
+        row = rolOriginal;
         col = colOriginal;
 
         //LEFT
         while (col >= 1) {
             col--;
-            char curr = matrix[rol][col];
+            char curr = matrix[row][col];
             if (curr == 'q') {
                 return false;
             }
         }
-        rol = rolOriginal;
+        row = rolOriginal;
         col = colOriginal;
 
 
         //RIGHT
-        while (col < matrix[rol].length - 1) {
+        while (col < matrix[row].length - 1) {
             col++;
-            char curr = matrix[rol][col];
+            char curr = matrix[row][col];
             if (curr == 'q') {
                 return false;
             }
         }
-        rol = rolOriginal;
+        row = rolOriginal;
         col = colOriginal;
 
 
         //DIAGONALS:
 
         //RIGHT-DOWN
-        while (rol < matrix.length - 1 && col < matrix[rol].length - 1) {
-            rol++;
+        while (row < matrix.length - 1 && col < matrix[row].length - 1) {
+            row++;
             col++;
-            char curr = matrix[rol][col];
+            char curr = matrix[row][col];
             if (curr == 'q') {
                 return false;
             }
         }
-        rol = rolOriginal;
+        row = rolOriginal;
         col = colOriginal;
 
 
         //RIGHT-UP
-        while (rol >= 1 && col < matrix[rol].length - 1) {
-            rol--;
+        while (row >= 1 && col < matrix[row].length - 1) {
+            row--;
             col++;
-            char curr = matrix[rol][col];
+            char curr = matrix[row][col];
             if (curr == 'q') {
                 return false;
             }
         }
-        rol = rolOriginal;
+        row = rolOriginal;
         col = colOriginal;
 
 
         //LEFT-UP
-        while (rol >= 1 && col >= 1) {
-            rol--;
+        while (row >= 1 && col >= 1) {
+            row--;
             col--;
-            char curr = matrix[rol][col];
+            char curr = matrix[row][col];
             if (curr == 'q') {
                 return false;
             }
         }
-        rol = rolOriginal;
+        row = rolOriginal;
         col = colOriginal;
 
 
         //LEFT-DOWN
-        while (rol < matrix.length - 1 && col >= 1) {
-            rol++;
+        while (row < matrix.length - 1 && col >= 1) {
+            row++;
             col--;
-            char curr = matrix[rol][col];
+            char curr = matrix[row][col];
             if (curr == 'q') {
                 return false;
             }
@@ -125,9 +125,9 @@ public class Main {
         return true;
     }
 
-    private static char[][] readCharMatrix(Scanner scanner, int rolls, int cols) {
-        char[][] matrix = new char[rolls][cols];
-        for (int i = 0; i < rolls; i++) {
+    private static char[][] readCharMatrix(Scanner scanner, int row, int cols) {
+        char[][] matrix = new char[row][cols];
+        for (int i = 0; i < row; i++) {
             String[] elements = scanner.nextLine().split("\\s+");
             for (int j = 0; j < cols; j++) {
                 matrix[i][j] = elements[j].charAt(0);
