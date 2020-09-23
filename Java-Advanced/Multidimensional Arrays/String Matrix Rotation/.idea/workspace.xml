@@ -63,22 +63,26 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1637" height="272" key="GridCell.Tab.0.bottom" timestamp="1600868152476">
+    <state x="92" y="92" width="1496" height="826" key="DiffContextDialog" timestamp="1600868489145">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1637" height="272" key="GridCell.Tab.0.bottom/0.0.1680.1010@0.0.1680.1010" timestamp="1600868152476" />
-    <state width="1637" height="272" key="GridCell.Tab.0.center" timestamp="1600868152475">
+    <state x="92" y="92" width="1496" height="826" key="DiffContextDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1600868489145" />
+    <state width="1637" height="272" key="GridCell.Tab.0.bottom" timestamp="1600868428147">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1637" height="272" key="GridCell.Tab.0.center/0.0.1680.1010@0.0.1680.1010" timestamp="1600868152475" />
-    <state width="1637" height="272" key="GridCell.Tab.0.left" timestamp="1600868152475">
+    <state width="1637" height="272" key="GridCell.Tab.0.bottom/0.0.1680.1010@0.0.1680.1010" timestamp="1600868428147" />
+    <state width="1637" height="272" key="GridCell.Tab.0.center" timestamp="1600868428147">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1637" height="272" key="GridCell.Tab.0.left/0.0.1680.1010@0.0.1680.1010" timestamp="1600868152475" />
-    <state width="1637" height="272" key="GridCell.Tab.0.right" timestamp="1600868152476">
+    <state width="1637" height="272" key="GridCell.Tab.0.center/0.0.1680.1010@0.0.1680.1010" timestamp="1600868428147" />
+    <state width="1637" height="272" key="GridCell.Tab.0.left" timestamp="1600868428147">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1637" height="272" key="GridCell.Tab.0.right/0.0.1680.1010@0.0.1680.1010" timestamp="1600868152476" />
+    <state width="1637" height="272" key="GridCell.Tab.0.left/0.0.1680.1010@0.0.1680.1010" timestamp="1600868428147" />
+    <state width="1637" height="272" key="GridCell.Tab.0.right" timestamp="1600868428147">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state width="1637" height="272" key="GridCell.Tab.0.right/0.0.1680.1010@0.0.1680.1010" timestamp="1600868428147" />
     <state width="1637" height="336" key="GridCell.Tab.1.bottom" timestamp="1600867953928">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
