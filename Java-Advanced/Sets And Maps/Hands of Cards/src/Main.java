@@ -48,20 +48,7 @@ public class Main {
                     System.out.printf("%s: %d%n", p.getKey(), p.getValue());
                 });
     }
-
-    private static int calculateValue(String[] cards) {
-        int value = 0;
-        for (int i = 0; i < cards.length; i++) {
-            String[] currCard = cards[i].split("");
-            String power = currCard[0];
-            String multiplier = currCard[1];
-
-            int powerInNumbers = Integer.parseInt(returnPowerValue(power));
-            int multiplierInNumbers = Integer.parseInt(returnMultiplier(multiplier));
-            value = value + (powerInNumbers * multiplierInNumbers);
-        }
-        return value;
-    }
+    
 
     private static String returnMultiplier(String multiplier) {
         switch (multiplier) {
