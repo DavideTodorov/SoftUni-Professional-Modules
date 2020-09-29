@@ -7,20 +7,17 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String[] input = scanner.nextLine().split("");
+        Map<Character, Integer> symbolOccurrences = new TreeMap<>();
 
-        Map<String, Integer> symbolOccurrences = new TreeMap<>();
-
-        for (int i = 0; i < input.length; i++) {
-            String currSymbol = input[i];
+        String input = scanner.nextLine();
+        for (int i = 0; i < input.length(); i++) {
+            char currSymbol = input.charAt(i);
 
             symbolOccurrences.putIfAbsent(currSymbol, 0);
-            symbolOccurrences.put(currSymbol, symbolOccurrences.get(currSymbol) + 1);
+            int occurrences = symbolOccurrences.get(currSymbol) + 1;
+            symbolOccurrences.put(currSymbol, occurrences);
         }
 
-        symbolOccurrences.entrySet()
-                .forEach(x -> {
-                    System.out.printf("%s: %d time/s%n", x.getKey(), x.getValue());
-                });
+        symbolOccurrences.forEach((key, value) -> System.out.printf("%c: %d time/s%n", key, value));
     }
 }
