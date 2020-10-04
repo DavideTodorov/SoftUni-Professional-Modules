@@ -37,4 +37,14 @@ public class Car {
     public int getHorsePower() {
         return this.horsePower;
     }
+
+    public void carInfo() {
+        System.out.println(this.toString());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("The car is: %s %s - %d HP.",
+                this.getBrand(), this.getModel(), this.getHorsePower());
+    }
 }
