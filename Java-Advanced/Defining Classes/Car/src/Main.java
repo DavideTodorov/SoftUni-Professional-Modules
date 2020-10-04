@@ -8,8 +8,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         int inputCount = Integer.parseInt(scanner.nextLine());
-
-
+        
         List<Car> cars = new ArrayList<>();
 
         for (int i = 0; i < inputCount; i++) {
