@@ -20,13 +20,7 @@ public class Car {
 
     @Override
     public String toString() {
-        //FordFocus:
-        //V4-33:
-        //Power: 140
-        //Displacement: 28
-        //Efficiency: B
-        //Weight: 1300
-        //Color: Silver
+
         return String.format("%s:%n" +
                         "%s:%n" +
                         "Power: %s%n" +
