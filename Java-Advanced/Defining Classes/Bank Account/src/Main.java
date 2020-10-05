@@ -9,7 +9,7 @@ public class Main {
         Map<Integer, BankAccount> bankAccounts = new HashMap<>();
 
         String input = scanner.nextLine();
-        while (!"END".equals(input)) {
+        while (!"End".equals(input)) {
             String[] tokens = input.split("\\s+");
 
             String command = tokens[0];
