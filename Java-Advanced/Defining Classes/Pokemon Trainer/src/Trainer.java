@@ -25,15 +25,20 @@ public class Trainer {
         return this.numberOfBadges;
     }
 
-    public void setNumberOfBadges(int numberOfBadges) {
-        this.numberOfBadges = numberOfBadges;
+    public void increaseNumberOfBadges() {
+        this.numberOfBadges += 1;
     }
 
     public List<Pokemon> getPokemonList() {
         return this.pokemonList;
     }
 
-    public void setPokemonList(List<Pokemon> pokemonList) {
-        this.pokemonList = pokemonList;
+    public void addToPokemonList(Pokemon pokemon) {
+        this.pokemonList.add(pokemon);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %d %d", this.name, this.numberOfBadges, this.pokemonList.size());
     }
 }

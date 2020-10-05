@@ -29,7 +29,7 @@ public class Pokemon {
         return this.health;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void decreaseHealthBy10() {
+        this.health -= 10;
     }
 }
