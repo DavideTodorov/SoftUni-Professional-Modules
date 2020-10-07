@@ -10,27 +10,9 @@ public class Company {
         this.salary = salary;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public double getSalary() {
-        return salary;
+    @Override
+    public String toString() {
+        return String.format("%s", this.salary == 0.0 ? "" : String.format("%s %s %.2f\n"
+                ,this.companyName, this.department, this.salary));
     }
 }

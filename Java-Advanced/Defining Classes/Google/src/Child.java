@@ -8,19 +8,8 @@ public class Child {
         this.childBirthday = childBirthday;
     }
 
-    public String getChildName() {
-        return childName;
-    }
-
-    public void setChildName(String childName) {
-        this.childName = childName;
-    }
-
-    public String getChildBirthday() {
-        return childBirthday;
-    }
-
-    public void setChildBirthday(String childBirthday) {
-        this.childBirthday = childBirthday;
+    @Override
+    public String toString() {
+        return String.format("%s %s", this.childName, this.childBirthday);
     }
 }
