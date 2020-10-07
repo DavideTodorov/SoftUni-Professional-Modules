@@ -57,6 +57,7 @@ public class Person {
 
     @Override
     public String toString() {
+        //Get Pokemons as String
         StringBuilder pokemonsToPrint = new StringBuilder();
         try {
             if (pokemons.isEmpty()) {
@@ -70,6 +71,7 @@ public class Person {
             pokemonsToPrint.append("");
         }
 
+        //Get Parents as String
         StringBuilder parentsToPrint = new StringBuilder();
         try {
             if (parents.isEmpty()) {
@@ -83,6 +85,7 @@ public class Person {
             parentsToPrint.append("");
         }
 
+        //Get Children as String
         StringBuilder childrenToPrint = new StringBuilder();
         try {
             if (children.isEmpty()) {
