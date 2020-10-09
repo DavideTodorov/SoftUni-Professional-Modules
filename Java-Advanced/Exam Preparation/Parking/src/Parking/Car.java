@@ -1,3 +1,5 @@
+package Parking;
+
 public class Car {
 
     private String manufacturer;
