@@ -40,7 +40,7 @@ public class Main {
                     storedFlowers += flowersCount;
                 }
             }
-            
+
             minLength--;
         }
 
