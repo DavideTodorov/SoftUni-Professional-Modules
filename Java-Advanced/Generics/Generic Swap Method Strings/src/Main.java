@@ -7,11 +7,11 @@ public class Main {
 
         int n = Integer.parseInt(scanner.nextLine());
 
-        Box<String> box = new Box<>();
+        Box<Integer> box = new Box<>();
 
         for (int i = 0; i < n; i++) {
-            String text = scanner.nextLine();
-            box.add(text);
+            Integer num = Integer.parseInt(scanner.nextLine());
+            box.add(num);
         }
         int firstIndex = scanner.nextInt();
         int secondIndex = scanner.nextInt();
