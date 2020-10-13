@@ -57,40 +57,57 @@ public class CustomList<T extends Comparable<T>> {
     }
 
     //Sorter
-    @SuppressWarnings("unchecked")
     public static <T extends Comparable<T>> CustomList<T> sort(CustomList<T> list) {
-        List<T> list1 = (List<T>) list;
-        for (int i = 0; i < list1.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             int minPosition = -1;
-            T minValue = list1.get(i);
-            for (int j = i + 1; j < list1.size(); j++) {
-                T secondPosition = list1.get(j);
+            T minValue = list.get(i);
+            for (int j = i + 1; j < list.size(); j++) {
+                T secondPosition = list.get(j);
                 if (minValue.compareTo(secondPosition) > 0) {
                     minPosition = j;
-                    minValue = list1.get(j);
+                    minValue = list.get(j);
                 }
             }
             if (minPosition >= 0) {
-                swap(list1, i, minPosition);
+                swap(list, i, minPosition);
             }
         }
 
-        list = (CustomList<T>) list1;
-        return (CustomList<T>) list;
+        return list;
     }
-    private static <E extends Comparable<E>> void swap(List<E> sequence,
+
+    private static <T extends Comparable<T>> void swap(CustomList<T> sequence,
                                                        int positionOne, int positionTwo) {
-        E temp = sequence.get(positionOne);
+        T temp = sequence.get(positionOne);
         sequence.set(positionOne, sequence.get(positionTwo));
         sequence.set(positionTwo, temp);
+    }
+
+    private int size() {
+        return this.listOfElements.size();
+    }
+
+    private void set(int index, T element) {
+        this.listOfElements.set(index, element);
+    }
+
+    private T get(int index) {
+        return this.listOfElements.get(index);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (T currElement : listOfElements) {
+
+        for (int i = 0; i < this.listOfElements.size(); i++) {
+            T currElement = this.listOfElements.get(i);
+            if (i == this.listOfElements.size() - 1){
+                sb.append(currElement);
+                break;
+            }
             sb.append(currElement).append("\n");
         }
+
         return sb.toString();
     }
 }

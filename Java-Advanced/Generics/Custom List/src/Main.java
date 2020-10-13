@@ -52,7 +52,7 @@ public class Main {
                     break;
 
                 case "Sort":
-                    System.out.println(CustomList.sort(customList));
+                    CustomList.sort(customList);
                     break;
             }
 
