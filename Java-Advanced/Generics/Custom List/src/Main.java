@@ -50,6 +50,10 @@ public class Main {
                 case "Print":
                     System.out.println(customList.toString());
                     break;
+
+                case "Sort":
+                    System.out.println(CustomList.sort(customList));
+                    break;
             }
 
             input = scanner.nextLine();

@@ -56,6 +56,35 @@ public class CustomList<T extends Comparable<T>> {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
+    //Sorter
+    @SuppressWarnings("unchecked")
+    public static <T extends Comparable<T>> CustomList<T> sort(CustomList<T> list) {
+        List<T> list1 = (List<T>) list;
+        for (int i = 0; i < list1.size(); i++) {
+            int minPosition = -1;
+            T minValue = list1.get(i);
+            for (int j = i + 1; j < list1.size(); j++) {
+                T secondPosition = list1.get(j);
+                if (minValue.compareTo(secondPosition) > 0) {
+                    minPosition = j;
+                    minValue = list1.get(j);
+                }
+            }
+            if (minPosition >= 0) {
+                swap(list1, i, minPosition);
+            }
+        }
+
+        list = (CustomList<T>) list1;
+        return (CustomList<T>) list;
+    }
+    private static <E extends Comparable<E>> void swap(List<E> sequence,
+                                                       int positionOne, int positionTwo) {
+        E temp = sequence.get(positionOne);
+        sequence.set(positionOne, sequence.get(positionTwo));
+        sequence.set(positionTwo, temp);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
