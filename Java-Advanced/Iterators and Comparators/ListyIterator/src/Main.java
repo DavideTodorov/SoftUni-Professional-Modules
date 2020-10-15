@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main {
@@ -29,6 +30,10 @@ public class Main {
 
                 case "Print":
                     System.out.println(listyIterator.print());
+                    break;
+
+                case "PrintAll":
+                    ListyIterator.PrintAll(listyIterator);
                     break;
             }
 
