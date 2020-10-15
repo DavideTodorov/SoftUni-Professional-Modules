@@ -29,7 +29,7 @@ public class ListyIterator  {
 
     public String print() {
         if (list.isEmpty() || index >= list.size()) {
-            throw new IndexOutOfBoundsException("Invalid Operation!");
+            return "Invalid Operation!";
         }
         return list.get(index);
     }
