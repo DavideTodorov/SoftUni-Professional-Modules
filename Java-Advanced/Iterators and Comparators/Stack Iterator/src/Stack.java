@@ -3,44 +3,47 @@ import java.util.function.Consumer;
 
 public class Stack implements Iterable<Integer> {
 
-    private List<Integer> stack;
+    private ArrayDeque<Integer> stack;
 
     public Stack() {
-        this.stack = new ArrayList<>();
+        this.stack = new ArrayDeque<>();
     }
 
     public void push(int... integers) {
         if (integers.length >= 1) {
             for (int i = 0; i < integers.length; i++) {
-                stack.add(integers[i]);
+                stack.offer(integers[i]);
             }
         }
     }
 
     public void pop() {
         if (!stack.isEmpty()) {
-            stack.remove(stack.size() - 1);
+            stack.pollLast();
         } else {
             System.out.println("No elements");
         }
     }
 
+    public int size(){
+        return this.stack.size();
+    }
 
     @Override
     public Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
-            int index = 0;
+            int index = stack.size();
 
             @Override
             public boolean hasNext() {
-                return index < stack.size();
+                return index > 0;
             }
 
             @Override
             public Integer next() {
-                return stack.get(index++);
+                index = index - 1;
+                return stack.pollLast();
             }
         };
     }
-
 }

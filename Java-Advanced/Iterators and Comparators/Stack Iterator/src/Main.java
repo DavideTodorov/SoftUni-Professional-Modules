@@ -19,14 +19,17 @@ public class Main {
                     break;
 
                 case "Pop":
-
+                    stack.pop();
+                    break;
             }
 
             input = scanner.nextLine();
         }
 
-        for (int integer : stack) {
-            System.out.println();
+        if (stack.size() > 0) {
+            for (Integer integer : stack) {
+                System.out.println(integer);
+            }
         }
     }
 
