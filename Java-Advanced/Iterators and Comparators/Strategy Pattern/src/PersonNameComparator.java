@@ -7,7 +7,13 @@ public class PersonNameComparator implements Comparator<Person> {
         int result = person1.getName().compareTo(person2.getName());
 
         if (result == 0) {
-            result = Integer.compare(person1.getAge(), person2.getAge());
+            result = person1.getName().toLowerCase().charAt(0) - person2.getName().toLowerCase().charAt(0);
+
+            if (result > 0) {
+                result = 1;
+            } else if (result < 0) {
+                result = -1;
+            }
         }
 
         return result;
