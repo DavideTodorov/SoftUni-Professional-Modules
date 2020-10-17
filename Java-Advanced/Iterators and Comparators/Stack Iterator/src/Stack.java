@@ -3,25 +3,27 @@ import java.util.function.Consumer;
 
 public class Stack implements Iterable<Integer> {
 
-    private ArrayDeque<Integer> stack;
+    private ArrayList<Integer> stack;
 
     public Stack() {
-        this.stack = new ArrayDeque<>();
+        this.stack = new ArrayList<>();
     }
 
     public void push(int... integers) {
         if (integers.length >= 1) {
             for (int i = 0; i < integers.length; i++) {
-                stack.offer(integers[i]);
+                stack.add(integers[i]);
             }
         }
     }
 
-    public void pop() {
+    public boolean pop() {
         if (!stack.isEmpty()) {
-            stack.pollLast();
+            stack.remove(stack.size() - 1);
+            return true;
         } else {
             System.out.println("No elements");
+            return false;
         }
     }
 
@@ -29,20 +31,23 @@ public class Stack implements Iterable<Integer> {
         return this.stack.size();
     }
 
+    public void reverse(){
+        Collections.reverse(this.stack);
+    }
+
     @Override
     public Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
-            int index = stack.size();
+            int index = 0;
 
             @Override
             public boolean hasNext() {
-                return index > 0;
+                return index < stack.size();
             }
 
             @Override
             public Integer next() {
-                index = index - 1;
-                return stack.pollLast();
+                return stack.get(index++);
             }
         };
     }
