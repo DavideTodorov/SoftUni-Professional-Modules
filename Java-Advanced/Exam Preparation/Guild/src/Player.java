@@ -46,7 +46,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return String.format("Player %s: $s\n" +
+        return String.format("Player %s: %s\n" +
                 "Rank: %s\n" +
                 "Description: %s", this.name, this.clazz, this.rank, this.description);
     }
