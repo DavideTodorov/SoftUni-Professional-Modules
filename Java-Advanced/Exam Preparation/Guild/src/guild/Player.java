@@ -1,6 +1,8 @@
+package guild;
+
 public class Player {
 
-    private String name;
+    public String name;
     private String clazz;
     private String rank;
     private String description;
@@ -44,10 +46,9 @@ public class Player {
         this.description = description;
     }
 
+
     @Override
     public String toString() {
-        return String.format("Player %s: %s\n" +
-                "Rank: %s\n" +
-                "Description: %s", this.name, this.clazz, this.rank, this.description);
+        return String.format("Player %s: %s%nRank: %s%nDescription: %s", this.name, this.clazz, this.rank, this.description);
     }
 }
