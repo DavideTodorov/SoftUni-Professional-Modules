@@ -11,7 +11,7 @@ public class Main {
         String[][] matrix = new String[rows][];
 
         for (int i = 0; i < rows; i++) {
-            matrix[i] = scanner.nextLine().split("");
+            matrix[i] = scanner.nextLine().split("\\s*");
         }
 
         int playerRow = 0;
@@ -42,14 +42,10 @@ public class Main {
                     playerRow = playerRowUp(matrix, playerRow);
 
                     if (matrix[playerRow][playerCol].equals("B")) {
-                        while (matrix[playerRow][playerCol].equals("B")) {
-                            playerRow = playerRowUp(matrix, playerRow);
-                        }
+                        playerRow = playerRowUp(matrix, playerRow);
 
                     } else if (matrix[playerRow][playerCol].equals("T")) {
-                        while (matrix[playerRow][playerCol].equals("T")) {
-                            playerRow = playerRowDown(matrix, playerRow);
-                        }
+                        playerRow = playerRowDown(matrix, playerRow);
 
                     } else if (matrix[playerRow][playerCol].equals("F")) {
                         matrix[playerRow][playerCol] = "f";
@@ -65,14 +61,10 @@ public class Main {
                     playerRow = playerRowDown(matrix, playerRow);
 
                     if (matrix[playerRow][playerCol].equals("B")) {
-                        while (matrix[playerRow][playerCol].equals("B")) {
-                            playerRow = playerRowDown(matrix, playerRow);
-                        }
+                        playerRow = playerRowDown(matrix, playerRow);
 
                     } else if (matrix[playerRow][playerCol].equals("T")) {
-                        while (matrix[playerRow][playerCol].equals("T")) {
-                            playerRow = playerRowUp(matrix, playerRow);
-                        }
+                        playerRow = playerRowUp(matrix, playerRow);
 
                     } else if (matrix[playerRow][playerCol].equals("F")) {
                         matrix[playerRow][playerCol] = "f";
@@ -88,15 +80,10 @@ public class Main {
                     playerCol = playerColRight(matrix, playerCol, playerRow);
 
                     if (matrix[playerRow][playerCol].equals("B")) {
-                        while (matrix[playerRow][playerCol].equals("B")) {
-                            playerCol = playerColRight(matrix, playerCol, playerRow);
-                        }
-
+                        playerCol = playerColRight(matrix, playerCol, playerRow);
 
                     } else if (matrix[playerRow][playerCol].equals("T")) {
-                        while (matrix[playerRow][playerCol].equals("T")) {
-                            playerCol = playerColLeft(matrix, playerCol, playerCol);
-                        }
+                        playerCol = playerColLeft(matrix, playerCol, playerCol);
 
 
                     } else if (matrix[playerRow][playerCol].equals("F")) {
@@ -113,16 +100,10 @@ public class Main {
                     playerCol = playerColLeft(matrix, playerCol, playerRow);
 
                     if (matrix[playerRow][playerCol].equals("B")) {
-                        while (matrix[playerRow][playerCol].equals("B")) {
-                            playerCol = playerColLeft(matrix, playerCol, playerRow);
-                        }
-
+                        playerCol = playerColLeft(matrix, playerCol, playerRow);
 
                     } else if (matrix[playerRow][playerCol].equals("T")) {
-                        while (matrix[playerRow][playerCol].equals("T")) {
-                            playerCol = playerColRight(matrix, playerCol, playerCol);
-                        }
-
+                        playerCol = playerColRight(matrix, playerCol, playerCol);
 
                     } else if (matrix[playerRow][playerCol].equals("F")) {
                         matrix[playerRow][playerCol] = "f";
@@ -163,16 +144,6 @@ public class Main {
         return playerCol;
     }
 
-    private static void printIfWin(String[][] matrix) {
-        System.out.println("Player won!");
-        for (String[] strings : matrix) {
-            for (String string : strings) {
-                System.out.print(string);
-            }
-            System.out.println();
-        }
-    }
-
     private static int playerRowDown(String[][] matrix, int playerRow) {
         playerRow++;
         if (playerRow >= matrix.length) {
@@ -187,5 +158,15 @@ public class Main {
             playerRow = matrix.length - 1;
         }
         return playerRow;
+    }
+
+    private static void printIfWin(String[][] matrix) {
+        System.out.println("Player won!");
+        for (String[] strings : matrix) {
+            for (String string : strings) {
+                System.out.print(string);
+            }
+            System.out.println();
+        }
     }
 }
