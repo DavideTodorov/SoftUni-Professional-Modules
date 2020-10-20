@@ -35,12 +35,15 @@ public class Bag {
 
     public boolean remove(String name) {
         boolean isRemoved = false;
-        for (Present currPresent : this.data) {
-            if (currPresent.getName().equals(name)) {
-                this.data.remove(currPresent);
+
+        for (Present datum : data) {
+            if (datum.getName().equals(name)){
                 isRemoved = true;
+                break;
             }
         }
+
+        this.data.removeIf(currPresent -> currPresent.getName().equals(name));
 
         return isRemoved;
     }
