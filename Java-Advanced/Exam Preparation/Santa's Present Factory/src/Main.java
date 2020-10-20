@@ -23,8 +23,8 @@ public class Main {
         int bicycles = 0;
 
         while (!materials.isEmpty() && !magicLevel.isEmpty()) {
-            int currMaterial = materials.pollLast();
-            int currMagicLevel = magicLevel.pollFirst();
+            int currMaterial = materials.poll();
+            int currMagicLevel = magicLevel.pop();
 
             if (currMaterial == 0 && currMagicLevel == 0) {
                 continue;
@@ -82,7 +82,9 @@ public class Main {
             System.out.printf("Materials left: %s%n", String.join(", ",
                     sb.toString().substring(0, sb.toString().lastIndexOf(", "))));
 
-        } else if (!magicLevel.isEmpty()) {
+        }
+
+        if (!magicLevel.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             while (!magicLevel.isEmpty()) {
                 sb.append(String.valueOf(magicLevel.pollFirst())).append(", ");
