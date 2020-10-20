@@ -53,7 +53,7 @@ public class Main {
                             niceKids--;
                             if (presentsCount <= 0) {
                                 System.out.println("Santa ran out of presents.");
-                                printEnd(niceKids, niceKidsCount, matrix);
+                                printEnd( niceKidsCount, matrix);
 
                                 return;
                             }
@@ -153,7 +153,7 @@ public class Main {
 
                     } else {
                         System.out.println("Santa ran out of presents.");
-                        printEnd(niceKids, niceKidsCount, matrix);
+                        printEnd(niceKidsCount, matrix);
 
                         return;
                     }
@@ -269,7 +269,7 @@ public class Main {
 
                     } else {
                         System.out.println("Santa ran out of presents.");
-                        printEnd(niceKids, niceKidsCount, matrix);
+                        printEnd( niceKidsCount, matrix);
 
                         return;
                     }
@@ -385,7 +385,7 @@ public class Main {
 
                     } else {
                         System.out.println("Santa ran out of presents.");
-                        printEnd(niceKids, niceKidsCount, matrix);
+                        printEnd( niceKidsCount, matrix);
 
                         return;
                     }
@@ -500,7 +500,7 @@ public class Main {
 
                     } else {
                         System.out.println("Santa ran out of presents.");
-                        printEnd(niceKids, niceKidsCount, matrix);
+                        printEnd( niceKidsCount, matrix);
 
                         return;
                     }
@@ -511,13 +511,13 @@ public class Main {
             input = scanner.nextLine();
         }
 
-        printEnd(niceKids, niceKidsCount, matrix);
+        printEnd( niceKidsCount, matrix);
     }
 
     private static boolean ifEquals(int presentsCount, String[][] matrix, int santaRow, int santaCol, int niceKids, int niceKidsCount) {
         if (presentsCount <= 0) {
             System.out.println("Santa ran out of presents.");
-            printEnd(niceKids, niceKidsCount, matrix);
+            printEnd( niceKidsCount, matrix);
 
             return true;
         }
@@ -532,13 +532,18 @@ public class Main {
         return false;
     }
 
-    public static void printEnd(int niceKids, int niceKidsCount, String[][] matrix) {
+    public static void printEnd(int niceKidsCount, String[][] matrix) {
+        int niceKids = 0;
         for (String[] strings : matrix) {
             for (String string : strings) {
                 System.out.print(string + " ");
+                if (string.equals("V")) {
+                    niceKids++;
+                }
             }
             System.out.println();
         }
+
 
         if (niceKids <= 0) {
             System.out.printf("Good job, Santa! %d happy nice kid/s.\n", niceKidsCount);
