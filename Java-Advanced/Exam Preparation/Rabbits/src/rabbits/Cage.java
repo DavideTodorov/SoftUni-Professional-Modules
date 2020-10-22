@@ -29,8 +29,8 @@ public class Cage {
         }
     }
 
-    public boolean removeRabbit(String name) {
-        return this.data.removeIf(rabbit -> rabbit.getName().equals(name));
+    public void removeRabbit(String name) {
+        System.out.println(this.data.removeIf(rabbit -> rabbit.getName().equals(name)));
     }
 
     public void removeSpecies(String species) {
