@@ -26,7 +26,7 @@ public class Rabbit {
 
     //TODO
     public void setAvailable() {
-        this.available = true;
+        this.available = false;
     }
 
     @Override
