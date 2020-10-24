@@ -11,9 +11,10 @@ public class Main {
         ArrayDeque<String> vegetableQueue = Arrays.stream(scanner.nextLine().split("\\s+"))
                 .collect(Collectors.toCollection(ArrayDeque::new));
 
-        ArrayDeque<Integer> caloriesStack = Arrays.stream(scanner.nextLine().split("\\s+"))
+        ArrayDeque<Integer> caloriesStack = new ArrayDeque<>();
+        Arrays.stream(scanner.nextLine().split("\\s+"))
                 .map(Integer::parseInt)
-                .collect(Collectors.toCollection(ArrayDeque::new));
+                .forEach(caloriesStack::push);
 
         ArrayDeque<Integer> caloriesMade = new ArrayDeque<>();
 
@@ -23,7 +24,7 @@ public class Main {
         int potatoCals = 215;
 
         while (!vegetableQueue.isEmpty() && !caloriesStack.isEmpty()) {
-            int calories = caloriesStack.pollLast();
+            int calories = caloriesStack.poll();
             int startingCalories = calories;
 
             while (calories > 0 && !vegetableQueue.isEmpty()) {
@@ -61,11 +62,13 @@ public class Main {
         }
 
         if (!vegetableQueue.isEmpty()) {
-            for (String s : vegetableQueue) {
-                System.out.print(s + " ");
+            for (int i = vegetableQueue.size() - 1; i >= 0; i--) {
+                System.out.println(vegetableQueue.pollFirst() + " ");
             }
             System.out.println();
-        } else {
+        }
+
+        if (!caloriesStack.isEmpty()) {
             for (int i = caloriesStack.size() - 1; i >= 0; i--) {
                 System.out.print(caloriesStack.pollLast() + " ");
             }

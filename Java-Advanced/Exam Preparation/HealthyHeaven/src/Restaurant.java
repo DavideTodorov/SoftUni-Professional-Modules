@@ -16,21 +16,11 @@ public class Restaurant {
     }
 
     public boolean buy(String name) {
-        boolean isSold = false;
-
-        for (Salad salad : data) {
-            if (salad.getName().equals(name)) {
-                isSold = true;
-                data.remove(salad);
-                break;
-            }
-        }
-
-        return isSold;
+        return this.data.removeIf(salad -> salad.getName().equals(name));
     }
 
-    public String getHealthiestSalad() {
-        Salad healthiestSalad = new Salad("");
+    public Salad getHealthiestSalad() {
+        Salad healthiestSalad = null;
         int minCalories = Integer.MAX_VALUE;
 
         for (Salad salad : data) {
@@ -40,7 +30,7 @@ public class Restaurant {
             }
         }
 
-        return healthiestSalad.getName();
+        return healthiestSalad;
     }
 
     public String generateMenu() {

@@ -18,7 +18,7 @@ public class Salad {
     public int getTotalCalories() {
         int totalCalories = 0;
 
-        for (Vegetable product : products) {
+        for (Vegetable product : this.products) {
             totalCalories += product.getCalories();
         }
 
@@ -29,8 +29,8 @@ public class Salad {
         return this.products.size();
     }
 
-    public void add(Vegetable vegetable) {
-        this.products.add(vegetable);
+    public void add(Vegetable product) {
+        this.products.add(product);
     }
 
     @Override
@@ -43,14 +43,10 @@ public class Salad {
 
         result.append(format).append(System.lineSeparator());
 
-        for (int i = 0; i < this.products.size(); i++) {
-            if (i == this.products.size() - 1) {
-                result.append(products.get(i));
-            } else {
-                result.append(products.get(i)).append(System.lineSeparator());
-            }
+        for (Vegetable product : this.products) {
+            result.append(product.toString()).append(System.lineSeparator());
         }
 
-        return result.toString();
+        return result.toString().trim();
     }
 }
