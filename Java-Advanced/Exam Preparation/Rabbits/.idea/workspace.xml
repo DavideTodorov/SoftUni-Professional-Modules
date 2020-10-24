@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9adaebdc-a542-4f52-aec6-de27acf34dd3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../DatingApp/~$. Dating App_Условие.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/rabbits/Cage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rabbits/Cage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rabbits/Rabbit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rabbits/Rabbit.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
