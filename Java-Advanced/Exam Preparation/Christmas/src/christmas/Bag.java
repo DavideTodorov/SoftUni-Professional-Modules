@@ -34,18 +34,7 @@ public class Bag {
     }
 
     public boolean remove(String name) {
-        boolean isRemoved = false;
-
-        for (Present datum : data) {
-            if (datum.getName().equals(name)){
-                isRemoved = true;
-                break;
-            }
-        }
-
-        this.data.removeIf(currPresent -> currPresent.getName().equals(name));
-
-        return isRemoved;
+        return this.data.removeIf(currPresent -> currPresent.getName().equals(name));
     }
 
     public Present heaviestPresent() {
@@ -53,7 +42,7 @@ public class Bag {
         Present presentToReturn = null;
 
         for (Present currPresent : data) {
-            if (currPresent.getWeight() > maxWeight) {
+            if (Double.compare(currPresent.getWeight(), maxWeight) == 1) {
                 maxWeight = currPresent.getWeight();
                 presentToReturn = currPresent;
             }
@@ -76,14 +65,11 @@ public class Bag {
 
     public String report() {
         StringBuilder sb = new StringBuilder();
+
         for (int i = 0; i < data.size(); i++) {
-            if (i == data.size() - 1) {
-                sb.append(data.get(i));
-            } else {
-                sb.append(data.get(i)).append(System.lineSeparator());
-            }
+            sb.append(data.get(i)).append(System.lineSeparator());
         }
-        String color = this.color.substring(0, 1).toUpperCase() + this.color.substring(1);
-        return String.format("%s bag contains:\n%s", color, sb.toString());
+
+        return String.format("%s bag contains:\n%s", this.color, sb.toString().trim());
     }
 }
