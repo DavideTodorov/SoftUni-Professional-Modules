@@ -73,7 +73,7 @@ public class Main {
             if (indexIsInBounds(row, col, matrix)) {
                 while (indexIsInBounds(row, col, matrix)) {
 
-                    if (matrix[row][col].equalsIgnoreCase(" ")) {
+                    if (!matrix[row][col].equalsIgnoreCase(" ")) {
                         harmedVegetables++;
                     }
 
@@ -85,27 +85,40 @@ public class Main {
         } else if (direction.equalsIgnoreCase("Down")) {
             if (indexIsInBounds(row, col, matrix)) {
                 while (indexIsInBounds(row, col, matrix)) {
+
+                    if (!matrix[row][col].equalsIgnoreCase(" ")) {
+                        harmedVegetables++;
+                    }
+
                     matrix[row][col] = " ";
                     row += 2;
-                    harmedVegetables++;
                 }
             }
 
         } else if (direction.equalsIgnoreCase("Left")) {
             if (indexIsInBounds(row, col, matrix)) {
                 while (indexIsInBounds(row, col, matrix)) {
+
+                    if (!matrix[row][col].equalsIgnoreCase(" ")) {
+                        harmedVegetables++;
+                    }
+
                     matrix[row][col] = " ";
                     col -= 2;
-                    harmedVegetables++;
+
                 }
             }
 
         } else if (direction.equalsIgnoreCase("Right")) {
             if (indexIsInBounds(row, col, matrix)) {
                 while (indexIsInBounds(row, col, matrix)) {
+
+                    if (!matrix[row][col].equalsIgnoreCase(" ")) {
+                        harmedVegetables++;
+                    }
+
                     matrix[row][col] = " ";
                     col += 2;
-                    harmedVegetables++;
                 }
             }
 
