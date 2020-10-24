@@ -35,7 +35,7 @@ public class Main {
             }
 
             if (currMaleNumber <= 0) {
-                femaleQueue.offer(currFemaleNumber);
+                femaleQueue.offerFirst(currFemaleNumber);
                 continue;
             }
 
@@ -53,7 +53,7 @@ public class Main {
 
             if (currMaleNumber % 25 == 0) {
                 maleStack.pop();
-                femaleQueue.offer(currFemaleNumber);
+                femaleQueue.offerFirst(currFemaleNumber);
                 continue;
             }
 
