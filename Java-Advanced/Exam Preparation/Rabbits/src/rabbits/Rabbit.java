@@ -24,7 +24,6 @@ public class Rabbit {
         return this.available;
     }
 
-    //TODO
     public void setAvailable() {
         this.available = false;
     }

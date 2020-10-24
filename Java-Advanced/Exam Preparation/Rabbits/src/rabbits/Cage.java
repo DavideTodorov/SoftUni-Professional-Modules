@@ -23,14 +23,25 @@ public class Cage {
         return this.capacity;
     }
 
-    public void add(Rabbit rabbit) {
+    public void add (Rabbit rabbit) {
         if (this.data.size() < this.capacity) {
-            this.data.add(rabbit);
+            boolean isPresent = false;
+
+            for (Rabbit datum : data) {
+                if (datum.getName().equals(rabbit.getName())) {
+                    isPresent = true;
+                    break;
+                }
+            }
+
+            if (!isPresent) {
+                this.data.add(rabbit);
+            }
         }
     }
 
     public void removeRabbit(String name) {
-        System.out.println(this.data.removeIf(rabbit -> rabbit.getName().equals(name)));
+        System.out.println(this.data.removeIf(rabbit -> (rabbit.getName().equals(name))));
     }
 
     public void removeSpecies(String species) {
@@ -42,9 +53,11 @@ public class Cage {
 
         for (Rabbit rabbit : this.data) {
             if (rabbit.getName().equals(name)) {
-                rabbit.setAvailable();
-                rabbitToReturn = rabbit;
-                break;
+                if (rabbit.isAvailable()) {
+                    rabbit.setAvailable();
+                    rabbitToReturn = rabbit;
+                    break;
+                }
             }
         }
 
@@ -56,8 +69,10 @@ public class Cage {
 
         for (Rabbit rabbit : this.data) {
             if (rabbit.getSpecies().equals(species)) {
-                rabbit.setAvailable();
-                rabbitList.add(rabbit);
+                if (rabbit.isAvailable()) {
+                    rabbit.setAvailable();
+                    rabbitList.add(rabbit);
+                }
             }
         }
 
