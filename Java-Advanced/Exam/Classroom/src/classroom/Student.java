@@ -12,6 +12,18 @@ public class Student {
         this.bestSubject = bestSubject;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getBestSubject() {
+        return bestSubject;
+    }
+
     @Override
     public String toString() {
         return String.format("Student: First Name= %s, Last Name= %s, Best Subject= %s",
