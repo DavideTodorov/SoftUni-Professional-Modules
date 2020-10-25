@@ -72,7 +72,7 @@ public class Classroom {
 
             return "No students enrolled for the subject";
         } else {
-            result.append("Students: ").append(System.lineSeparator());
+            result.append("Students:").append(System.lineSeparator());
             result.append(students);
             return result.toString().trim();
         }
