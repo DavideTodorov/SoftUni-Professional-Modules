@@ -2,9 +2,9 @@ package classroom;
 
 public class Student {
 
-    private String firstName;
-    private String lastName;
-    private String bestSubject;
+    public String firstName;
+    public String lastName;
+    public String bestSubject;
 
     public Student(String firstName, String lastName, String bestSubject) {
         this.firstName = firstName;

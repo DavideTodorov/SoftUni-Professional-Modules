@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Classroom {
 
-    private int capacity;
-    private List<Student> students;
+    public int capacity;
+    public List<Student> students;
 
     public Classroom(int capacity) {
         this.capacity = capacity;
