@@ -6,11 +6,11 @@ import java.util.List;
 public class Classroom {
 
     private int capacity;
-    private List<Student> data;
+    private List<Student> students;
 
     public Classroom(int capacity) {
         this.capacity = capacity;
-        this.data = new ArrayList<>();
+        this.students = new ArrayList<>();
     }
 
     public int getCapacity() {
@@ -18,30 +18,30 @@ public class Classroom {
     }
 
     public List<Student> getStudents() {
-        return this.data;
+        return this.students;
     }
 
     public int getStudentCount() {
-        return this.data.size();
+        return this.students.size();
     }
 
     public String registerStudent(Student student) {
-        if (this.data.size() >= this.capacity) {
+        if (this.students.size() >= this.capacity) {
             return "No seats in the classroom";
 
-        } else if (this.data.contains(student)) {
+        } else if (this.students.contains(student)) {
             return "Student is already in the classroom";
 
         } else {
-            this.data.add(student);
+            this.students.add(student);
             return String.format("Added student %s %s",
                     student.getFirstName(), student.getLastName());
         }
     }
 
     public String dismissStudent(Student student) {
-        if (this.data.contains(student)) {
-            this.data.remove(student);
+        if (this.students.contains(student)) {
+            this.students.remove(student);
 
             return String.format("Removed student %s %s",
                     student.getFirstName(), student.getLastName());
@@ -59,7 +59,7 @@ public class Classroom {
         boolean hasStudents = false;
 
         StringBuilder students = new StringBuilder();
-        for (Student student : this.data) {
+        for (Student student : this.students) {
             if (student.getBestSubject().equals(subject)) {
                 students.append(String.format("%s %s",
                         student.getFirstName(), student.getLastName()))
@@ -82,7 +82,7 @@ public class Classroom {
     public Student getStudent(String firstName, String secondName) {
         Student student = null;
 
-        for (Student currStudent : this.data) {
+        for (Student currStudent : this.students) {
             if (currStudent.getFirstName().equals(firstName) && currStudent.getLastName().equals(secondName)) {
                 student = currStudent;
                 break;
@@ -95,10 +95,10 @@ public class Classroom {
     public String getStatistics() {
         StringBuilder result = new StringBuilder();
 
-        result.append(String.format("Classroom size: %d", this.data.size())).append(System.lineSeparator());
+        result.append(String.format("Classroom size: %d", this.students.size())).append(System.lineSeparator());
 
-        for (Student student : this.data) {
-            result.append(String.format("==Student: First Name= %s , Last Name= %s , Best Subject= %s",
+        for (Student student : this.students) {
+            result.append(String.format("   ==Student: First Name= %s , Last Name= %s , Best Subject= %s",
                     student.getFirstName(), student.getLastName(), student.getBestSubject()))
                     .append(System.lineSeparator());
         }
