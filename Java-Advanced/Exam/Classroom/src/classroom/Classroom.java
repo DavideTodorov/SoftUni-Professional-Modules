@@ -69,14 +69,13 @@ public class Classroom {
         }
 
         if (!hasStudents) {
-            result.append("No students enrolled for the subject").append(System.lineSeparator());
 
+            return "No students enrolled for the subject";
         } else {
-            result.append("Students:").append(System.lineSeparator());
+            result.append("Students: ").append(System.lineSeparator());
             result.append(students);
+            return result.toString().trim();
         }
-
-        return result.toString().trim();
     }
 
     public Student getStudent(String firstName, String secondName) {
@@ -98,7 +97,7 @@ public class Classroom {
         result.append(String.format("Classroom size: %d", this.students.size())).append(System.lineSeparator());
 
         for (Student student : this.students) {
-            result.append(String.format("   ==Student: First Name= %s , Last Name= %s , Best Subject= %s",
+            result.append(String.format("==Student: First Name= %s, Last Name= %s, Best Subject= %s",
                     student.getFirstName(), student.getLastName(), student.getBestSubject()))
                     .append(System.lineSeparator());
         }
