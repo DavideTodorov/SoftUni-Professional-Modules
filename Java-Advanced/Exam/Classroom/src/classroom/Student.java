@@ -13,15 +13,15 @@ public class Student {
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public String getBestSubject() {
-        return bestSubject;
+        return this.bestSubject;
     }
 
     @Override
