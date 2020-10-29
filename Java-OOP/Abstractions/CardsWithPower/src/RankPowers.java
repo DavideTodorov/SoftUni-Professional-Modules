@@ -19,4 +19,8 @@ public enum RankPowers {
     RankPowers(int rankPower) {
         this.rankPower = rankPower;
     }
+
+    public int getRankPower() {
+        return rankPower;
+    }
 }
