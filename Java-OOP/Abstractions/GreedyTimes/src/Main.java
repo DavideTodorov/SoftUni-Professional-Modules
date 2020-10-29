@@ -20,13 +20,13 @@ public class Main {
         for (int i = 0; i < itemsInSafe.length; i += 2) {
 
             String currItem = itemsInSafe[i];
-            long count = Long.parseLong(itemsInSafe[i + 1]);
+            long currItemQuantity = Long.parseLong(itemsInSafe[i + 1]);
 
             String itemType = itemType(currItem);
 
             if (itemType.equals("")) {
                 continue;
-            } else if (bagCapacity < getBagCapacity(bag, count)) {
+            } else if (bagCapacity < getBagCapacity(bag, currItemQuantity)) {
                 continue;
             }
 
@@ -34,26 +34,26 @@ public class Main {
                 case "Gem":
                     if (!bag.containsKey(itemType)) {
                         if (bag.containsKey("Gold")) {
-                            if (count > bag.get("Gold").values().stream().mapToLong(e -> e).sum()) {
+                            if (currItemQuantity > getGoldQuantityInBag(bag, "Gold")) {
                                 continue;
                             }
                         } else {
                             continue;
                         }
-                    } else if (bag.get(itemType).values().stream().mapToLong(e -> e).sum() + count > bag.get("Gold").values().stream().mapToLong(e -> e).sum()) {
+                    } else if (getGoldQuantityInBag(bag, itemType) + currItemQuantity > getGoldQuantityInBag(bag, "Gold")) {
                         continue;
                     }
                     break;
                 case "Cash":
                     if (!bag.containsKey(itemType)) {
                         if (bag.containsKey("Gem")) {
-                            if (count > bag.get("Gold").values().stream().mapToLong(e -> e).sum()) {
+                            if (currItemQuantity > getGoldQuantityInBag(bag, "Gold")) {
                                 continue;
                             }
                         } else {
                             continue;
                         }
-                    } else if (bag.get(itemType).values().stream().mapToLong(e -> e).sum() + count > bag.get("Gem").values().stream().mapToLong(e -> e).sum()) {
+                    } else if (getGoldQuantityInBag(bag, itemType) + currItemQuantity > getGoldQuantityInBag(bag, "Gem")) {
                         continue;
                     }
                     break;
@@ -68,14 +68,14 @@ public class Main {
             }
 
 
-            bag.get(itemType).put(currItem, bag.get(itemType).get(currItem) + count);
+            bag.get(itemType).put(currItem, bag.get(itemType).get(currItem) + currItemQuantity);
 
             if (itemType.equals("Gold")) {
-                gold += count;
+                gold += currItemQuantity;
             } else if (itemType.equals("Gem")) {
-                gems += count;
+                gems += currItemQuantity;
             } else if (itemType.equals("Cash")) {
-                money += count;
+                money += currItemQuantity;
             }
         }
 
@@ -89,6 +89,10 @@ public class Main {
                     .sorted((e1, e2) -> e2.getKey().compareTo(e1.getKey()))
                     .forEach(i -> System.out.println("##" + i.getKey() + " - " + i.getValue()));
         }
+    }
+
+    private static long getGoldQuantityInBag(Map<String, LinkedHashMap<String, Long>> bag, String gold) {
+        return bag.get(gold).values().stream().mapToLong(e -> e).sum();
     }
 
     private static long getBagCapacity(Map<String, LinkedHashMap<String, Long>> bag, long count) {
