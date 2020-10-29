@@ -22,19 +22,11 @@ public class Main {
             String currItem = itemsInSafe[i];
             long count = Long.parseLong(itemsInSafe[i + 1]);
 
-            String itemType = "";
-
-            if (currItem.length() == 3) {
-                itemType = "Cash";
-            } else if (currItem.toLowerCase().endsWith("gem")) {
-                itemType = "Gem";
-            } else if (currItem.toLowerCase().equals("gold")) {
-                itemType = "Gold";
-            }
+            String itemType = itemType(currItem);
 
             if (itemType.equals("")) {
                 continue;
-            } else if (bagCapacity < bag.values().stream().map(Map::values).flatMap(Collection::stream).mapToLong(e -> e).sum() + count) {
+            } else if (bagCapacity < getBagCapacity(bag, count)) {
                 continue;
             }
 
@@ -77,7 +69,7 @@ public class Main {
 
 
             bag.get(itemType).put(currItem, bag.get(itemType).get(currItem) + count);
-            
+
             if (itemType.equals("Gold")) {
                 gold += count;
             } else if (itemType.equals("Gem")) {
@@ -87,13 +79,36 @@ public class Main {
             }
         }
 
-        for (var x : bag.entrySet()) {
-            Long sumValues = x.getValue().values().stream().mapToLong(l -> l).sum();
+        for (Map.Entry<String, LinkedHashMap<String, Long>> curr : bag.entrySet()) {
+            Long sumValues = curr.getValue().values().stream().mapToLong(l -> l).sum();
 
-            System.out.println(String.format("<%s> $%s", x.getKey(), sumValues));
+            System.out.println(String.format("<%s> $%s", curr.getKey(), sumValues));
 
-            x.getValue().entrySet().stream().sorted((e1, e2) -> e2.getKey().compareTo(e1.getKey())).forEach(i -> System.out.println("##" + i.getKey() + " - " + i.getValue()));
-
+            curr.getValue().entrySet()
+                    .stream()
+                    .sorted((e1, e2) -> e2.getKey().compareTo(e1.getKey()))
+                    .forEach(i -> System.out.println("##" + i.getKey() + " - " + i.getValue()));
         }
+    }
+
+    private static long getBagCapacity(Map<String, LinkedHashMap<String, Long>> bag, long count) {
+        return bag.values().stream()
+                .map(Map::values)
+                .flatMap(Collection::stream)
+                .mapToLong(e -> e).sum() + count;
+    }
+
+    private static String itemType(String currItem) {
+        String itemType = "";
+
+        if (currItem.length() == 3) {
+            itemType = "Cash";
+        } else if (currItem.toLowerCase().endsWith("gem")) {
+            itemType = "Gem";
+        } else if (currItem.toLowerCase().equals("gold")) {
+            itemType = "Gold";
+        }
+
+        return itemType;
     }
 }
