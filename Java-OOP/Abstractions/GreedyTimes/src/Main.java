@@ -4,6 +4,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+
+    private static long gold = 0;
+    private static long gems = 0;
+    private static long money = 0;
+
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -13,9 +19,7 @@ public class Main {
 
         Map<String, LinkedHashMap<String, Long>> bag = new LinkedHashMap<>();
 
-        long gold = 0;
-        long gems = 0;
-        long money = 0;
+
 
         for (int i = 0; i < itemsInSafe.length; i += 2) {
 
@@ -34,49 +38,36 @@ public class Main {
                 case "Gem":
                     if (!bag.containsKey(itemType)) {
                         if (bag.containsKey("Gold")) {
-                            if (currItemQuantity > getGoldQuantityInBag(bag, "Gold")) {
+                            if (currItemQuantity > getQuantityInBag(bag, "Gold")) {
                                 continue;
                             }
                         } else {
                             continue;
                         }
-                    } else if (getGoldQuantityInBag(bag, itemType) + currItemQuantity > getGoldQuantityInBag(bag, "Gold")) {
+                    } else if (getQuantityInBag(bag, itemType) + currItemQuantity > getQuantityInBag(bag, "Gold")) {
                         continue;
                     }
                     break;
                 case "Cash":
                     if (!bag.containsKey(itemType)) {
                         if (bag.containsKey("Gem")) {
-                            if (currItemQuantity > getGoldQuantityInBag(bag, "Gold")) {
+                            if (currItemQuantity > getQuantityInBag(bag, "Gold")) {
                                 continue;
                             }
                         } else {
                             continue;
                         }
-                    } else if (getGoldQuantityInBag(bag, itemType) + currItemQuantity > getGoldQuantityInBag(bag, "Gem")) {
+                    } else if (getQuantityInBag(bag, itemType) + currItemQuantity > getQuantityInBag(bag, "Gem")) {
                         continue;
                     }
                     break;
             }
 
-            if (!bag.containsKey(itemType)) {
-                bag.put((itemType), new LinkedHashMap<String, Long>());
-            }
+            addToBag(bag, currItem, itemType);
+            
+            increaseQuantityInBag(bag, currItem, currItemQuantity, itemType);
 
-            if (!bag.get(itemType).containsKey(currItem)) {
-                bag.get(itemType).put(currItem, 0L);
-            }
-
-
-            bag.get(itemType).put(currItem, bag.get(itemType).get(currItem) + currItemQuantity);
-
-            if (itemType.equals("Gold")) {
-                gold += currItemQuantity;
-            } else if (itemType.equals("Gem")) {
-                gems += currItemQuantity;
-            } else if (itemType.equals("Cash")) {
-                money += currItemQuantity;
-            }
+            increaseQuantity(currItemQuantity, itemType);
         }
 
         for (Map.Entry<String, LinkedHashMap<String, Long>> curr : bag.entrySet()) {
@@ -91,7 +82,31 @@ public class Main {
         }
     }
 
-    private static long getGoldQuantityInBag(Map<String, LinkedHashMap<String, Long>> bag, String gold) {
+    private static void increaseQuantityInBag(Map<String, LinkedHashMap<String, Long>> bag, String currItem, long currItemQuantity, String itemType) {
+        bag.get(itemType).put(currItem, bag.get(itemType).get(currItem) + currItemQuantity);
+    }
+
+    private static void increaseQuantity(long currItemQuantity, String itemType) {
+        if (itemType.equals("Gold")) {
+            gold += currItemQuantity;
+        } else if (itemType.equals("Gem")) {
+            gems += currItemQuantity;
+        } else if (itemType.equals("Cash")) {
+            money += currItemQuantity;
+        }
+    }
+
+    private static void addToBag(Map<String, LinkedHashMap<String, Long>> bag, String currItem, String itemType) {
+        if (!bag.containsKey(itemType)) {
+            bag.put(itemType, new LinkedHashMap<String, Long>());
+        }
+
+        if (!bag.get(itemType).containsKey(currItem)) {
+            bag.get(itemType).put(currItem, 0L);
+        }
+    }
+
+    private static long getQuantityInBag(Map<String, LinkedHashMap<String, Long>> bag, String gold) {
         return bag.get(gold).values().stream().mapToLong(e -> e).sum();
     }
 
