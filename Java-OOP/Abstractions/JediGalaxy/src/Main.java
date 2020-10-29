@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int[] dimensionsInput = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] dimensionsInput = readIntArray(scanner.nextLine());
         int x = dimensionsInput[0];
         int y = dimensionsInput[1];
 
@@ -17,8 +17,8 @@ public class Main {
         String command = scanner.nextLine();
         while (!command.equals("Let the Force be with you")) {
 
-            int[] ivoCoordinates = Arrays.stream(command.split(" ")).mapToInt(Integer::parseInt).toArray();
-            int[] evilCoordinates = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            int[] ivoCoordinates = readIntArray(command);
+            int[] evilCoordinates = readIntArray(scanner.nextLine());
 
             int rowIvo = ivoCoordinates[0];
             int colIvo = ivoCoordinates[1];
@@ -27,7 +27,6 @@ public class Main {
             int colEvil = evilCoordinates[1];
 
             iterEvilCoordinates(matrix, rowEvil, colEvil);
-
             iterIvoCoordinates(matrix, rowIvo, colIvo);
 
             command = scanner.nextLine();
@@ -36,6 +35,10 @@ public class Main {
         System.out.println(sum);
 
 
+    }
+
+    private static int[] readIntArray(String command) {
+        return Arrays.stream(command.split(" ")).mapToInt(Integer::parseInt).toArray();
     }
 
     private static void iterEvilCoordinates(int[][] matrix, int rowEvil, int colEvil) {
