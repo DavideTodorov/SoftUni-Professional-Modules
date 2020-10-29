@@ -1,65 +1,76 @@
-package workingWithAbstraction.jediGalaxy;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+
+    private static long sum = 0;
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-            int[] dimestions = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            int x = dimestions[0];
-            int y = dimestions[1];
+        int[] dimensionsInput = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int x = dimensionsInput[0];
+        int y = dimensionsInput[1];
 
-            int[][] matrix = new int[x][y];
+        int[][] matrix = createArray(x, y);
 
-            int value = 0;
-            for (int i = 0; i < x; i++)
-            {
-                for (int j = 0; j < y; j++)
-                {
-                    matrix[i][j] = value++;
-                }
-            }
 
-            String command = scanner.nextLine();
-            long sum = 0;
-            while (!command.equals("Let the Force be with you"))
-            {
-                int[] ivoS = Arrays.stream(command.split(" ")).mapToInt(Integer::parseInt).toArray();
-                int[] evil = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-                int xE = evil[0];
-                int yE = evil[1];
+        String command = scanner.nextLine();
+        while (!command.equals("Let the Force be with you")) {
 
-                while (xE >= 0 && yE >= 0)
-                {
-                    if (xE >= 0 && xE < matrix.length && yE >= 0 && yE < matrix[0].length)
-                    {
-                        matrix[xE] [yE] = 0;
-                    }
-                    xE--;
-                    yE--;
-                }
+            int[] ivoCoordinates = Arrays.stream(command.split(" ")).mapToInt(Integer::parseInt).toArray();
+            int[] evilCoordinates = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
-                int xI = ivoS[0];
-                int yI = ivoS[1];
+            int rowIvo = ivoCoordinates[0];
+            int colIvo = ivoCoordinates[1];
 
-                while (xI >= 0 && yI < matrix[1].length)
-                {
-                    if (xI >= 0 && xI < matrix.length && yI >= 0 && yI < matrix[0].length)
-                    {
-                        sum += matrix[xI][yI];
-                    }
+            int rowEvil = evilCoordinates[0];
+            int colEvil = evilCoordinates[1];
 
-                    yI++;
-                    xI--;
-                }
+            iterEvilCoordinates(matrix, rowEvil, colEvil);
 
-                command = scanner.nextLine();
-            }
+            iterIvoCoordinates(matrix, rowIvo, colIvo);
+
+            command = scanner.nextLine();
+        }
 
         System.out.println(sum);
 
 
+    }
+
+    private static void iterEvilCoordinates(int[][] matrix, int rowEvil, int colEvil) {
+        while (rowEvil >= 0 && colEvil >= 0) {
+            if (indexInBounds(matrix, rowEvil, colEvil)) {
+                matrix[rowEvil][colEvil] = 0;
+            }
+            rowEvil--;
+            colEvil--;
+        }
+    }
+
+    private static boolean indexInBounds(int[][] matrix, int rowEvil, int colEvil) {
+        return rowEvil >= 0 && rowEvil < matrix.length && colEvil >= 0 && colEvil < matrix[0].length;
+    }
+
+    private static void iterIvoCoordinates(int[][] matrix, int rowIvo, int colIvo) {
+        while (rowIvo >= 0 && colIvo < matrix[1].length) {
+            if (indexInBounds(matrix, rowIvo, colIvo)) {
+                sum += matrix[rowIvo][colIvo];
+            }
+
+            colIvo++;
+            rowIvo--;
+        }
+    }
+
+    private static int[][] createArray(int x, int y) {
+        int[][] matrix = new int[x][y];
+        int value = 0;
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                matrix[i][j] = value++;
+            }
+        }
+        return matrix;
     }
 }
