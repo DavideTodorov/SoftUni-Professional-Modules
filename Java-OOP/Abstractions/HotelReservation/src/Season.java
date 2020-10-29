@@ -10,4 +10,8 @@ public enum Season {
     Season(int multiplier) {
         this.multiplier = multiplier;
     }
+
+    public int getMultiplier() {
+        return multiplier;
+    }
 }
