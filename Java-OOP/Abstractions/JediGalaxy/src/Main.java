@@ -26,8 +26,8 @@ public class Main {
             int rowEvil = evilCoordinates[0];
             int colEvil = evilCoordinates[1];
 
-            iterEvilCoordinates(matrix, rowEvil, colEvil);
-            iterIvoCoordinates(matrix, rowIvo, colIvo);
+            iterateEvilCoordinates(matrix, rowEvil, colEvil);
+            iterateIvoCoordinates(matrix, rowIvo, colIvo);
 
             command = scanner.nextLine();
         }
@@ -37,11 +37,9 @@ public class Main {
 
     }
 
-    private static int[] readIntArray(String command) {
-        return Arrays.stream(command.split(" ")).mapToInt(Integer::parseInt).toArray();
-    }
 
-    private static void iterEvilCoordinates(int[][] matrix, int rowEvil, int colEvil) {
+
+    private static void iterateEvilCoordinates(int[][] matrix, int rowEvil, int colEvil) {
         while (rowEvil >= 0 && colEvil >= 0) {
             if (indexInBounds(matrix, rowEvil, colEvil)) {
                 matrix[rowEvil][colEvil] = 0;
@@ -51,11 +49,7 @@ public class Main {
         }
     }
 
-    private static boolean indexInBounds(int[][] matrix, int rowEvil, int colEvil) {
-        return rowEvil >= 0 && rowEvil < matrix.length && colEvil >= 0 && colEvil < matrix[0].length;
-    }
-
-    private static void iterIvoCoordinates(int[][] matrix, int rowIvo, int colIvo) {
+    private static void iterateIvoCoordinates(int[][] matrix, int rowIvo, int colIvo) {
         while (rowIvo >= 0 && colIvo < matrix[1].length) {
             if (indexInBounds(matrix, rowIvo, colIvo)) {
                 sum += matrix[rowIvo][colIvo];
@@ -75,5 +69,13 @@ public class Main {
             }
         }
         return matrix;
+    }
+
+    private static boolean indexInBounds(int[][] matrix, int rowEvil, int colEvil) {
+        return rowEvil >= 0 && rowEvil < matrix.length && colEvil >= 0 && colEvil < matrix[0].length;
+    }
+
+    private static int[] readIntArray(String command) {
+        return Arrays.stream(command.split(" ")).mapToInt(Integer::parseInt).toArray();
     }
 }
