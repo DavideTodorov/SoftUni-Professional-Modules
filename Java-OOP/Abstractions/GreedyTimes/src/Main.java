@@ -8,7 +8,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        int bagCapacity = Integer.parseInt(scanner.nextLine());
+        long bagCapacity = Long.parseLong(scanner.nextLine());
         String[] itemsInSafe = scanner.nextLine().split("\\s+");
 
         Map<String, LinkedHashMap<String, Long>> bag = new LinkedHashMap<>();
