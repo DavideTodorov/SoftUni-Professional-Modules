@@ -12,15 +12,23 @@ public class Main {
         while (!"Beast!".equals(animalTypeInput)) {
             String[] animalCharacteristics = scanner.nextLine().split("\\s+");
 
-            String animalName = animalCharacteristics[0];
-            int animalAge = Integer.parseInt(animalCharacteristics[1]);
-            String animalGender = animalCharacteristics[2];
-
-            if (animalName == null || animalAge <= 0 || animalGender == null) {
+            if (animalCharacteristics.length != 3) {
                 System.out.println("Invalid Input!");
                 animalTypeInput = scanner.nextLine();
                 continue;
             }
+
+            String animalName = animalCharacteristics[0];
+
+            int animalAge = Integer.parseInt(animalCharacteristics[1]);
+            if (animalAge <= 0) {
+                System.out.println("Invalid Input!");
+                animalTypeInput = scanner.nextLine();
+                continue;
+            }
+
+            String animalGender = animalCharacteristics[2];
+
 
             if (animalTypeInput.equals("Dog")) {
                 Dog dog = new Dog(animalName, animalAge, animalGender);
