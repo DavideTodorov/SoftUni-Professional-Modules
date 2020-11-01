@@ -1,5 +1,6 @@
 package animals;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -15,9 +16,43 @@ public class Main {
             int animalAge = Integer.parseInt(animalCharacteristics[1]);
             String animalGender = animalCharacteristics[2];
 
+            if (animalName == null || animalAge <= 0 || animalGender == null) {
+                System.out.println("Invalid Input!");
+                animalTypeInput = scanner.nextLine();
+                continue;
+            }
 
+            if (animalTypeInput.equals("Dog")) {
+                Dog dog = new Dog(animalName, animalAge, animalGender);
+                printCharacteristics(animalTypeInput, animalName, animalAge, animalGender);
+                dog.produceSound();
+
+            } else if (animalTypeInput.equals("Cat")) {
+                Cat cat = new Cat(animalName, animalAge, animalGender);
+                printCharacteristics(animalTypeInput, animalName, animalAge, animalGender);
+                cat.produceSound();
+
+            } else if (animalTypeInput.equals("Frog")) {
+                Frog frog = new Frog(animalName, animalAge, animalGender);
+                printCharacteristics(animalTypeInput, animalName, animalAge, animalGender);
+                frog.produceSound();
+            } else if (animalTypeInput.equals("Kitten")) {
+                Kitten kitten = new Kitten(animalName, animalAge, animalGender);
+                printCharacteristics(animalTypeInput, animalName, animalAge, animalGender);
+                kitten.produceSound();
+            } else if (animalTypeInput.equals("Tomcat")) {
+                Tomcat tomcat = new Tomcat(animalName, animalAge, animalGender);
+                printCharacteristics(animalTypeInput, animalName, animalAge, animalGender);
+                tomcat.produceSound();
+            }
 
             animalTypeInput = scanner.nextLine();
         }
+    }
+
+    private static void printCharacteristics(String animalTypeInput, String animalName,
+                                             int animalAge, String animalGender) {
+        System.out.println(animalTypeInput);
+        System.out.println(String.format("%s %d %s", animalName, animalAge, animalGender));
     }
 }

@@ -1,8 +1,8 @@
 package animals;
 
-public class Kittens extends Cat{
+public class Kitten extends Cat{
 
-    public Kittens(String name, int age, String gender) {
+    public Kitten(String name, int age, String gender) {
         super(name, age, gender);
     }
 
