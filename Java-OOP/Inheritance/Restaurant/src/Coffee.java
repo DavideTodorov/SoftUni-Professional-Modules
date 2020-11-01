@@ -10,4 +10,8 @@ public class Coffee extends HotBeverage {
         super(name, COFFEE_PRICE, COFFEE_MILLILITERS);
         this.caffeine = caffeine;
     }
+
+    public double getCaffeine() {
+        return this.caffeine;
+    }
 }
