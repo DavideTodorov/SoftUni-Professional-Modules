@@ -12,23 +12,23 @@ public class Main {
         while (!"Beast!".equals(animalTypeInput)) {
             String[] animalCharacteristics = scanner.nextLine().split("\\s+");
 
-            if (animalCharacteristics.length != 3) {
-                System.out.println("Invalid Input!");
-                animalTypeInput = scanner.nextLine();
-                continue;
-            }
 
             String animalName = animalCharacteristics[0];
-
             int animalAge = Integer.parseInt(animalCharacteristics[1]);
-            if (animalAge <= 0) {
+
+            if (animalCharacteristics.length <= 2 && !animalTypeInput.equals("Tomcat") || !animalTypeInput.equals("Kitten")) {
                 System.out.println("Invalid Input!");
                 animalTypeInput = scanner.nextLine();
                 continue;
             }
-
+            
             String animalGender = animalCharacteristics[2];
 
+            if (animalName == null || animalAge <= 0) {
+                System.out.println("Invalid Input!");
+                animalTypeInput = scanner.nextLine();
+                continue;
+            }
 
             if (animalTypeInput.equals("Dog")) {
                 Dog dog = new Dog(animalName, animalAge, animalGender);
@@ -45,12 +45,12 @@ public class Main {
                 printCharacteristics(animalTypeInput, animalName, animalAge, animalGender);
                 frog.produceSound();
             } else if (animalTypeInput.equals("Kitten")) {
-                Kitten kitten = new Kitten(animalName, animalAge, animalGender);
-                printCharacteristics(animalTypeInput, animalName, animalAge, animalGender);
+                Kitten kitten = new Kitten(animalName, animalAge, "Female");
+                printCharacteristics(animalTypeInput, animalName, animalAge, "Female");
                 kitten.produceSound();
             } else if (animalTypeInput.equals("Tomcat")) {
-                Tomcat tomcat = new Tomcat(animalName, animalAge, animalGender);
-                printCharacteristics(animalTypeInput, animalName, animalAge, animalGender);
+                Tomcat tomcat = new Tomcat(animalName, animalAge, "Male");
+                printCharacteristics(animalTypeInput, animalName, animalAge, "Male");
                 tomcat.produceSound();
             }
 
