@@ -4,8 +4,8 @@ public class Food extends Product {
 
     private double grams;
 
-    public Food(String name, double price, double grams) {
-        super(name, new BigDecimal(price));
+    public Food(String name, BigDecimal price, double grams) {
+        super(name, price);
         this.grams = grams;
     }
 
