@@ -12,4 +12,8 @@ public class Dessert extends Food {
     public double getCalories() {
         return this.calories;
     }
+
+    public void setCalories(double calories) {
+        this.calories = calories;
+    }
 }
