@@ -14,4 +14,8 @@ public class Coffee extends HotBeverage {
     public double getCaffeine() {
         return this.caffeine;
     }
+
+    public static double getCoffeeMilliliters() {
+        return COFFEE_MILLILITERS;
+    }
 }
