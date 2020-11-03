@@ -3,7 +3,7 @@ import java.math.BigDecimal;
 public class Coffee extends HotBeverage {
 
     private static final double COFFEE_MILLILITERS = 50;
-    private static final BigDecimal COFFEE_PRICE = new BigDecimal("3.5");
+    private static final BigDecimal COFFEE_PRICE = BigDecimal.valueOf(3.50);
     private double caffeine;
 
     public Coffee(String name, double caffeine) {
