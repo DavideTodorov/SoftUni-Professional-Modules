@@ -24,7 +24,7 @@ public class Animal {
         return this.gender;
     }
 
-    public void produceSound(){
-        System.out.println();
+    protected String produceSound(){
+        return "";
     }
 }

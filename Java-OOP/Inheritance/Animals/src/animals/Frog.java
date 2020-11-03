@@ -7,7 +7,7 @@ public class Frog extends Animal {
     }
 
     @Override
-    public void produceSound() {
-        System.out.println("Ribbit");
+    public String produceSound() {
+       return "Ribbit";
     }
 }
