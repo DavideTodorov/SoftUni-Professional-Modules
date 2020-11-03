@@ -17,4 +17,12 @@ public class Product {
     public BigDecimal getPrice() {
         return this.price;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }
