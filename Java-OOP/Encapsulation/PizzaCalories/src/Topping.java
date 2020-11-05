@@ -12,9 +12,10 @@ public class Topping {
     private double cals;
 
     public Topping(String toppingType, double weight) {
+        addAllModifiers();
+
         this.setToppingType(toppingType);
         this.setWeight(weight);
-        addAllModifiers();
     }
 
     private void setWeight(double weight) {

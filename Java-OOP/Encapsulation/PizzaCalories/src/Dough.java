@@ -12,10 +12,11 @@ public class Dough {
 
 
     public Dough(String flourType, String bakingTechnique, double weight) {
+        addAllFlourTypeModifiers();
+
         this.setFlourType(flourType);
         this.setBakingTechnique(bakingTechnique);
         this.setWeight(weight);
-        addAllflourTypeModifiers();
     }
 
     private void setWeight(double weight) {
@@ -27,7 +28,7 @@ public class Dough {
     }
 
     private void setBakingTechnique(String bakingTechnique) {
-        validateFlourType(flourType);
+        validateFlourType(bakingTechnique);
         this.bakingTechnique = bakingTechnique;
     }
 
@@ -45,7 +46,7 @@ public class Dough {
         this.cals = this.cals * flourModifiers.get(flourType);
     }
 
-    private void addAllflourTypeModifiers() {
+    private void addAllFlourTypeModifiers() {
         this.flourModifiers.put("White", 1.5);
         this.flourModifiers.put("Wholegrain", 1.0);
         this.flourModifiers.put("Crispy", 0.9);
@@ -54,6 +55,6 @@ public class Dough {
     }
 
     public double calculateCalories() {
-        return 2 * this.cals * this.weight;
+        return (2 * this.weight) * this.cals ;
     }
 }

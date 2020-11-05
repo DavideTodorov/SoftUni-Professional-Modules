@@ -10,20 +10,18 @@ public class Pizza {
 
     public Pizza(String name, int numberOfToppings) {
         this.setName(name);
-        this.setNumberOfToppings(numberOfToppings);
-        this.toppings = new ArrayList<>(numberOfToppings);
+        validateNumberOfToppings(numberOfToppings);
+        this.toppings = new ArrayList<>();
     }
 
     public String getName() {
         return name;
     }
 
-    private void setNumberOfToppings(int numberOfToppings) {
+    private void validateNumberOfToppings(int numberOfToppings) {
         if (numberOfToppings < 0 || numberOfToppings > 10) {
             throw new IllegalArgumentException("Number of toppings should be in range [0..10].");
         }
-
-        this.numberOfToppings = numberOfToppings;
     }
 
     public void setDough(Dough dough) {
@@ -39,13 +37,12 @@ public class Pizza {
     }
 
     public void addTopping(Topping topping) {
-        if (this.toppings.size() < this.numberOfToppings) {
-            this.toppings.add(topping);
-        }
+        this.toppings.add(topping);
     }
 
     public double getOverallCalories() {
         double totalCalories = 0;
+
         for (Topping topping : toppings) {
             totalCalories += topping.calculateCalories();
         }
@@ -53,11 +50,5 @@ public class Pizza {
         totalCalories += dough.calculateCalories();
 
         return totalCalories;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s - %.2f",
-                this.name, this.getOverallCalories());
     }
 }
