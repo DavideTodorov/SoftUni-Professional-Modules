@@ -42,4 +42,8 @@ public class Topping {
         this.toppingType = toppingType;
         this.cals = toppingsModifiers.get(toppingType);
     }
+
+    public double calculateCalories() {
+        return 2 * this.cals * this.weight;
+    }
 }
