@@ -29,4 +29,9 @@ public class Product {
     public double getCost() {
         return this.cost;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

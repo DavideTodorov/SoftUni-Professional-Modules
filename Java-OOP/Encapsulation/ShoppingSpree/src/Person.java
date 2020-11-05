@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Person {
@@ -17,10 +18,15 @@ public class Person {
         return this.name;
     }
 
+    public List<Product> getProducts() {
+        return Collections.unmodifiableList(products);
+    }
+
     private void setMoney(double money) {
         if (money < 0) {
             throw new IllegalArgumentException("Money cannot be negative");
         }
+        this.money = money;
     }
 
     private void setName(String name) {
@@ -33,6 +39,7 @@ public class Person {
     public void buyProduct(Product product) {
         checkIfPersonHasEnoughMoney(product);
         products.add(product);
+        this.money -= product.getCost();
     }
 
     private void checkIfPersonHasEnoughMoney(Product product) {
