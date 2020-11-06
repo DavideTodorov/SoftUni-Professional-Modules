@@ -10,15 +10,15 @@ public class Pizza {
 
     public Pizza(String name, int numberOfToppings) {
         this.setName(name);
-        validateNumberOfToppings(numberOfToppings);
-        this.toppings = new ArrayList<>();
+        setToppings(numberOfToppings);
+        this.toppings = new ArrayList<>(numberOfToppings);
     }
 
     public String getName() {
         return name;
     }
 
-    private void validateNumberOfToppings(int numberOfToppings) {
+    private void setToppings(int numberOfToppings) {
         if (numberOfToppings < 0 || numberOfToppings > 10) {
             throw new IllegalArgumentException("Number of toppings should be in range [0..10].");
         }
@@ -29,7 +29,7 @@ public class Pizza {
     }
 
     private void setName(String name) {
-        if (name.trim().isEmpty() || name.length() > 15) {
+        if (name == null || name.trim().isEmpty() || name.length() > 15) {
             throw new IllegalArgumentException("Pizza name should be between 1 and 15 symbols.");
         }
 
