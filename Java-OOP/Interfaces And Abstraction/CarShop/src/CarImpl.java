@@ -6,7 +6,7 @@ public abstract class CarImpl implements Car {
     private String countryProduced;
 
     public CarImpl(String model, String color,
-                   Integer horsePowerString, String countryProduced) {
+                   Integer horsePower, String countryProduced) {
         this.model = model;
         this.color = color;
         this.countryProduced = countryProduced;
