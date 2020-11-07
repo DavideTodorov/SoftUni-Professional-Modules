@@ -36,11 +36,7 @@ public abstract class CarImpl implements Car {
 
     @Override
     public String toString() {
-        return String.format("%s is %s color and have %d horse power",
-                model, color, horsePower) +
-                System.lineSeparator() +
-                String.format("This is %s produced in %s and have %d",
-                        model, countryProduced, Car.TIRES) +
-                System.lineSeparator();
+        return String.format("This is %s produced in %s and have %d tires%n",
+                model, countryProduced, Car.TIRES);
     }
 }
