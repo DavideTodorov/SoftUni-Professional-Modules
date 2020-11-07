@@ -1,40 +1,20 @@
-public class Seat implements Car {
+public class Seat extends CarImpl implements Sellable {
 
-    private String model;
-    private String color;
-    private String countryProduced;
-    private Integer horsePower;
+    private Double price;
 
-    public Seat(String model, String color, Integer horsePowerString, String countryProduced) {
-        this.model = model;
-        this.color = color;
-        this.horsePower = horsePower;
-        this.countryProduced = countryProduced;
+    public Seat(String model, String color, Integer horsePowerString, String countryProduced, Double price) {
+        super(model, color, horsePowerString, countryProduced);
+        this.price = price;
     }
 
     @Override
-    public String getModel() {
-        return model;
-    }
-
-    @Override
-    public String getColor() {
-        return color;
-    }
-
-    @Override
-    public String getCountryProduced() {
-        return countryProduced;
-    }
-
-    @Override
-    public Integer getHorsePower() {
-        return horsePower;
+    public Double getPrice() {
+        return this.price;
     }
 
     @Override
     public String toString() {
-        return String.format("This is %s produced in %s and have %d tires",
-                model, countryProduced, Car.TIRES);
+        return super.toString() + String.format("%s sells for %s",
+                this.getModel(), price);
     }
 }
