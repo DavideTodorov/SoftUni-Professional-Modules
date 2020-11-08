@@ -1,45 +1,46 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        List<Birthable> birthables = new ArrayList<>();
+        Map<String, Buyer> buyers = new HashMap<>();
 
-        String input = scanner.nextLine();
-        while (!"End".equalsIgnoreCase(input)) {
-            String[] tokens = input.split("\\s+");
+        int n = Integer.parseInt(scanner.nextLine());
+        for (int i = 0; i < n; i++) {
+            String[] tokens = scanner.nextLine().split("\\s+");
 
-            String inputType = tokens[0];
-            String name = tokens[1];
+            if (tokens.length == 4) {
+                //CITIZEN
+                buyers.putIfAbsent(tokens[0],
+                        new Citizen(tokens[0],
+                                Integer.parseInt(tokens[1]),
+                                tokens[2], tokens[3]));
 
-            switch (inputType) {
-                case "Citizen":
-                    int age = Integer.parseInt(tokens[2]);
-                    String id = tokens[3];
-                    String birthDay = tokens[4];
-
-                    birthables.add(new Citizen(name, age, id, birthDay));
-                    break;
-
-                case "Pet":
-                    birthDay = tokens[2];
-                    birthables.add(new Pet(name, birthDay));
-                    break;
-            }
-
-            input = scanner.nextLine();
-        }
-
-        String yearToSearchFor = scanner.nextLine();
-        
-        for (Birthable birthable : birthables) {
-            if (birthable.getBirthDate().endsWith(yearToSearchFor)){
-                System.out.println(birthable.getBirthDate());
+            } else if (tokens.length == 3) {
+                //REBEl
+                buyers.putIfAbsent(tokens[0], new Rebel(tokens[0],
+                        Integer.parseInt(tokens[1]),
+                        tokens[2]));
             }
         }
+
+        String nameInput = scanner.nextLine();
+
+        while (!"End".equalsIgnoreCase(nameInput)) {
+            if (buyers.containsKey(nameInput)) {
+                buyers.get(nameInput).buyFood();
+            }
+
+            nameInput = scanner.nextLine();
+        }
+
+        int foodBought = 0;
+        for (Buyer buyer : buyers.values()) {
+            foodBought += buyer.getFood();
+        }
+
+        System.out.println(foodBought);
     }
 }
