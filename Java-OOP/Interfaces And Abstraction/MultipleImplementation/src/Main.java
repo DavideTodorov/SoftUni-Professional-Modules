@@ -1,27 +1,56 @@
-import java.lang.reflect.Method;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Class[] citizenInterfaces = Citizen.class.getInterfaces();
-        if (Arrays.asList(citizenInterfaces).contains(Birthable.class)
-                && Arrays.asList(citizenInterfaces).contains(Identifiable.class)) {
-            Method[] methods = Birthable.class.getDeclaredMethods();
-            methods = Identifiable.class.getDeclaredMethods();
-            Scanner scanner = new Scanner(System.in);
-            String name = scanner.nextLine();
-            int age = Integer.parseInt(scanner.nextLine());
-            String id = scanner.nextLine();
-            String birthDate = scanner.nextLine();
-            Identifiable identifiable = new Citizen(name,age,id,birthDate);
-            Birthable birthable = new Citizen(name,age,id,birthDate);
-            System.out.println(methods.length);
-            System.out.println(methods[0].getReturnType().getSimpleName());
-            System.out.println(methods.length);
-            System.out.println(methods[0].getReturnType().getSimpleName());
+        Scanner scanner = new Scanner(System.in);
+
+        List<Birthable> birthables = new ArrayList<>();
+        List<Robot> robots = new ArrayList<>();
+
+        String input = scanner.nextLine();
+        while (!"End".equals(input)) {
+            String[] tokens = input.split("\\s+");
+
+            String inputType = tokens[0];
+            String name = tokens[1];
+
+            switch (inputType) {
+                case "Citizen":
+                    int age = Integer.parseInt(tokens[2]);
+                    String id = tokens[3];
+                    String birthDay = tokens[4];
+
+                    birthables.add(new Citizen(name, age, id, birthDay));
+                    break;
+
+                case "Pet":
+                    birthDay = tokens[2];
+                    birthables.add(new Pet(name, birthDay));
+                    break;
+
+                case "Robot":
+                    id = tokens[2];
+                    robots.add(new Robot(name, id));
+                    break;
+            }
+
+            input = scanner.nextLine();
         }
 
+        String yearToSearchFor = scanner.nextLine();
+
+        if (birthables.isEmpty()){
+            System.out.println("<no output>");
+            return;
+        }
+
+        for (Birthable birthable : birthables) {
+            if (birthable.getBirthDate().endsWith(yearToSearchFor)){
+                System.out.println(birthable.getBirthDate());
+            }
+        }
     }
 }
