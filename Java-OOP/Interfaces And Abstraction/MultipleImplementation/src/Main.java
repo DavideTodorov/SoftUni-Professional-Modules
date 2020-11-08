@@ -8,10 +8,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         List<Birthable> birthables = new ArrayList<>();
-        List<Robot> robots = new ArrayList<>();
 
         String input = scanner.nextLine();
-        while (!"End".equals(input)) {
+        while (!"End".equalsIgnoreCase(input)) {
             String[] tokens = input.split("\\s+");
 
             String inputType = tokens[0];
@@ -30,23 +29,13 @@ public class Main {
                     birthDay = tokens[2];
                     birthables.add(new Pet(name, birthDay));
                     break;
-
-                case "Robot":
-                    id = tokens[2];
-                    robots.add(new Robot(name, id));
-                    break;
             }
 
             input = scanner.nextLine();
         }
 
         String yearToSearchFor = scanner.nextLine();
-
-        if (birthables.isEmpty()){
-            System.out.println("<no output>");
-            return;
-        }
-
+        
         for (Birthable birthable : birthables) {
             if (birthable.getBirthDate().endsWith(yearToSearchFor)){
                 System.out.println(birthable.getBirthDate());
