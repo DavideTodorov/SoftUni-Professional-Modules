@@ -1,15 +1,7 @@
-public class Chinese implements Person {
-
-    private String name;
+public class Chinese extends BasePerson {
 
     public Chinese(String name) {
-        this.name = name;
-    }
-
-
-    @Override
-    public String getName() {
-        return this.name;
+        super(name);
     }
 
     @Override
