@@ -6,19 +6,40 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         String[] carInfo = scanner.nextLine().split("\\s+");
-        Car car = new Car(Double.parseDouble(carInfo[1]),
-                Double.parseDouble(carInfo[2]),
-                Double.parseDouble(carInfo[3]));
+
+        Car car;
+        try {
+            car = new Car(Double.parseDouble(carInfo[1]),
+                    Double.parseDouble(carInfo[2]),
+                    Double.parseDouble(carInfo[3]));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
         String[] truckInfo = scanner.nextLine().split("\\s+");
-        Truck truck = new Truck(Double.parseDouble(truckInfo[1]),
-                Double.parseDouble(truckInfo[2]),
-                Double.parseDouble(truckInfo[3]));
+
+        Truck truck;
+        try {
+            truck = new Truck(Double.parseDouble(truckInfo[1]),
+                    Double.parseDouble(truckInfo[2]),
+                    Double.parseDouble(truckInfo[3]));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
         String[] busInfo = scanner.nextLine().split("\\s+");
-        Bus bus = new Bus(Double.parseDouble(busInfo[1]),
-                Double.parseDouble(busInfo[2]),
-                Double.parseDouble(busInfo[3]));
+
+        Bus bus;
+        try {
+            bus = new Bus(Double.parseDouble(busInfo[1]),
+                    Double.parseDouble(busInfo[2]),
+                    Double.parseDouble(busInfo[3]));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
         int n = Integer.parseInt(scanner.nextLine());
 
@@ -76,8 +97,8 @@ public class Main {
             }
         }
 
-        System.out.println(String.format("Car: %.2f", car.getFuelQuantity()));
-        System.out.println(String.format("Truck: %.2f", truck.getFuelQuantity()));
-        System.out.println(String.format("Bus: %.2f", bus.getFuelQuantity()));
+        System.out.printf("Car: %.2f%n", car.getFuelQuantity());
+        System.out.printf("Truck: %.2f%n", truck.getFuelQuantity());
+        System.out.printf("Bus: %.2f%n", bus.getFuelQuantity());
     }
 }

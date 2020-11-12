@@ -10,7 +10,7 @@ public class Car extends Vehicle {
     public String drive(Double kilometers) {
         double fuelNeeded = super.getFuelConsumption() * kilometers;
 
-        if (fuelNeeded <= super.getFuelQuantity()) {
+        if (fuelNeeded < super.getFuelQuantity()) {
             DecimalFormat decimalFormat = new DecimalFormat("##.##");
             String formatted = decimalFormat.format(kilometers);
 
@@ -23,6 +23,9 @@ public class Car extends Vehicle {
 
     @Override
     public void refuel(Double liters) {
+        if (liters <= 0){
+            throw new IllegalArgumentException("Fuel must be a positive number");
+        }
         double fuelQuantityAfterRefuel = super.getFuelQuantity() + liters;
         super.setFuelQuantity(fuelQuantityAfterRefuel);
     }
