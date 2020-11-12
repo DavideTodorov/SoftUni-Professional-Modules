@@ -23,7 +23,6 @@ public class Main {
                 animals.add(cat);
                 cat.makeSound();
                 animalEats(foodInputTokens, cat);
-//                System.out.println(cat.toString());
             } else {
                 //MOUSE, TIGER OR ZEBRA
                 switch (animalTokens[0]) {
@@ -38,8 +37,6 @@ public class Main {
                         } catch (IllegalArgumentException e) {
                             System.out.println(e.getMessage());
                         }
-
-//                        System.out.println(tiger.toString());
                         break;
 
                     case "Zebra":
@@ -53,8 +50,6 @@ public class Main {
                         } catch (IllegalArgumentException e) {
                             System.out.println(e.getMessage());
                         }
-
-//                        System.out.println(zebra.toString());
                         break;
 
                     case "Mouse":
@@ -68,8 +63,6 @@ public class Main {
                         } catch (IllegalArgumentException e) {
                             System.out.println(e.getMessage());
                         }
-
-//                        System.out.println(mouse.toString());
                         break;
                 }
             }
