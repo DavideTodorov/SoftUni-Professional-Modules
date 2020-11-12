@@ -2,8 +2,8 @@ import java.text.DecimalFormat;
 
 public class Truck extends Vehicle {
 
-    public Truck(Double fuelQuantity, Double fuelConsumption) {
-        super(fuelQuantity, fuelConsumption + 1.6);
+    public Truck(Double fuelQuantity, Double fuelConsumption, Double tankCapacity) {
+        super(fuelQuantity, fuelConsumption + 1.6, tankCapacity);
     }
 
     @Override
@@ -23,6 +23,7 @@ public class Truck extends Vehicle {
 
     @Override
     public void refuel(Double liters) {
-        super.setFuelQuantity(liters * 0.95);
+        double fuelQuantityAfterRefuel = super.getFuelQuantity() + liters;
+        super.setFuelQuantity(fuelQuantityAfterRefuel);
     }
 }
