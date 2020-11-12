@@ -21,7 +21,7 @@ public class Cat extends Felime {
 
     @Override
     public String toString() {
-        DecimalFormat decimalFormat = new DecimalFormat("####.#####");
+        DecimalFormat decimalFormat = new DecimalFormat("##########.###########");
         String formatted = decimalFormat.format(this.animalWeight);
         return String.format("Cat[%s, %s, %s, %s, %d]",
                 this.animalName, this.breed, formatted,

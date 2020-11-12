@@ -22,7 +22,7 @@ public class Zebra extends Mammal {
 
     @Override
     public String toString() {
-        DecimalFormat decimalFormat = new DecimalFormat("####.#####");
+        DecimalFormat decimalFormat = new DecimalFormat("##########.###########");
         String formatted = decimalFormat.format(this.animalWeight);
         return String.format("Zebra[%s, %s, %s, %d]", this.animalName, formatted,
                 this.livingRegion, this.foodEaten);
