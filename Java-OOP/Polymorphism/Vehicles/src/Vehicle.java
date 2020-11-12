@@ -66,5 +66,12 @@ public abstract class Vehicle {
         return vehicleType + " needs refueling";
     }
 
-    public abstract void refuel(Double liters);
+    public void refuel(Double liters) {
+        if (liters <= 0) {
+            throw new IllegalArgumentException("Fuel must be a positive number");
+        }
+
+        double fuelQuantityAfterRefuel = this.getFuelQuantity() + liters;
+        this.setFuelQuantity(fuelQuantityAfterRefuel);
+    }
 }
