@@ -15,4 +15,9 @@ public abstract class Animal {
     public abstract void makeSound();
 
     public abstract void eat(Food food);
+
+    @Override
+    public String toString() {
+        return "";
+    }
 }

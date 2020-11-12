@@ -17,4 +17,10 @@ public class Mouse extends Mammal {
 
         super.foodEaten += food.getQuantity();
     }
+
+    @Override
+    public String toString() {
+        return String.format("Mouse[%s, %s, %s, %d]", this.animalName, this.animalWeight,
+                this.livingRegion, this.foodEaten);
+    }
 }

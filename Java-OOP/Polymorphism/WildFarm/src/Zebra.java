@@ -17,4 +17,10 @@ public class Zebra extends Mammal {
 
         super.foodEaten += food.getQuantity();
     }
+
+    @Override
+    public String toString() {
+        return String.format("Zebra[%s, %s, %s, %d]", this.animalName, this.animalWeight,
+                this.livingRegion, this.foodEaten);
+    }
 }
