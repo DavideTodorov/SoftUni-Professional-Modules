@@ -49,8 +49,7 @@ public abstract class Vehicle {
         return fuelConsumption;
     }
 
-
-    //ABSTRACT METHODS
+    
     public String drive(Double kilometers, String vehicleType, Double fuelConsumption) {
         double fuelNeeded = fuelConsumption * kilometers;
 
