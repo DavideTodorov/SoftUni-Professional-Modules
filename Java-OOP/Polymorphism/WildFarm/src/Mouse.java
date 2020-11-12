@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class Mouse extends Mammal {
 
     public Mouse(String animalName, String animalType, Double animalWeight, String livingRegion) {
@@ -20,7 +22,9 @@ public class Mouse extends Mammal {
 
     @Override
     public String toString() {
-        return String.format("Mouse[%s, %s, %s, %d]", this.animalName, this.animalWeight,
+        DecimalFormat decimalFormat = new DecimalFormat("####.#####");
+        String formatted = decimalFormat.format(this.animalWeight);
+        return String.format("Mouse[%s, %s, %s, %d]", this.animalName, formatted,
                 this.livingRegion, this.foodEaten);
     }
 }

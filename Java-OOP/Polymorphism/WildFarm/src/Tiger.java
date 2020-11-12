@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class Tiger extends Felime {
 
     public Tiger(String animalName, String animalType, Double animalWeight, String livingRegion) {
@@ -20,7 +22,9 @@ public class Tiger extends Felime {
 
     @Override
     public String toString() {
-        return String.format("Tiger[%s, %s, %s, %d]", this.animalName, this.animalWeight,
+        DecimalFormat decimalFormat = new DecimalFormat("####.#####");
+        String formatted = decimalFormat.format(this.animalWeight);
+        return String.format("Tiger[%s, %s, %s, %d]", this.animalName, formatted,
                 this.livingRegion, this.foodEaten);
     }
 }
