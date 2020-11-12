@@ -1,13 +1,12 @@
 public abstract class Vehicle {
 
-    private Double fuelQuantity;
-    private Double fuelConsumption;
-    private Double litersPerKm;
+    protected Double fuelQuantity;
+    protected Double fuelConsumption;
 
-    protected Vehicle(Double fuelQuantity, Double fuelConsumption, Double litersPerKm) {
+
+    protected Vehicle(Double fuelQuantity, Double fuelConsumption) {
         this.fuelQuantity = fuelQuantity;
         this.fuelConsumption = fuelConsumption;
-        this.litersPerKm = litersPerKm;
     }
 
     public void setFuelQuantity(Double fuelQuantity) {
@@ -22,10 +21,7 @@ public abstract class Vehicle {
         return fuelConsumption;
     }
 
-    public Double getLitersPerKm() {
-        return litersPerKm;
-    }
-
     public abstract String drive(Double km);
+
     public abstract void refuel(Double liters);
 }
