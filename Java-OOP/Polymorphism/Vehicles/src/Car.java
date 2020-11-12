@@ -6,20 +6,9 @@ public class Car extends Vehicle {
         super(fuelQuantity, fuelConsumption + 0.9, tankCapacity);
     }
 
-    @Override
+
     public String drive(Double kilometers) {
-        double fuelNeeded = super.getFuelConsumption() * kilometers;
-
-        if (fuelNeeded < super.getFuelQuantity()) {
-            DecimalFormat decimalFormat = new DecimalFormat("##.##");
-            String formatted = decimalFormat.format(kilometers);
-
-            double fuelLeft = super.getFuelQuantity() - fuelNeeded;
-            super.setFuelQuantity(fuelLeft);
-            return String.format("Car travelled %s km", formatted);
-        }
-
-        return "Car needs refueling";
+        return super.drive(kilometers, "Car", super.getFuelConsumption());
     }
 
     @Override

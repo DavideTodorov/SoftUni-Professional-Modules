@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public abstract class Vehicle {
 
     private Double tankCapacity;
@@ -49,7 +51,20 @@ public abstract class Vehicle {
 
 
     //ABSTRACT METHODS
-    public abstract String drive(Double km);
+    public String drive(Double kilometers, String vehicleType, Double fuelConsumption) {
+        double fuelNeeded = fuelConsumption * kilometers;
+
+        if (fuelNeeded < this.getFuelQuantity()) {
+            DecimalFormat decimalFormat = new DecimalFormat("##.##");
+            String formatted = decimalFormat.format(kilometers);
+
+            double fuelLeft = this.getFuelQuantity() - fuelNeeded;
+            this.setFuelQuantity(fuelLeft);
+            return String.format("%s travelled %s km", vehicleType, formatted);
+        }
+
+        return vehicleType + " needs refueling";
+    }
 
     public abstract void refuel(Double liters);
 }

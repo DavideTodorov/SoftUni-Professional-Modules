@@ -6,25 +6,14 @@ public class Truck extends Vehicle {
         super(fuelQuantity, fuelConsumption + 1.6, tankCapacity);
     }
 
-    @Override
+
     public String drive(Double kilometers) {
-        double fuelNeeded = super.getFuelConsumption() * kilometers;
-
-        if (fuelNeeded < super.getFuelQuantity()) {
-            DecimalFormat decimalFormat = new DecimalFormat("##.##");
-            String formatted = decimalFormat.format(kilometers);
-
-            double fuelLeft = super.getFuelQuantity()- fuelNeeded;
-            super.setFuelQuantity(fuelLeft);
-            return String.format("Truck travelled %s km", formatted);
-        }
-
-        return "Truck needs refueling";
+        return super.drive(kilometers, "Truck", super.getFuelConsumption());
     }
 
     @Override
     public void refuel(Double liters) {
-        if (liters <= 0){
+        if (liters <= 0) {
             throw new IllegalArgumentException("Fuel must be a positive number");
         }
         double fuelQuantityAfterRefuel = super.getFuelQuantity() + (liters * 0.95);
