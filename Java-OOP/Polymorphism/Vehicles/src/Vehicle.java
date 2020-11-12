@@ -1,8 +1,8 @@
 public abstract class Vehicle {
 
-    protected Double tankCapacity;
-    protected Double fuelQuantity;
-    protected Double fuelConsumption;
+    private Double tankCapacity;
+    private Double fuelQuantity;
+    private Double fuelConsumption;
 
 
     protected Vehicle(Double fuelQuantity, Double fuelConsumption, Double tankCapacity) {
@@ -35,15 +35,15 @@ public abstract class Vehicle {
 
 
     //GETTERS
-    public Double getTankCapacity() {
+    protected Double getTankCapacity() {
         return tankCapacity;
     }
 
-    public Double getFuelQuantity() {
+    protected Double getFuelQuantity() {
         return fuelQuantity;
     }
 
-    public Double getFuelConsumption() {
+    protected Double getFuelConsumption() {
         return fuelConsumption;
     }
 

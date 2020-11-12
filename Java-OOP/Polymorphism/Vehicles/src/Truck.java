@@ -14,7 +14,8 @@ public class Truck extends Vehicle {
             DecimalFormat decimalFormat = new DecimalFormat("##.##");
             String formatted = decimalFormat.format(kilometers);
 
-            super.fuelQuantity -= fuelNeeded;
+            double fuelLeft = super.getFuelQuantity()- fuelNeeded;
+            super.setFuelQuantity(fuelLeft);
             return String.format("Truck travelled %s km", formatted);
         }
 
@@ -26,7 +27,7 @@ public class Truck extends Vehicle {
         if (liters <= 0){
             throw new IllegalArgumentException("Fuel must be a positive number");
         }
-        double fuelQuantityAfterRefuel = super.getFuelQuantity() + liters;
+        double fuelQuantityAfterRefuel = super.getFuelQuantity() + (liters * 0.95);
         super.setFuelQuantity(fuelQuantityAfterRefuel);
     }
 }

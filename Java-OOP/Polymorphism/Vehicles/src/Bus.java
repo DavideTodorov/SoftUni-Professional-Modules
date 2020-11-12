@@ -14,7 +14,8 @@ public class Bus extends Vehicle {
             DecimalFormat decimalFormat = new DecimalFormat("##.##");
             String formatted = decimalFormat.format(km);
 
-            super.fuelQuantity -= fuelNeeded;
+            double fuelLeft = super.getFuelQuantity()- fuelNeeded;
+            super.setFuelQuantity(fuelLeft);
             return String.format("Bus travelled %s km", formatted);
         }
 
@@ -30,7 +31,8 @@ public class Bus extends Vehicle {
             DecimalFormat decimalFormat = new DecimalFormat("##.##");
             String formatted = decimalFormat.format(km);
 
-            super.fuelQuantity -= fuelNeeded;
+            double fuelLeft = super.getFuelQuantity()- fuelNeeded;
+            super.setFuelQuantity(fuelLeft);
             return String.format("Bus travelled %s km", formatted);
         }
 
