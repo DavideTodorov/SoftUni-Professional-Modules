@@ -14,59 +14,19 @@ public class Main {
             String[] animalTokens = animalInput.split("\\s+");
             String[] foodInputTokens = scanner.nextLine().split("\\s+");
 
-            if (animalTokens.length == 5) {
-                //CAT
-                Cat cat = new Cat(animalTokens[1], animalTokens[0],
-                        Double.parseDouble(animalTokens[2]), animalTokens[3],
-                        animalTokens[4]);
+            Animal animal = createAnimal(animalTokens);
 
-                animals.add(cat);
-                cat.makeSound();
-                animalEats(foodInputTokens, cat);
-            } else {
-                //MOUSE, TIGER OR ZEBRA
-                switch (animalTokens[0]) {
-                    case "Tiger":
-                        Tiger tiger = new Tiger(animalTokens[1], animalTokens[0],
-                                Double.parseDouble(animalTokens[2]), animalTokens[3]);
+            Food food = createFood(foodInputTokens);
 
-                        animals.add(tiger);
-                        tiger.makeSound();
-                        try {
-                            animalEats(foodInputTokens, tiger);
-                        } catch (IllegalArgumentException e) {
-                            System.out.println(e.getMessage());
-                        }
-                        break;
-
-                    case "Zebra":
-                        Zebra zebra = new Zebra(animalTokens[1], animalTokens[0],
-                                Double.parseDouble(animalTokens[2]), animalTokens[3]);
-
-                        animals.add(zebra);
-                        zebra.makeSound();
-                        try {
-                            animalEats(foodInputTokens, zebra);
-                        } catch (IllegalArgumentException e) {
-                            System.out.println(e.getMessage());
-                        }
-                        break;
-
-                    case "Mouse":
-                        Mouse mouse = new Mouse(animalTokens[1], animalTokens[0],
-                                Double.parseDouble(animalTokens[2]), animalTokens[3]);
-
-                        animals.add(mouse);
-                        mouse.makeSound();
-                        try {
-                            animalEats(foodInputTokens, mouse);
-                        } catch (IllegalArgumentException e) {
-                            System.out.println(e.getMessage());
-                        }
-                        break;
-                }
+            animal.makeSound();
+            try {
+                animal.eat(food);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
 
+            animals.add(animal);
+            
             animalInput = scanner.nextLine();
         }
 
@@ -75,17 +35,38 @@ public class Main {
         }
     }
 
-    private static void animalEats(String[] foodInputTokens, Animal animal) {
-        int foodQuantity = Integer.parseInt(foodInputTokens[1]);
+    private static Food createFood(String[] foodInputTokens) {
+        int quantity = Integer.parseInt(foodInputTokens[1]);
 
-        switch (foodInputTokens[0]) {
-            case "Vegetable":
-                animal.eat(new Vegetable(foodQuantity));
-                break;
+        return foodInputTokens[0].equals("Vegetable")
+                ? new Vegetable(quantity)
+                : new Meat(quantity);
+    }
 
-            case "Meat":
-                animal.eat(new Meat(foodQuantity));
-                break;
+    private static Animal createAnimal(String[] animalTokens) {
+        String animalType = animalTokens[0];
+
+        switch (animalType) {
+            case "Tiger":
+                return new Tiger(animalTokens[1], animalType,
+                        Double.parseDouble(animalTokens[2]),
+                        animalTokens[3]);
+
+            case "Zebra":
+                return new Zebra(animalTokens[1], animalType,
+                        Double.parseDouble(animalTokens[2]),
+                        animalTokens[3]);
+
+            case "Mouse":
+                return new Mouse(animalTokens[1], animalType,
+                        Double.parseDouble(animalTokens[2]),
+                        animalTokens[3]);
+
+            case "Cat":
+                return new Cat(animalTokens[1], animalType,
+                        Double.parseDouble(animalTokens[2]),
+                        animalTokens[3], animalTokens[4]);
         }
+        return null;
     }
 }
