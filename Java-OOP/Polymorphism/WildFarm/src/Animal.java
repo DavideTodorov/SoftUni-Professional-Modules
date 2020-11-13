@@ -1,23 +1,39 @@
+import java.text.DecimalFormat;
+
 public abstract class Animal {
+    private String name;
+    private String type;
+    private double weight;
+    private String livingRegion;
+    private int foodEaten;
 
-    protected String animalName;
-    protected String animalType;
-    protected Double animalWeight;
-    protected Integer foodEaten;
+    protected Animal(String name, String type, double weight, String livingRegion) {
+        this.name = name;
+        this.type = type;
+        this.weight = weight;
+        this.livingRegion = livingRegion;
+    }
 
-    public Animal(String animalName, String animalType, Double animalWeight) {
-        this.animalName = animalName;
-        this.animalType = animalType;
-        this.animalWeight = animalWeight;
-        this.foodEaten = 0;
+    protected String getType() {
+        return this.type;
     }
 
     public abstract void makeSound();
 
-    public abstract void eat(Food food);
+    public void eat(Food food) {
+        this.foodEaten += food.getQuantity();
+    }
 
     @Override
     public String toString() {
-        return "";
+        DecimalFormat formatter = new DecimalFormat("##.##");
+        return String.format(
+                "%s[%s, %s, %s, %d]",
+                this.type,
+                this.name,
+                formatter.format(this.weight),
+                this.livingRegion,
+                this.foodEaten
+        );
     }
 }

@@ -2,29 +2,21 @@ import java.text.DecimalFormat;
 
 public class Mouse extends Mammal {
 
-    public Mouse(String animalName, String animalType, Double animalWeight, String livingRegion) {
-        super(animalName, animalType, animalWeight, livingRegion);
+    public Mouse(String name, String type, double weight, String livingRegion) {
+        super(name, type, weight, livingRegion);
+    }
+
+    @Override
+    public void eat(Food food) {
+        if (food instanceof Meat) {
+            throw new IllegalArgumentException(
+                    "Mice are not eating that type of food!");
+        }
+        super.eat(food);
     }
 
     @Override
     public void makeSound() {
         System.out.println("SQUEEEAAAK!");
-    }
-
-    @Override
-    public void eat(Food food) {
-        if (!food.getClass().getSimpleName().equals("Vegetable")) {
-            throw new IllegalArgumentException("Mice are not eating that type of food!");
-        }
-
-        super.foodEaten += food.getQuantity();
-    }
-
-    @Override
-    public String toString() {
-        DecimalFormat decimalFormat = new DecimalFormat("##########.###########");
-        String formatted = decimalFormat.format(this.animalWeight);
-        return String.format("Mouse[%s, %s, %s, %d]", this.animalName, formatted,
-                this.livingRegion, this.foodEaten);
     }
 }

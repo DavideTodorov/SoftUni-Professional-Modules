@@ -1,11 +1,10 @@
-import java.text.DecimalFormat;
-
 public class Cat extends Felime {
 
     private String breed;
 
-    public Cat(String animalName, String animalType, Double animalWeight, String livingRegion, String breed) {
-        super(animalName, animalType, animalWeight, livingRegion);
+    public Cat(String name, String type, double weight, String livingRegion,
+               String breed) {
+        super(name, type, weight, livingRegion);
         this.breed = breed;
     }
 
@@ -15,16 +14,10 @@ public class Cat extends Felime {
     }
 
     @Override
-    public void eat(Food food) {
-        super.foodEaten += food.getQuantity();
-    }
-
-    @Override
     public String toString() {
-        DecimalFormat decimalFormat = new DecimalFormat("##########.###########");
-        String formatted = decimalFormat.format(this.animalWeight);
-        return String.format("Cat[%s, %s, %s, %s, %d]",
-                this.animalName, this.breed, formatted,
-                this.livingRegion, this.foodEaten);
+        StringBuilder baseToString = new StringBuilder(super.toString());
+        baseToString.insert(baseToString.indexOf(",") + 1, " " + this.breed + ",");
+
+        return baseToString.toString();
     }
 }
