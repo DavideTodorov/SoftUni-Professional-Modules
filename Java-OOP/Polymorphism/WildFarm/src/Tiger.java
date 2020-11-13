@@ -13,7 +13,7 @@ public class Tiger extends Felime {
 
     @Override
     public void eat(Food food) {
-        if (!food.getClass().getName().equals("Meat")) {
+        if (!food.getClass().getSimpleName().equals("Meat")) {
             throw new IllegalArgumentException("Tigers are not eating that type of food!");
         }
 

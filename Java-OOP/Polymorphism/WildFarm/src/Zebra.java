@@ -13,7 +13,7 @@ public class Zebra extends Mammal {
 
     @Override
     public void eat(Food food) {
-        if (!food.getClass().getName().equals("Vegetable")) {
+        if (!food.getClass().getSimpleName().equals("Vegetable")) {
             throw new IllegalArgumentException("Zebras are not eating that type of food!");
         }
 

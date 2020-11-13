@@ -12,4 +12,5 @@ public abstract class Food {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
 }
