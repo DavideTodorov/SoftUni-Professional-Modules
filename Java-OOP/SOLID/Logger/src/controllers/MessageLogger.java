@@ -5,18 +5,20 @@ import interfaces.Appender;
 import interfaces.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MessageLogger implements Logger {
-    private static List<Appender> appenders = new ArrayList<>();
+    private List<Appender> appenders;
 
-    public MessageLogger(Appender appender) {
-        appenders.add(appender);
+    public MessageLogger(Appender... appenders) {
+        this.appenders = new ArrayList<>(Arrays.asList(appenders));
     }
 
     public void addAppender(Appender appender) {
         this.appenders.add(appender);
     }
+
 
     @Override
     public void logInfo(String date, String message) {
@@ -25,7 +27,7 @@ public class MessageLogger implements Logger {
 
     @Override
     public void logWarning(String date, String message) {
-
+        this.logMessage(date, ReportLevel.WARNING, message);
     }
 
     @Override
@@ -35,13 +37,14 @@ public class MessageLogger implements Logger {
 
     @Override
     public void logCritical(String date, String message) {
-
+        this.logMessage(date, ReportLevel.CRITICAL, message);
     }
 
     @Override
     public void logFatal(String date, String message) {
-
+        this.logMessage(date, ReportLevel.FATAL, message);
     }
+
 
     private void logMessage(String date, ReportLevel reportLevel, String message) {
         for (Appender appender : appenders) {

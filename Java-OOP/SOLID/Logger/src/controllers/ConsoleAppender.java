@@ -10,6 +10,10 @@ public class ConsoleAppender extends Appender {
         super(layout);
     }
 
+    public ConsoleAppender(Layout layout, ReportLevel reportLevel) {
+        super(layout, reportLevel);
+    }
+
     @Override
     public void append(String date, ReportLevel reportLevel, String message) {
         super.incrementMessagesCount();

@@ -1,6 +1,7 @@
 import controllers.ConsoleAppender;
 import controllers.MessageLogger;
 import controllers.SimpleLayout;
+import controllers.XmlLayout;
 import interfaces.Appender;
 import interfaces.Layout;
 import interfaces.Logger;
@@ -8,8 +9,8 @@ import interfaces.Logger;
 public class Main {
 
     public static void main(String[] args) {
-        Layout simpleLayout = new SimpleLayout();
-        Appender consoleAppender = new ConsoleAppender(simpleLayout);
+        Layout xmlLayout = new XmlLayout();
+        Appender consoleAppender = new ConsoleAppender(xmlLayout);
         Logger logger = new MessageLogger(consoleAppender);
 
         logger.logError("3/26/2015 2:08:11 PM", "Error parsing JSON.");
