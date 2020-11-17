@@ -1,5 +1,7 @@
 package interfaces;
 
+import enums.ReportLevel;
+
 public abstract class Appender {
     private Layout layout;
     private int messagesCount;
@@ -18,5 +20,5 @@ public abstract class Appender {
         this.messagesCount++;
     }
 
-    protected abstract void append(String date, String reportLevel, String message);
+    public abstract void append(String date, ReportLevel reportLevel, String message);
 }
