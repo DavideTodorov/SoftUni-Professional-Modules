@@ -30,4 +30,15 @@ public abstract class Appender {
     }
 
     public abstract void append(String date, ReportLevel reportLevel, String message);
+
+    @Override
+    public String toString() {
+        return String.format("Appender type: %s, " +
+                        "Layout type: %s, " +
+                        "Report level: %s, " +
+                        "Messages appended: %d", this.getClass().getSimpleName(),
+                this.layout.getClass().getSimpleName(),
+                this.reportLevel.toString(),
+                this.messagesCount);
+    }
 }

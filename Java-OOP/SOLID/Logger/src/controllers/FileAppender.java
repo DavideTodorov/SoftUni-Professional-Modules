@@ -20,4 +20,9 @@ public class FileAppender extends Appender {
                 super.getLayout().format(date, reportLevel, message)
         );
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + String.format(", File size: %d", this.file.getSize());
+    }
 }

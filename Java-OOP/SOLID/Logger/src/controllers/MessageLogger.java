@@ -51,4 +51,15 @@ public class MessageLogger implements Logger {
             appender.append(date, reportLevel, message);
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        for (Appender appender : appenders) {
+            builder.append(appender.toString()).append(System.lineSeparator());
+        }
+
+        return builder.toString().trim();
+    }
 }
