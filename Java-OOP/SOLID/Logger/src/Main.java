@@ -13,8 +13,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         List<Appender> appenders = createAllAppenders(scanner);
-        
 
+        //TODO: Finish main method
     }
 
 
