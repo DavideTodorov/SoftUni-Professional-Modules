@@ -1,4 +1,4 @@
-package interfaces;
+package barracksWars.interfaces;
 
 public interface Destroyable {
     

@@ -1,3 +1,5 @@
+package barracksWars;
+
 import barracksWars.interfaces.Repository;
 import barracksWars.interfaces.Runnable;
 import barracksWars.interfaces.UnitFactory;

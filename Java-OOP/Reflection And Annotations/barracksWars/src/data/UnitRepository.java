@@ -1,4 +1,4 @@
-package data;
+package barracksWars.data;
 
 import barracksWars.interfaces.Repository;
 import barracksWars.interfaces.Unit;
