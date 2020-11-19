@@ -1,4 +1,4 @@
-package barracksWars.interfaces;
+package interfaces;
 
 import jdk.jshell.spi.ExecutionControl;
 

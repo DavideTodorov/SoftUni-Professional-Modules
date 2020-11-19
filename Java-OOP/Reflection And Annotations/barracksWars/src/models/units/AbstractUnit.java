@@ -1,4 +1,4 @@
-package barracksWars.models.units;
+package models.units;
 
 import barracksWars.interfaces.Unit;
 

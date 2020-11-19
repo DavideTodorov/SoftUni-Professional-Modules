@@ -1,4 +1,4 @@
-package barracksWars.core.factories;
+package core.factories;
 
 import barracksWars.interfaces.Unit;
 import barracksWars.interfaces.UnitFactory;

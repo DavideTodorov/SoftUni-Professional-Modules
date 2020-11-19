@@ -1,4 +1,4 @@
-package barracksWars.models.units;
+package models.units;
 
 public class Pikeman extends AbstractUnit {
 

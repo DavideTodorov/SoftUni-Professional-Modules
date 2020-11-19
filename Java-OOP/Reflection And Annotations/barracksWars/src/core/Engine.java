@@ -1,4 +1,4 @@
-package barracksWars.core;
+package core;
 
 import barracksWars.interfaces.Repository;
 import barracksWars.interfaces.Runnable;
