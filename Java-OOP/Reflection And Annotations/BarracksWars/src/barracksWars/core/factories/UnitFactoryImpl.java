@@ -14,27 +14,13 @@ public class UnitFactoryImpl implements UnitFactory {
 
     @Override
     public Unit createUnit(String unitType) {
-
-        Class<?> clazz = null;
-
         try {
-            clazz = Class.forName(UNITS_PACKAGE_NAME + unitType);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+           Class<?> clazz = Class.forName(UNITS_PACKAGE_NAME + unitType);
 
-        Constructor<?> constructor = null;
-        try {
-            constructor = clazz.getDeclaredConstructor();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-
-        constructor.setAccessible(true);
-
-        try {
-            return (Unit) constructor.newInstance();
-        } catch (InstantiationException
+           return (Unit)clazz.getDeclaredConstructor().newInstance();
+        } catch (ClassNotFoundException
+                | NoSuchMethodException
+                | InstantiationException
                 | IllegalAccessException
                 | InvocationTargetException e) {
             e.printStackTrace();
