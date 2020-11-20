@@ -61,7 +61,7 @@ public class Engine implements Runnable {
                     clazz.getDeclaredConstructor(String[].class, Repository.class, UnitFactory.class);
 
             Command command = constructor.newInstance(data, this.repository, this.unitFactory);
-            result = command.execute();
+            return result = command.execute();
         } catch (ClassNotFoundException
                 | NoSuchMethodException
                 | InstantiationException
