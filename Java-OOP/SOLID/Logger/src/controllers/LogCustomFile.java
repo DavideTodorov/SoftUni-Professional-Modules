@@ -10,32 +10,38 @@ public class LogCustomFile implements CustomFile {
     private String filePath;
     private File file;
     private long size;
+    private PrintWriter writer;
 
     public LogCustomFile() {
         this.filePath = "out.txt";
         this.file = new File(filePath);
         this.size = 0;
-    }
-
-    @Override
-    public void write(String text) {
-        this.addToSize(text);
-
         try {
-            PrintWriter writer = new PrintWriter(file);
-            writer.write(text);
-            writer.flush();
-            writer.close();
+            this.writer = new PrintWriter(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+    @Override
+    public void write(String text) {
+        this.addToSize(text);
+        writer.write(text);
+        writer.write(System.lineSeparator());
+        writer.flush();
+    }
+
     private void addToSize(String text) {
         long toAdd = 0;
         for (int i = 0; i < text.length(); i++) {
-            toAdd += text.charAt(i);
+            char currChar = text.charAt(i);
+
+            if ((currChar >= 65 && currChar <= 90) || (currChar >= 97 && currChar <= 122)) {
+                toAdd += currChar;
+            }
         }
+
+        this.size += toAdd;
     }
 
     @Override
