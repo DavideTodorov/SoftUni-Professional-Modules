@@ -24,6 +24,7 @@ public class LogCustomFile implements CustomFile {
         try {
             PrintWriter writer = new PrintWriter(file);
             writer.write(text);
+            writer.flush();
             writer.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
