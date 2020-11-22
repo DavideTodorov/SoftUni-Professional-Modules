@@ -11,8 +11,8 @@ import java.util.List;
 public class MessageLogger implements Logger {
     private List<Appender> appenders;
 
-    public MessageLogger(Appender... appenders) {
-        this.appenders = new ArrayList<>(Arrays.asList(appenders));
+    public MessageLogger(List<Appender> appenders) {
+        this.appenders = appenders;
     }
 
     public void addAppender(Appender appender) {

@@ -3,6 +3,8 @@ import enums.ReportLevel;
 import interfaces.Appender;
 import interfaces.Layout;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,12 +15,39 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         List<Appender> appenders = createAllAppenders(scanner);
+        MessageLogger logger = new MessageLogger(appenders);
 
-        //TODO: Finish main method
+
+        String input = scanner.nextLine();
+        while (!"END".equals(input)) {
+            String[] tokens = input.split("\\|");
+
+            ReportLevel reportLevel = ReportLevel.valueOf(tokens[0].toUpperCase());
+            String date = tokens[1];
+            String message = tokens[2];
+
+            String reportLevelAsString = Character.toUpperCase(reportLevel.name().charAt(0)) +
+                    reportLevel.name().substring(1).toLowerCase();
+
+            Class<MessageLogger> clazz = MessageLogger.class;
+
+            try {
+                Method method = clazz.getMethod("log" + reportLevelAsString,
+                        String.class, String.class);
+
+                method.invoke(logger, date, message);
+            } catch (NoSuchMethodException
+                    | IllegalAccessException
+                    | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+
+            input = scanner.nextLine();
+        }
+        System.out.println("Logger info");
+
+        System.out.println(logger.toString());
     }
-
-
-
 
 
     private static List<Appender> createAllAppenders(Scanner scanner) {

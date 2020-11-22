@@ -15,10 +15,13 @@ public class FileAppender extends Appender {
 
     @Override
     public void append(String date, ReportLevel reportLevel, String message) {
-        this.incrementMessagesCount();
-        this.file.write(
-                super.getLayout().format(date, reportLevel, message)
-        );
+        if (reportLevel.ordinal() >= super.getReportLevel().ordinal()) {
+            this.file.write(
+                    super.getLayout().format(date, reportLevel, message)
+            );
+
+            this.incrementMessagesCount();
+        }
     }
 
     @Override

@@ -10,6 +10,7 @@ public abstract class Appender {
 
     public Appender(Layout layout, ReportLevel reportLevel) {
         this.layout = layout;
+        this.reportLevel = reportLevel;
         this.messagesCount = 0;
     }
 
@@ -27,6 +28,10 @@ public abstract class Appender {
 
     public void setReportLevel(ReportLevel reportLevel) {
         this.reportLevel = reportLevel;
+    }
+
+    public ReportLevel getReportLevel() {
+        return reportLevel;
     }
 
     public abstract void append(String date, ReportLevel reportLevel, String message);

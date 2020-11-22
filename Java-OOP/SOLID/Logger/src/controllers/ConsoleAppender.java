@@ -16,7 +16,9 @@ public class ConsoleAppender extends Appender {
 
     @Override
     public void append(String date, ReportLevel reportLevel, String message) {
-        super.incrementMessagesCount();
-        System.out.println(this.getLayout().format(date, reportLevel, message));
+        if (reportLevel.ordinal() >= super.getReportLevel().ordinal()) {
+            System.out.println(this.getLayout().format(date, reportLevel, message));
+            super.incrementMessagesCount();
+        }
     }
 }
