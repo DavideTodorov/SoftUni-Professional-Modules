@@ -5,5 +5,5 @@ public interface Weapon {
 
     int getDurabilityPoints();
 
-    void attack(Dummy target);
+    void attack(Target target);
 }

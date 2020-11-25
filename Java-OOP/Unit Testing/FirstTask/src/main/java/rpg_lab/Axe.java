@@ -21,7 +21,7 @@ public class Axe implements Weapon {
     }
 
     @Override
-    public void attack(Dummy target) {
+    public void attack(Target target) {
         if (this.durabilityPoints <= 0) {
             throw new IllegalStateException("Axe is broken.");
         }
