@@ -4,7 +4,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class DummyTest {
-    
+
     @Test
     public void testDummyLosesHealthAfterAttack() {
         Dummy dummy = new Dummy(1000, 10);
