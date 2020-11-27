@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class DatabaseTest {
 
     @Test(expected = OperationNotSupportedException.class)
-    public void testAddingPeopleWithTheSameId() throws OperationNotSupportedException {
+    public void testFindingPeopleWithTheSameId() throws OperationNotSupportedException {
         Person person = Mockito.mock(Person.class);
         Person person2 = Mockito.mock(Person.class);
 
