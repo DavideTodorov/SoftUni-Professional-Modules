@@ -10,7 +10,7 @@ public class CustomLinkedListTest {
     private CustomLinkedList<String> linkedList;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         linkedList = new CustomLinkedList<>();
     }
 
@@ -58,11 +58,46 @@ public class CustomLinkedListTest {
     }
 
 
-    //TEST FOR ADD METHOD
-    @Test
-    public void testAddingNullElement(){
-
+    //TESTS FOR RemoveAt METHOD
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemovingIncorrectIndex() {
+        linkedList.removeAt(4);
     }
 
+    @Test
+    public void testRemovingFromValidIndex() {
+        linkedList.add("Test");
+        linkedList.add("and");
+        linkedList.add("Test2");
+        String s = linkedList.removeAt(2);
+        assertEquals("Test2", s);
+    }
+
+
+    //TESTS FOR Remove METHOD
+    @Test
+    public void testRemoveNonExistingElement() {
+        linkedList.add("Test");
+        linkedList.add("and");
+        linkedList.add("Test2");
+
+        int returnedValue = linkedList.remove("Hello");
+
+        assertEquals(-1, returnedValue);
+    }
+
+    @Test
+    public void testRemovingExistingElement(){
+        linkedList.add("Test");
+        linkedList.add("and");
+        linkedList.add("Test2");
+
+        int returnedValue = linkedList.remove("and");
+
+        assertEquals(1, returnedValue);
+    }
+
+
+    //TESTS FOR IndexOf METHOD
 
 }
