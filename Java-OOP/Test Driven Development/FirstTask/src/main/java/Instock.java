@@ -87,7 +87,9 @@ public class Instock implements ProductStock {
 
     @Override
     public Iterable<Product> findAllByPrice(double price) {
-        return null;
+        return products.stream()
+                .filter(p -> p.getPrice() == price)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     @Override

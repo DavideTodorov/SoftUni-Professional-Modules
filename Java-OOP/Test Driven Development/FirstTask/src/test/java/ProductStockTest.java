@@ -224,13 +224,51 @@ public class ProductStockTest {
         products.add(product5);
         products.add(product6);
         products.add(product7);
-        
+
         Iterable<Product> allInRange = products.findAllInRange(3, 5);
         List<Product> productsToList = makeFoundProductsToList(allInRange);
 
         assertTrue(productsToList.isEmpty());
     }
 
+
+    @Test
+    public void testFindProductsByGivenPrice() {
+        Product product1 = new Product("product1", 1.00, 1);
+        Product product2 = new Product("product2", 2.00, 1);
+        Product product3 = new Product("product3", 2.00, 1);
+        Product product4 = new Product("product4", 3.00, 1);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+
+        Iterable<Product> allByPrice = products.findAllByPrice(2);
+        List<Product> productsAsList = makeFoundProductsToList(allByPrice);
+        List<Product> expected = Arrays.asList(product2, product3);
+
+        assertEquals(expected, productsAsList);
+    }
+
+    @Test
+    public void testFindProductsByGivenPriceThatNoneOfTheProductsHas() {
+        Product product1 = new Product("product1", 1.00, 1);
+        Product product2 = new Product("product2", 2.00, 1);
+        Product product3 = new Product("product3", 2.00, 1);
+        Product product4 = new Product("product4", 3.00, 1);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+
+        Iterable<Product> allByPrice = products.findAllByPrice(5);
+        List<Product> productsAsList = makeFoundProductsToList(allByPrice);
+        List<Product> expected = Arrays.asList(product2, product3);
+
+        assertTrue(productsAsList.isEmpty());
+    }
 
     private <T> List<T> makeFoundProductsToList(Iterable<T> foundProducts) {
         List<T> result = new ArrayList<>();
