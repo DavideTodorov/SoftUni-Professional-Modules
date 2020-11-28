@@ -33,6 +33,7 @@ public class Instock implements ProductStock {
         for (Product product1 : products) {
             if (product1.getLabel().equals(product)){
                 productInStock = product1;
+                break;
             }
         }
 
@@ -50,7 +51,19 @@ public class Instock implements ProductStock {
 
     @Override
     public Product findByLabel(String label) {
-        return null;
+        Product productFound = null;
+        for (Product product : products) {
+            if (product.getLabel().equals(label)){
+                productFound = product;
+                break;
+            }
+        }
+
+        if (productFound == null){
+            throw new IllegalArgumentException();
+        }
+
+        return productFound;
     }
 
     @Override
