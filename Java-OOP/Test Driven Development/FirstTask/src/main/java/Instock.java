@@ -1,8 +1,7 @@
 import jdk.jshell.spi.ExecutionControl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Instock implements ProductStock {
 
@@ -31,13 +30,13 @@ public class Instock implements ProductStock {
     public void changeQuantity(String product, int quantity) {
         Product productInStock = null;
         for (Product product1 : products) {
-            if (product1.getLabel().equals(product)){
+            if (product1.getLabel().equals(product)) {
                 productInStock = product1;
                 break;
             }
         }
 
-        if (productInStock == null){
+        if (productInStock == null) {
             throw new IllegalArgumentException();
         }
 
@@ -53,13 +52,13 @@ public class Instock implements ProductStock {
     public Product findByLabel(String label) {
         Product productFound = null;
         for (Product product : products) {
-            if (product.getLabel().equals(label)){
+            if (product.getLabel().equals(label)) {
                 productFound = product;
                 break;
             }
         }
 
-        if (productFound == null){
+        if (productFound == null) {
             throw new IllegalArgumentException();
         }
 
@@ -68,7 +67,14 @@ public class Instock implements ProductStock {
 
     @Override
     public Iterable<Product> findFirstByAlphabeticalOrder(int count) {
-        return null;
+        if (count <= 0 || count >= products.size()) {
+            return new TreeSet<>();
+        }
+
+        return products.stream()
+                .sorted(Comparator.comparing(Product::getLabel))
+                .limit(count)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -159,6 +160,30 @@ public class ProductStockTest {
         assertTrue(productsAsList.isEmpty());
     }
 
+    @Test
+    public void testFindingFirstNProductsInAlphabeticalOrderWithCorrectCount() {
+        Product product1 = new Product("label_3", 3.00, 1);
+        Product product2 = new Product("label_2", 3.00, 1);
+        Product product3 = new Product("label_1", 3.00, 1);
+        Product product4 = new Product("label_4", 3.00, 1);
+        Product product5 = new Product("label_5", 3.00, 1);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+
+        Iterable<Product> foundProducts = products.findFirstByAlphabeticalOrder(3);
+        List<Product> productsAsList = makeFoundProductsToList(foundProducts);
+        List<Product> expected = Arrays.asList(product3, product2, product1);
+
+        assertEquals(expected, productsAsList);
+    }
+
+
+    @Test
+    
 
 
 
