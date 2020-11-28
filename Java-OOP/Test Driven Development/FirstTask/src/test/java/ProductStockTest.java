@@ -183,10 +183,53 @@ public class ProductStockTest {
 
 
     @Test
-    
+    public void testFindingAllProductsInPriceRange() {
+        Product product1 = new Product("product1", 3.00, 1);
+        Product product2 = new Product("product2", 4.00, 1);
+        Product product3 = new Product("product3", 5.00, 1);
+        Product product4 = new Product("product4", 6.00, 1);
+        Product product5 = new Product("product5", 7.00, 1);
+        Product product6 = new Product("product6", 8.00, 1);
+        Product product7 = new Product("product7", 9.00, 1);
 
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+        products.add(product6);
+        products.add(product7);
 
+        Iterable<Product> allInRange = products.findAllInRange(3, 7);
+        List<Product> productsToList = makeFoundProductsToList(allInRange);
+        List<Product> expected = Arrays.asList(product5, product4, product3, product2);
 
+        assertEquals(expected, productsToList);
+    }
+
+    @Test
+    public void testFindingAllProductsInPriceRangeWithProductsThatAreNotInThisRange() {
+        Product product1 = new Product("product1", 1.00, 1);
+        Product product2 = new Product("product2", 2.00, 1);
+        Product product3 = new Product("product3", 3.00, 1);
+        Product product4 = new Product("product4", 6.00, 1);
+        Product product5 = new Product("product5", 7.00, 1);
+        Product product6 = new Product("product6", 8.00, 1);
+        Product product7 = new Product("product7", 9.00, 1);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+        products.add(product6);
+        products.add(product7);
+        
+        Iterable<Product> allInRange = products.findAllInRange(3, 5);
+        List<Product> productsToList = makeFoundProductsToList(allInRange);
+
+        assertTrue(productsToList.isEmpty());
+    }
 
 
     private <T> List<T> makeFoundProductsToList(Iterable<T> foundProducts) {
