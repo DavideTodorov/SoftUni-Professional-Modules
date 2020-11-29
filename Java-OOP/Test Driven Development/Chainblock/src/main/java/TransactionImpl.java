@@ -1,4 +1,4 @@
-public class TransactionImpl implements Comparable<TransactionImpl>{
+public class TransactionImpl    {
 
     private int id;
     private TransactionStatus status;
@@ -14,7 +14,7 @@ public class TransactionImpl implements Comparable<TransactionImpl>{
         this.amount = amount;
     }
 
-    public int compareTo(TransactionImpl o) {
+    public int compareTo(TransactionImpl other) {
         return 0;
     }
 }

@@ -1,2 +1,2 @@
-public interface Transaction {
+public interface Transaction extends Comparable<TransactionImpl>{
 }

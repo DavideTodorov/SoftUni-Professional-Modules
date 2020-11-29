@@ -1,6 +1,20 @@
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ChainblockImpl implements Chainblock{
+    private List<Transaction> transactions;
+
+    public ChainblockImpl() {
+        this.transactions = transactions;
+    }
+
+    public void ChainblockImpl(){
+        transactions = new ArrayList<>();
+    }
+
+
+
     public int getCount() {
         return 0;
     }
