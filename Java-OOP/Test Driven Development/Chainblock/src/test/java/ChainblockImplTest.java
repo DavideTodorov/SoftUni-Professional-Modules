@@ -261,6 +261,40 @@ public class ChainblockImplTest {
     }
 
 
+    @Test
+    public void testGetBySenderOrderedByAmountDescending() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.FAILED,
+                "from_2", "to_2", 2);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_2", "to_3", 3);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+
+        Iterable<Transaction> sendersFrom_2 = chainblock.getBySenderOrderedByAmountDescending("from_2");
+        List<Transaction> returnedTransactions = makeIteratorToList(sendersFrom_2);
+        List<Transaction> expected = Arrays.asList(currTransaction2, currTransaction);
+
+        assertEquals(expected, returnedTransactions);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetByInvalidSenderOrderedByAmountDescending() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.FAILED,
+                "from_2", "to_2", 2);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_3", "to_3", 2);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+
+        Iterable<Transaction> sendersFrom_2 = chainblock.getBySenderOrderedByAmountDescending("from_4");
+    }
+
     private <T> List<T> makeIteratorToList(Iterator<T> iterator) {
         List<T> list = new ArrayList<>();
 

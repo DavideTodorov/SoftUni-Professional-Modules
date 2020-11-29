@@ -132,7 +132,16 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<Transaction> getBySenderOrderedByAmountDescending(String sender) {
-        return null;
+        LinkedHashSet<Transaction> transactions = transactionList.stream()
+                .filter(t -> t.getSender().equals(sender))
+                .sorted((t1, t2) -> Double.compare(t2.getAmount(), t1.getAmount()))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        if (transactions.isEmpty()){
+            throw new IllegalArgumentException();
+        }
+
+        return transactions;
     }
 
     public Iterable<Transaction> getByReceiverOrderedByAmountThenById(String receiver) {
