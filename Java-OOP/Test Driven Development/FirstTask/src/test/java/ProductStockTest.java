@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -268,6 +269,189 @@ public class ProductStockTest {
         List<Product> expected = Arrays.asList(product2, product3);
 
         assertTrue(productsAsList.isEmpty());
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindFirstNMostExpensiveProductsWithCountLargerThanProductsCount() {
+        Product product1 = new Product("product1", 5.00, 1);
+        Product product2 = new Product("product2", 6.00, 1);
+        Product product3 = new Product("product3", 7.00, 1);
+        Product product4 = new Product("product4", 8.00, 1);
+        Product product5 = new Product("product4", 9.00, 1);
+        Product product6 = new Product("product4", 10.00, 1);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+        products.add(product6);
+
+        products.findFirstMostExpensiveProducts(6);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindFirstNMostExpensiveProductsWithNegativeCount() {
+        Product product1 = new Product("product1", 5.00, 1);
+        Product product2 = new Product("product2", 6.00, 1);
+        Product product3 = new Product("product3", 7.00, 1);
+        Product product4 = new Product("product4", 8.00, 1);
+        Product product5 = new Product("product4", 9.00, 1);
+        Product product6 = new Product("product4", 10.00, 1);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+        products.add(product6);
+
+        products.findFirstMostExpensiveProducts(-1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindFirstNMostExpensiveProductsWithZeroCount() {
+        Product product1 = new Product("product1", 5.00, 1);
+        Product product2 = new Product("product2", 6.00, 1);
+        Product product3 = new Product("product3", 7.00, 1);
+        Product product4 = new Product("product4", 8.00, 1);
+        Product product5 = new Product("product4", 9.00, 1);
+        Product product6 = new Product("product4", 10.00, 1);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+        products.add(product6);
+
+        products.findFirstMostExpensiveProducts(0);
+    }
+
+    @Test
+    public void testFindFirstNMostExpensiveProductsWithValidCount() {
+        Product product1 = new Product("product1", 5.00, 1);
+        Product product2 = new Product("product2", 6.00, 1);
+        Product product3 = new Product("product3", 7.00, 1);
+        Product product4 = new Product("product4", 8.00, 1);
+        Product product5 = new Product("product4", 9.00, 1);
+        Product product6 = new Product("product4", 10.00, 1);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+        products.add(product6);
+
+        Iterable<Product> firstMostExpensiveProducts =
+                products.findFirstMostExpensiveProducts(3);
+        List<Product> productsReceived = makeFoundProductsToList(firstMostExpensiveProducts);
+        List<Product> expected = Arrays.asList(product6, product5, product4);
+
+        assertEquals(expected, productsReceived);
+    }
+
+
+    @Test
+    public void testFindProductsByNotPresentQuantity() {
+        Product product1 = new Product("product1", 5.00, 3);
+        Product product2 = new Product("product2", 6.00, 4);
+        Product product3 = new Product("product3", 7.00, 7);
+        Product product4 = new Product("product4", 7.00, 7);
+        Product product5 = new Product("product5", 7.00, 7);
+        Product product6 = new Product("product6", 8.00, 8);
+        Product product7 = new Product("product7", 9.00, 9);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+        products.add(product6);
+        products.add(product7);
+
+        Iterable<Product> allByQuantity = products.findAllByQuantity(5);
+        List<Product> productsFound = makeFoundProductsToList(allByQuantity);
+
+        assertTrue(productsFound.isEmpty());
+    }
+
+    @Test
+    public void testFindProductsByNegativeQuantity() {
+        Product product1 = new Product("product1", 5.00, 3);
+        Product product2 = new Product("product2", 6.00, 4);
+        Product product3 = new Product("product3", 7.00, 7);
+        Product product4 = new Product("product4", 7.00, 7);
+        Product product5 = new Product("product5", 7.00, 7);
+        Product product6 = new Product("product6", 8.00, 8);
+        Product product7 = new Product("product7", 9.00, 9);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+        products.add(product6);
+        products.add(product7);
+
+        Iterable<Product> allByQuantity = products.findAllByQuantity(-1);
+        List<Product> productsFound = makeFoundProductsToList(allByQuantity);
+
+        assertTrue(productsFound.isEmpty());
+    }
+
+    @Test
+    public void testFindProductsByValidQuantity() {
+        Product product1 = new Product("product1", 5.00, 3);
+        Product product2 = new Product("product2", 6.00, 4);
+        Product product3 = new Product("product3", 7.00, 7);
+        Product product4 = new Product("product4", 7.00, 7);
+        Product product5 = new Product("product5", 7.00, 7);
+        Product product6 = new Product("product6", 8.00, 8);
+        Product product7 = new Product("product7", 9.00, 9);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+        products.add(product6);
+        products.add(product7);
+
+        Iterable<Product> allByQuantity = products.findAllByQuantity(7);
+        List<Product> productsFound = makeFoundProductsToList(allByQuantity);
+        List<Product> expected = Arrays.asList(product3, product4, product5);
+
+        assertEquals(expected, productsFound);
+    }
+
+
+    @Test
+    public void testGetAllProductsInStock() {
+        Product product1 = new Product("product1", 5.00, 3);
+        Product product2 = new Product("product2", 6.00, 4);
+        Product product3 = new Product("product3", 7.00, 7);
+        Product product4 = new Product("product4", 7.00, 7);
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+
+        Iterator<Product> productIterator = products.iterator();
+        List<Product> productsReceived = new ArrayList<>();
+
+        while (productIterator.hasNext()) {
+            Product next = productIterator.next();
+            productsReceived.add(next);
+            productIterator.remove();
+        }
+
+        List<Product> expectedProducts = Arrays.asList(product1, product2, product3, product4);
+
+        assertEquals(expectedProducts, productsReceived);
     }
 
     private <T> List<T> makeFoundProductsToList(Iterable<T> foundProducts) {
