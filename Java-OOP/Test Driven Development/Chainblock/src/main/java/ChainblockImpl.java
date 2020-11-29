@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChainblockImpl implements Chainblock {
     private List<Transaction> transactionList;
@@ -52,7 +54,7 @@ public class ChainblockImpl implements Chainblock {
 
     public void removeTransactionById(int id) {
         for (Transaction transaction : transactionList) {
-            if (transaction.getId() == id){
+            if (transaction.getId() == id) {
                 transactionList.remove(transaction);
                 return;
             }
@@ -75,7 +77,7 @@ public class ChainblockImpl implements Chainblock {
         List<Transaction> transactions = new ArrayList<>();
 
         for (Transaction transaction : transactionList) {
-            if (transaction.getStatus().equals(status)){
+            if (transaction.getStatus().equals(status)) {
                 transactions.add(transaction);
             }
         }
@@ -88,15 +90,45 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<String> getAllSendersWithTransactionStatus(TransactionStatus status) {
-        return null;
+        LinkedHashSet<String> senders = transactionList.stream()
+                .filter(t -> t.getStatus().equals(status))
+                .sorted((t1, t2) -> Double.compare(t2.getAmount(), t1.getAmount()))
+                .map(Transaction::getSender)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        if (senders.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return senders;
     }
 
     public Iterable<String> getAllReceiversWithTransactionStatus(TransactionStatus status) {
-        return null;
+        LinkedHashSet<String> receivers = transactionList.stream()
+                .filter(t -> t.getStatus().equals(status))
+                .sorted((t1, t2) -> Double.compare(t2.getAmount(), t1.getAmount()))
+                .map(Transaction::getReceiver)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        if (receivers.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return receivers;
     }
 
     public Iterable<Transaction> getAllOrderedByAmountDescendingThenById() {
-        return null;
+        return transactionList.stream()
+                .sorted((t1, t2) -> {
+                    int compare = Double.compare(t2.getAmount(), t1.getAmount());
+
+                    if (compare == 0){
+                        compare = Integer.compare(t1.getId(), t2.getId());
+                    }
+
+                    return compare;
+                })
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public Iterable<Transaction> getBySenderOrderedByAmountDescending(String sender) {

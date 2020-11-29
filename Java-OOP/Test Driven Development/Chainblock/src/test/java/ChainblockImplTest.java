@@ -14,7 +14,7 @@ public class ChainblockImplTest {
     public void setUp() {
         this.chainblock = new ChainblockImpl();
         this.testTransaction = new TransactionImpl(1, TransactionStatus.FAILED,
-                "From_test", "To_test", 5.0);
+                "from_1", "to_1", 3.0);
     }
 
 
@@ -164,6 +164,98 @@ public class ChainblockImplTest {
         Iterable<Transaction> byTransactionStatus = chainblock.getByTransactionStatus(TransactionStatus.ABORTED);
         List<Transaction> returnedTransactions = makeIteratorToList(byTransactionStatus);
         List<Transaction> expected = Arrays.asList(currTransaction, currTransaction2);
+
+        assertEquals(expected, returnedTransactions);
+    }
+
+
+    @Test
+    public void testGettingSendersWithValidStatus() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.FAILED,
+                "from_2", "to", 1);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_3", "to", 2);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+
+        Iterable<String> senders = chainblock.getAllSendersWithTransactionStatus(TransactionStatus.FAILED);
+        List<String> returnedSenders = makeIteratorToList(senders);
+        List<String> expected = Arrays.asList("from_1", "from_2");
+
+
+        assertEquals(expected, returnedSenders);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGettingSendersWithInvalidStatus() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.FAILED,
+                "from_2", "to", 1);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_3", "to", 2);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+
+        chainblock.getAllSendersWithTransactionStatus(TransactionStatus.SUCCESSFUL);
+    }
+
+
+    @Test
+    public void testGettingReceiversWithValidStatus() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.FAILED,
+                "from_2", "to_2", 1);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_3", "to_3", 2);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+
+        Iterable<String> senders = chainblock.getAllReceiversWithTransactionStatus(TransactionStatus.FAILED);
+        List<String> returnedSenders = makeIteratorToList(senders);
+        List<String> expected = Arrays.asList("to_1", "to_2");
+
+
+        assertEquals(expected, returnedSenders);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGettingReceiversWithInvalidStatus() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.FAILED,
+                "from_2", "to_2", 1);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_3", "to_3", 2);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+
+        chainblock.getAllReceiversWithTransactionStatus(TransactionStatus.SUCCESSFUL);
+    }
+
+
+    @Test
+    public void testGettingAllTransactionsOrderedByAmountDescendingThenById() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.FAILED,
+                "from_2", "to_2", 2);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_3", "to_3", 2);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+
+        Iterable<Transaction> received = chainblock.getAllOrderedByAmountDescendingThenById();
+        List<Transaction> returnedTransactions = makeIteratorToList(received);
+        List<Transaction> expected = Arrays.asList(testTransaction, currTransaction, currTransaction2);
 
         assertEquals(expected, returnedTransactions);
     }

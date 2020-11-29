@@ -32,4 +32,19 @@ public class TransactionImpl implements Transaction {
     public void setStatus(TransactionStatus newStatus) {
         this.status = newStatus;
     }
+
+    @Override
+    public String getSender(){
+        return this.from;
+    }
+
+    @Override
+    public Double getAmount(){
+        return this.amount;
+    }
+
+    @Override
+    public String getReceiver(){
+        return this.to;
+    }
 }

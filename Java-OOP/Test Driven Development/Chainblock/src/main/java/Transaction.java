@@ -5,4 +5,10 @@ public interface Transaction extends Comparable<TransactionImpl>{
     TransactionStatus getStatus();
 
     void setStatus(TransactionStatus newStatus);
+
+    String getSender();
+
+    Double getAmount();
+
+    String getReceiver();
 }
