@@ -12,9 +12,8 @@ public class ChainblockImpl implements Chainblock {
     }
 
 
-
     public int getCount() {
-        return 0;
+        return transactionList.size();
     }
 
     public void add(Transaction transaction) {
@@ -26,8 +25,12 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public boolean contains(Transaction transaction) {
-        for (Transaction tr : transactionList) {
-            if (tr.getId() == transaction.getId()) {
+        return contains(transaction.getId());
+    }
+
+    public boolean contains(int id) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getId() == id) {
                 return true;
             }
         }
@@ -35,12 +38,16 @@ public class ChainblockImpl implements Chainblock {
         return false;
     }
 
-    public boolean contains(int id) {
-        return false;
-    }
-
     public void changeTransactionStatus(int id, TransactionStatus newStatus) {
+        if (!this.contains(id)) {
+            throw new IllegalArgumentException();
+        }
 
+        for (Transaction transaction : transactionList) {
+            if (transaction.getId() == id) {
+                transaction.setStatus(newStatus);
+            }
+        }
     }
 
     public void removeTransactionById(int id) {
@@ -48,7 +55,13 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Transaction getById(int id) {
-        return null;
+        for (Transaction transaction : transactionList) {
+            if (transaction.getId() == id) {
+                return transaction;
+            }
+        }
+
+        throw new IllegalArgumentException();
     }
 
     public Iterable<Transaction> getByTransactionStatus(TransactionStatus status) {

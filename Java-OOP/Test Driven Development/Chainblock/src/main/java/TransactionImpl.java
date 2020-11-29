@@ -22,4 +22,14 @@ public class TransactionImpl implements Transaction {
     public int getId() {
         return this.id;
     }
+
+    @Override
+    public TransactionStatus getStatus() {
+        return this.status;
+    }
+
+    @Override
+    public void setStatus(TransactionStatus newStatus) {
+        this.status = newStatus;
+    }
 }
