@@ -51,7 +51,14 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public void removeTransactionById(int id) {
+        for (Transaction transaction : transactionList) {
+            if (transaction.getId() == id){
+                transactionList.remove(transaction);
+                return;
+            }
+        }
 
+        throw new IllegalArgumentException();
     }
 
     public Transaction getById(int id) {
@@ -65,7 +72,19 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<Transaction> getByTransactionStatus(TransactionStatus status) {
-        return null;
+        List<Transaction> transactions = new ArrayList<>();
+
+        for (Transaction transaction : transactionList) {
+            if (transaction.getStatus().equals(status)){
+                transactions.add(transaction);
+            }
+        }
+
+        if (transactions.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return transactions;
     }
 
     public Iterable<String> getAllSendersWithTransactionStatus(TransactionStatus status) {

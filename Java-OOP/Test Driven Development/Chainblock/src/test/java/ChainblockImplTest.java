@@ -43,13 +43,7 @@ public class ChainblockImplTest {
         chainblock.add(currTransaction);
 
         Iterator<Transaction> iterator = chainblock.iterator();
-        List<Transaction> transactionsReceived = new ArrayList<>();
-
-        while (iterator.hasNext()) {
-            Transaction next = iterator.next();
-            transactionsReceived.add(next);
-            iterator.remove();
-        }
+        List<Transaction> transactionsReceived = makeIteratorToList(iterator);
 
         List<Transaction> expected = Arrays.asList(testTransaction, currTransaction);
 
@@ -103,4 +97,96 @@ public class ChainblockImplTest {
         assertEquals(TransactionStatus.ABORTED, foundById.getStatus());
     }
 
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGettingByInvalidId() {
+        chainblock.getById(2);
+    }
+
+    @Test
+    public void testGettingByValidId() {
+        chainblock.add(testTransaction);
+        Transaction byId = chainblock.getById(1);
+        assertEquals(testTransaction, byId);
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemovingTransactionByInvalidId() {
+        chainblock.removeTransactionById(2);
+    }
+
+    @Test
+    public void testRemovingTransactionByValidId() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from", "to", 2);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+
+        chainblock.removeTransactionById(1);
+
+        Iterator<Transaction> iterator = chainblock.iterator();
+        List<Transaction> returnedList = makeIteratorToList(iterator);
+        List<Transaction> expected = Collections.singletonList(currTransaction);
+
+        assertEquals(expected, returnedList);
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGettingTransactionsByInvalidStatus() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from", "to", 2);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(4, TransactionStatus.FAILED,
+                "from", "to", 2);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+
+        chainblock.getByTransactionStatus(TransactionStatus.SUCCESSFUL);
+    }
+
+    @Test
+    public void testGettingTransactionsByValidStatus() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from", "to", 2);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from", "to", 2);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+
+        Iterable<Transaction> byTransactionStatus = chainblock.getByTransactionStatus(TransactionStatus.ABORTED);
+        List<Transaction> returnedTransactions = makeIteratorToList(byTransactionStatus);
+        List<Transaction> expected = Arrays.asList(currTransaction, currTransaction2);
+
+        assertEquals(expected, returnedTransactions);
+    }
+
+
+    private <T> List<T> makeIteratorToList(Iterator<T> iterator) {
+        List<T> list = new ArrayList<>();
+
+        while (iterator.hasNext()) {
+            list.add(iterator.next());
+            iterator.remove();
+        }
+
+        return list;
+    }
+
+    private <T> List<T> makeIteratorToList(Iterable<T> iterator) {
+        List<T> list = new ArrayList<>();
+
+        for (T element : iterator) {
+            list.add(element);
+        }
+
+        return list;
+    }
 }
