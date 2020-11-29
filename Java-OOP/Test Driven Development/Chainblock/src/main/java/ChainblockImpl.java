@@ -2,15 +2,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ChainblockImpl implements Chainblock{
-    private List<Transaction> transactions;
+public class ChainblockImpl implements Chainblock {
+    private List<Transaction> transactionList;
 
     public ChainblockImpl() {
-        this.transactions = transactions;
-    }
+        this.transactionList = transactionList;
+        transactionList = new ArrayList<>();
 
-    public void ChainblockImpl(){
-        transactions = new ArrayList<>();
     }
 
 
@@ -20,10 +18,20 @@ public class ChainblockImpl implements Chainblock{
     }
 
     public void add(Transaction transaction) {
+        if (this.contains(transaction)) {
+            throw new IllegalArgumentException();
+        }
 
+        transactionList.add(transaction);
     }
 
     public boolean contains(Transaction transaction) {
+        for (Transaction tr : transactionList) {
+            if (tr.getId() == transaction.getId()) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -84,6 +92,6 @@ public class ChainblockImpl implements Chainblock{
     }
 
     public Iterator<Transaction> iterator() {
-        return null;
+        return transactionList.listIterator();
     }
 }

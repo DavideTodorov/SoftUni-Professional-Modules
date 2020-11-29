@@ -1,4 +1,4 @@
-public class TransactionImpl    {
+public class TransactionImpl implements Transaction {
 
     private int id;
     private TransactionStatus status;
@@ -16,5 +16,10 @@ public class TransactionImpl    {
 
     public int compareTo(TransactionImpl other) {
         return 0;
+    }
+
+    @Override
+    public int getId() {
+        return this.id;
     }
 }
