@@ -507,6 +507,97 @@ public class ChainblockImplTest {
     }
 
 
+    @Test
+    public void testGetByReceiverAndAmountInRangeSortedByAmountDescendingThenById() {
+        TransactionImpl currTransaction = new TransactionImpl(2, TransactionStatus.FAILED,
+                "from_2", "to_3", 3);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from_3", "to_3", 4);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_4", "to_3", 6);
+
+
+        TransactionImpl currTransaction4 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_5", "to_3", 6);
+
+        TransactionImpl currTransaction5 = new TransactionImpl(6, TransactionStatus.ABORTED,
+                "from_6", "to_3", 7);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+        chainblock.add(currTransaction4);
+        chainblock.add(currTransaction5);
+
+        Iterable<Transaction> to_3 = chainblock.getByReceiverAndAmountRange("to_3", 4, 7);
+        List<Transaction> returnedTransactions = makeIteratorToList(to_3);
+        List<Transaction> expected = Arrays.asList(currTransaction3, currTransaction4, currTransaction2);
+
+        assertEquals(expected, returnedTransactions);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetByInvalidReceiverAndAmountInRangeSortedByAmountDescendingThenById() {
+        TransactionImpl currTransaction = new TransactionImpl(2, TransactionStatus.FAILED,
+                "from_2", "to_3", 3);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from_3", "to_3", 4);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_4", "to_3", 6);
+
+
+        TransactionImpl currTransaction4 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_5", "to_7", 6);
+
+        TransactionImpl currTransaction5 = new TransactionImpl(6, TransactionStatus.ABORTED,
+                "from_6", "to_4", 7);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+        chainblock.add(currTransaction4);
+        chainblock.add(currTransaction5);
+
+        chainblock.getByReceiverAndAmountRange("to_5", 4, 7);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetByReceiverAndInvalidAmountInRangeSortedByAmountDescendingThenById() {
+        TransactionImpl currTransaction = new TransactionImpl(2, TransactionStatus.FAILED,
+                "from_2", "to_3", 4);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from_3", "to_3", 5);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_4", "to_3", 6);
+
+
+        TransactionImpl currTransaction4 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_5", "to_3", 6);
+
+        TransactionImpl currTransaction5 = new TransactionImpl(6, TransactionStatus.ABORTED,
+                "from_6", "to_3", 7);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+        chainblock.add(currTransaction4);
+        chainblock.add(currTransaction5);
+
+        chainblock.getByReceiverAndAmountRange("to_3", 1, 4);
+    }
+
+
+    
+
     private <T> List<T> makeIteratorToList(Iterator<T> iterator) {
         List<T> list = new ArrayList<>();
 
