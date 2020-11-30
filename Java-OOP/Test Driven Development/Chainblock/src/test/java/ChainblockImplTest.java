@@ -358,6 +358,7 @@ public class ChainblockImplTest {
         chainblock.add(currTransaction);
         chainblock.add(currTransaction2);
         chainblock.add(currTransaction3);
+        chainblock.add(currTransaction4);
 
         Iterable<Transaction> transactionIterable =
                 chainblock.getByTransactionStatusAndMaximumAmount(TransactionStatus.ABORTED, 4);
@@ -387,6 +388,7 @@ public class ChainblockImplTest {
         chainblock.add(currTransaction);
         chainblock.add(currTransaction2);
         chainblock.add(currTransaction3);
+        chainblock.add(currTransaction4);
 
         Iterable<Transaction> transactionIterable =
                 chainblock.getByTransactionStatusAndMaximumAmount(TransactionStatus.ABORTED, 1);
@@ -416,6 +418,7 @@ public class ChainblockImplTest {
         chainblock.add(currTransaction);
         chainblock.add(currTransaction2);
         chainblock.add(currTransaction3);
+        chainblock.add(currTransaction4);
 
         Iterable<Transaction> transactionIterable =
                 chainblock.getByTransactionStatusAndMaximumAmount(TransactionStatus.UNAUTHORIZED, 4);
@@ -425,6 +428,84 @@ public class ChainblockImplTest {
 
         assertEquals(expected, returnedTransactions);
     }
+
+
+    @Test
+    public void testGetBySenderAndMinimumAmountDescending() {
+        TransactionImpl currTransaction = new TransactionImpl(2, TransactionStatus.FAILED,
+                "from_2", "to_2", 3);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from_2", "to_3", 4);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_2", "to_4", 5);
+
+
+        TransactionImpl currTransaction4 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_2", "to_5", 6);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+        chainblock.add(currTransaction4);
+
+        Iterable<Transaction> from_2 = chainblock.getBySenderAndMinimumAmountDescending("from_2", 4);
+        List<Transaction> returnedTransactions = makeIteratorToList(from_2);
+        List<Transaction> expected = Arrays.asList(currTransaction4, currTransaction3);
+
+        assertEquals(expected, returnedTransactions);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetBySenderAndInvalidMinimumAmountDescending() {
+        TransactionImpl currTransaction = new TransactionImpl(2, TransactionStatus.FAILED,
+                "from_2", "to_2", 3);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from_2", "to_3", 4);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_2", "to_4", 5);
+
+
+        TransactionImpl currTransaction4 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_2", "to_5", 6);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+        chainblock.add(currTransaction4);
+
+        chainblock.getBySenderAndMinimumAmountDescending("from_2", 7);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetByInvalidSenderAndMinimumAmountDescending() {
+        TransactionImpl currTransaction = new TransactionImpl(2, TransactionStatus.FAILED,
+                "from_2", "to_2", 3);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from_2", "to_3", 4);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_2", "to_4", 5);
+
+
+        TransactionImpl currTransaction4 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_2", "to_5", 6);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+        chainblock.add(currTransaction4);
+
+        chainblock.getBySenderAndMinimumAmountDescending("from_3", 3);
+    }
+
 
     private <T> List<T> makeIteratorToList(Iterator<T> iterator) {
         List<T> list = new ArrayList<>();
