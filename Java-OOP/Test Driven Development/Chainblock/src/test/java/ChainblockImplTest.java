@@ -295,6 +295,49 @@ public class ChainblockImplTest {
         Iterable<Transaction> sendersFrom_2 = chainblock.getBySenderOrderedByAmountDescending("from_4");
     }
 
+
+    @Test
+    public void testGetByReceiverOrderedByAmountDescendingThenById() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.FAILED,
+                "from_2", "to_2", 3);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_3", "to_2", 3);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_4", "to_2", 4);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+
+        Iterable<Transaction> sendersFrom_2 = chainblock.getByReceiverOrderedByAmountThenById("to_2");
+        List<Transaction> returnedTransactions = makeIteratorToList(sendersFrom_2);
+        List<Transaction> expected = Arrays.asList(currTransaction3, currTransaction, currTransaction2);
+
+        assertEquals(expected, returnedTransactions);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetByInvalidReceiverOrderedByAmountDescendingThenById() {
+        TransactionImpl currTransaction = new TransactionImpl(3, TransactionStatus.FAILED,
+                "from_2", "to_2", 3);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_3", "to_3", 3);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_4", "to_4", 4);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+
+        chainblock.getByReceiverOrderedByAmountThenById("to_5");
+    }
+
     private <T> List<T> makeIteratorToList(Iterator<T> iterator) {
         List<T> list = new ArrayList<>();
 

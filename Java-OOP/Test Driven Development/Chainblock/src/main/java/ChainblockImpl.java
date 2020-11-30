@@ -122,7 +122,7 @@ public class ChainblockImpl implements Chainblock {
                 .sorted((t1, t2) -> {
                     int compare = Double.compare(t2.getAmount(), t1.getAmount());
 
-                    if (compare == 0){
+                    if (compare == 0) {
                         compare = Integer.compare(t1.getId(), t2.getId());
                     }
 
@@ -137,7 +137,7 @@ public class ChainblockImpl implements Chainblock {
                 .sorted((t1, t2) -> Double.compare(t2.getAmount(), t1.getAmount()))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 
-        if (transactions.isEmpty()){
+        if (transactions.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
@@ -145,7 +145,24 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<Transaction> getByReceiverOrderedByAmountThenById(String receiver) {
-        return null;
+        LinkedHashSet<Transaction> transactions = transactionList.stream()
+                .filter(t -> t.getReceiver().equals(receiver))
+                .sorted((t1, t2) -> {
+                    int compare = Double.compare(t2.getAmount(), t1.getAmount());
+
+                    if (compare == 0) {
+                        compare = Integer.compare(t1.getId(), t2.getId());
+                    }
+
+                    return compare;
+                })
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        if (transactions.isEmpty()){
+            throw new IllegalArgumentException();
+        }
+
+        return transactions;
     }
 
     public Iterable<Transaction> getByTransactionStatusAndMaximumAmount(TransactionStatus status, double amount) {
