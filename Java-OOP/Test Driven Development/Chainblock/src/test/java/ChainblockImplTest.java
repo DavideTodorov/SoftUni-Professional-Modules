@@ -596,7 +596,69 @@ public class ChainblockImplTest {
     }
 
 
-    
+    @Test
+    public void testGetAllInAmountRange() {
+        TransactionImpl currTransaction = new TransactionImpl(2, TransactionStatus.FAILED,
+                "from_2", "to_2", 4);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from_3", "to_3", 5);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_4", "to_4", 6);
+
+
+        TransactionImpl currTransaction4 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_5", "to_5", 7);
+
+        TransactionImpl currTransaction5 = new TransactionImpl(6, TransactionStatus.ABORTED,
+                "from_6", "to_6", 3.5);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+        chainblock.add(currTransaction4);
+        chainblock.add(currTransaction5);
+
+        Iterable<Transaction> allInAmountRange = chainblock.getAllInAmountRange(3, 5);
+        List<Transaction> returnedTransactions = makeIteratorToList(allInAmountRange);
+        List<Transaction> expected = Arrays.asList(testTransaction, currTransaction, currTransaction2, currTransaction5);
+
+        assertEquals(expected, returnedTransactions);
+    }
+
+    @Test
+    public void testGetAllInInvalidAmountRange() {
+        TransactionImpl currTransaction = new TransactionImpl(2, TransactionStatus.FAILED,
+                "from_2", "to_2", 4);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from_3", "to_3", 5);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_4", "to_4", 6);
+
+
+        TransactionImpl currTransaction4 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_5", "to_5", 9);
+
+        TransactionImpl currTransaction5 = new TransactionImpl(6, TransactionStatus.ABORTED,
+                "from_6", "to_6", 10);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+        chainblock.add(currTransaction4);
+        chainblock.add(currTransaction5);
+
+        Iterable<Transaction> allInAmountRange = chainblock.getAllInAmountRange(7, 8);
+        List<Transaction> returnedTransactions = makeIteratorToList(allInAmountRange);
+        List<Transaction> expected = Collections.emptyList();
+
+        assertEquals(expected, returnedTransactions);
+    }
 
     private <T> List<T> makeIteratorToList(Iterator<T> iterator) {
         List<T> list = new ArrayList<>();

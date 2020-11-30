@@ -207,7 +207,9 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<Transaction> getAllInAmountRange(double lo, double hi) {
-        return null;
+        return transactionList.stream()
+                .filter(t -> t.getAmount() >= lo && t.getAmount() <= hi)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public Iterator<Transaction> iterator() {
