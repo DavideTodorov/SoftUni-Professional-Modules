@@ -338,6 +338,94 @@ public class ChainblockImplTest {
         chainblock.getByReceiverOrderedByAmountThenById("to_5");
     }
 
+
+    @Test
+    public void testGetTransactionByStatusAndMaximumAmount() {
+        TransactionImpl currTransaction = new TransactionImpl(2, TransactionStatus.FAILED,
+                "from_2", "to_2", 3);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from_3", "to_3", 3);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_4", "to_4", 4);
+
+
+        TransactionImpl currTransaction4 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_5", "to_5", 5);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+
+        Iterable<Transaction> transactionIterable =
+                chainblock.getByTransactionStatusAndMaximumAmount(TransactionStatus.ABORTED, 4);
+
+        List<Transaction> returnedTransactions = makeIteratorToList(transactionIterable);
+        List<Transaction> expected = Arrays.asList(currTransaction3, currTransaction2);
+
+        assertEquals(expected, returnedTransactions);
+    }
+
+    @Test
+    public void testGetTransactionByStatusAndInvalidMaximumAmount() {
+        TransactionImpl currTransaction = new TransactionImpl(2, TransactionStatus.FAILED,
+                "from_2", "to_2", 3);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from_3", "to_3", 3);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_4", "to_4", 4);
+
+
+        TransactionImpl currTransaction4 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_5", "to_5", 5);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+
+        Iterable<Transaction> transactionIterable =
+                chainblock.getByTransactionStatusAndMaximumAmount(TransactionStatus.ABORTED, 1);
+
+        List<Transaction> returnedTransactions = makeIteratorToList(transactionIterable);
+        List<Transaction> expected = Collections.emptyList();
+
+        assertEquals(expected, returnedTransactions);
+    }
+
+    @Test
+    public void testGetTransactionByInvalidStatusAndMaximumAmount() {
+        TransactionImpl currTransaction = new TransactionImpl(2, TransactionStatus.FAILED,
+                "from_2", "to_2", 3);
+
+        TransactionImpl currTransaction2 = new TransactionImpl(3, TransactionStatus.ABORTED,
+                "from_3", "to_3", 3);
+
+        TransactionImpl currTransaction3 = new TransactionImpl(4, TransactionStatus.ABORTED,
+                "from_4", "to_4", 4);
+
+
+        TransactionImpl currTransaction4 = new TransactionImpl(5, TransactionStatus.ABORTED,
+                "from_5", "to_5", 5);
+
+        chainblock.add(testTransaction);
+        chainblock.add(currTransaction);
+        chainblock.add(currTransaction2);
+        chainblock.add(currTransaction3);
+
+        Iterable<Transaction> transactionIterable =
+                chainblock.getByTransactionStatusAndMaximumAmount(TransactionStatus.UNAUTHORIZED, 4);
+
+        List<Transaction> returnedTransactions = makeIteratorToList(transactionIterable);
+        List<Transaction> expected = Collections.emptyList();
+
+        assertEquals(expected, returnedTransactions);
+    }
+
     private <T> List<T> makeIteratorToList(Iterator<T> iterator) {
         List<T> list = new ArrayList<>();
 

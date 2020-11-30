@@ -166,7 +166,10 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<Transaction> getByTransactionStatusAndMaximumAmount(TransactionStatus status, double amount) {
-        return null;
+        return transactionList.stream()
+                .filter(t -> t.getStatus().equals(status) && t.getAmount() <= amount)
+                .sorted((t1, t2) -> Double.compare(t2.getAmount(), t1.getAmount()))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public Iterable<Transaction> getBySenderAndMinimumAmountDescending(String sender, double amount) {
