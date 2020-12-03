@@ -1,10 +1,10 @@
 public class Main {
 
     public static void main(String[] args) {
+        SingletonCityContainer container = SingletonCityContainer.getInstance();
 
-        SingletonCapitalContainer container = SingletonCapitalContainer.getInstance();
-        SingletonCapitalContainer container2 = SingletonCapitalContainer.getInstance();
+        container.increasePopulation("Plovdiv", 1000);
 
-        System.out.println();
+        System.out.println(container.getCapitalPopulation("Plovdiv"));
     }
 }
