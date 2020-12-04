@@ -1,6 +1,5 @@
 package hell.entities.miscellaneous;
 
-import hell.entities.items.AbstractItem;
 import hell.entities.items.CommonItem;
 import hell.interfaces.Inventory;
 import hell.interfaces.Item;

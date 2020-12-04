@@ -2,7 +2,7 @@ package hell.entities.items;
 
 import hell.interfaces.Item;
 
-public abstract class AbstractItem implements Item {
+public abstract class Items implements Item {
     private String name;
     private Integer strengthBonus;
     private Integer agilityBonus;
@@ -10,8 +10,8 @@ public abstract class AbstractItem implements Item {
     private Integer hitPointsBonus;
     private Integer damageBonus;
 
-    public AbstractItem(String name, Integer strengthBonus, Integer agilityBonus,
-                        Integer intelligenceBonus, Integer hitPointsBonus, Integer damageBonus) {
+    public Items(String name, Integer strengthBonus, Integer agilityBonus,
+                 Integer intelligenceBonus, Integer hitPointsBonus, Integer damageBonus) {
         this.name = name;
         this.strengthBonus = strengthBonus;
         this.agilityBonus = agilityBonus;
@@ -48,5 +48,10 @@ public abstract class AbstractItem implements Item {
     @Override
     public int getDamageBonus() {
         return this.damageBonus;
+    }
+
+    @Override
+    public String toString() {
+        return "";
     }
 }

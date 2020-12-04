@@ -3,11 +3,14 @@ package hell.entities.heroes;
 import hell.entities.miscellaneous.HeroInventory;
 import hell.interfaces.Hero;
 import hell.interfaces.Item;
+import hell.interfaces.Manager;
 import hell.interfaces.Recipe;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
+import java.util.Map;
 
-public abstract class AbstractHero implements Hero {
+public abstract class Heroes implements Hero {
     private String name;
     private Integer strength;
     private Integer agility;
@@ -16,8 +19,8 @@ public abstract class AbstractHero implements Hero {
     private Integer damage;
     private HeroInventory heroInventory;
 
-    public AbstractHero(String name, Integer strength, Integer agility,
-                        Integer intelligence, Integer hitPoints, Integer damage) {
+    public Heroes(String name, Integer strength, Integer agility,
+                  Integer intelligence, Integer hitPoints, Integer damage) {
         this.name = name;
         this.strength = strength;
         this.agility = agility;
@@ -59,6 +62,14 @@ public abstract class AbstractHero implements Hero {
 
     @Override
     public Collection<Item> getItems() {
+        try {
+            Field field = this.heroInventory.getClass().getDeclaredField("commonItems");
+            field.setAccessible(true);
+            return ((Map<String, Item>) field.get(this.heroInventory)).values();
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 
@@ -70,5 +81,10 @@ public abstract class AbstractHero implements Hero {
     @Override
     public void addRecipe(Recipe recipe) {
         heroInventory.addRecipeItem(recipe);
+    }
+
+    @Override
+    public String toString() {
+        return "";
     }
 }
