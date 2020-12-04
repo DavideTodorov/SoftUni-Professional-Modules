@@ -1,4 +1,4 @@
-package hell.instantiation;
+package hell.instantiation.heroes;
 
 import hell.entities.miscellaneous.HeroInventory;
 import hell.interfaces.Hero;
@@ -7,22 +7,22 @@ import hell.interfaces.Recipe;
 
 import java.util.Collection;
 
-public class Assassin extends HeroInventory implements Hero {
+public class Barbarian extends HeroInventory implements Hero {
     private String name;
-    private int strength;
-    private int agility;
-    private int intelligence;
-    private int hitPoints;
-    private int damage;
+    private Integer strength;
+    private Integer agility;
+    private Integer intelligence;
+    private Integer hitPoints;
+    private Integer damage;
     private HeroInventory heroInventory;
 
-    public Assassin(String name) {
+    public Barbarian(String name) {
         this.name = name;
-        this.strength = 25;
-        this.agility = 100;
-        this.intelligence = 15;
-        this.hitPoints = 150;
-        this.damage = 300;
+        this.strength = 90;
+        this.agility = 25;
+        this.intelligence = 10;
+        this.hitPoints = 350;
+        this.damage = 150;
         this.heroInventory = new HeroInventory();
     }
 

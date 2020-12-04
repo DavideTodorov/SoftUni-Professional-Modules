@@ -1,7 +1,7 @@
 package hell.entities.miscellaneous;
 
-import hell.entities.items.CommonItem;
-import hell.entities.items.RecipeItem;
+
+import hell.instantiation.items.CommonItem;
 import hell.interfaces.Inventory;
 import hell.interfaces.Item;
 import hell.interfaces.Recipe;
