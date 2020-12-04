@@ -52,6 +52,13 @@ public abstract class Items implements Item {
 
     @Override
     public String toString() {
-        return "";
+        String output = "###Item: " + this.getName() + System.lineSeparator() +
+                "###+" + this.getStrengthBonus() + " Strength" + System.lineSeparator() +
+                "###+" + this.getAgilityBonus() + " Agility" + System.lineSeparator() +
+                "###+" + this.getIntelligenceBonus() + " Intelligence" + System.lineSeparator() +
+                "###+" + this.getHitPointsBonus() + " HitPoints" + System.lineSeparator() +
+                "###+" + this.getDamageBonus() + " Damage";
+
+        return output.trim();
     }
 }

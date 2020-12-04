@@ -87,5 +87,6 @@ public class HeroInventory implements Inventory {
                 recipe.getDamageBonus());
 
         this.commonItems.put(newItem.getName(), newItem);
+
     }
 }

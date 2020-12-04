@@ -37,27 +37,27 @@ public abstract class Heroes implements Hero {
 
     @Override
     public long getStrength() {
-        return this.strength;
+        return this.strength + heroInventory.getTotalStrengthBonus();
     }
 
     @Override
     public long getAgility() {
-        return this.agility;
+        return this.agility + heroInventory.getTotalAgilityBonus();
     }
 
     @Override
     public long getIntelligence() {
-        return this.intelligence;
+        return this.intelligence + heroInventory.getTotalIntelligenceBonus();
     }
 
     @Override
     public long getHitPoints() {
-        return this.hitPoints;
+        return this.hitPoints + heroInventory.getTotalHitPointsBonus();
     }
 
     @Override
     public long getDamage() {
-        return this.damage;
+        return this.damage + heroInventory.getTotalDamageBonus();
     }
 
     @Override
@@ -85,6 +85,22 @@ public abstract class Heroes implements Hero {
 
     @Override
     public String toString() {
-        return "";
+        StringBuilder output = new StringBuilder();
+        output.append("Hero: ").append(this.getName()).append(", Class: ").append(this.getClass().getSimpleName()).append(System.lineSeparator());
+        output.append("HitPoints: ").append(this.getHitPoints()).append(", Damage: ").append(this.getDamage()).append(System.lineSeparator());
+        output.append("Strength: ").append(this.getStrength()).append(System.lineSeparator());
+        output.append("Agility: ").append(this.getAgility()).append(System.lineSeparator());
+        output.append("Intelligence: ").append(this.getIntelligence()).append(System.lineSeparator());
+
+        if (this.getItems().isEmpty()) {
+            output.append("Items: None");
+        } else {
+            output.append("Items:").append(System.lineSeparator());
+            for (Item item : this.getItems()) {
+                output.append(item.toString());
+            }
+        }
+
+        return output.toString().trim();
     }
 }
