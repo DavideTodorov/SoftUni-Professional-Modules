@@ -1,4 +1,4 @@
-package interfaces;
+package hell.interfaces;
 
 /**
  *  This is the interface for the Item entity

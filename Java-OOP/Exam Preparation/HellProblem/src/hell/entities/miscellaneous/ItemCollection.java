@@ -1,4 +1,4 @@
-package entities.miscellaneous;
+package hell.entities.miscellaneous;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

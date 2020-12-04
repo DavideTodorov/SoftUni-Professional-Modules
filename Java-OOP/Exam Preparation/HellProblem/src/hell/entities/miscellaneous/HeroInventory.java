@@ -1,7 +1,7 @@
-package entities.miscellaneous;
+package hell.entities.miscellaneous;
 
+import hell.entities.items.AbstractItem;
 import hell.entities.items.CommonItem;
-import hell.entities.items.RecipeItem;
 import hell.interfaces.Inventory;
 import hell.interfaces.Item;
 import hell.interfaces.Recipe;
@@ -62,12 +62,12 @@ public class HeroInventory implements Inventory {
             List<String> requiredItems = new ArrayList<String>(recipe.getRequiredItems());
 
             for (Item item : this.commonItems.values()) {
-                if(requiredItems.contains(item.getName())) {
+                if (requiredItems.contains(item.getName())) {
                     requiredItems.remove(item.getName());
                 }
             }
 
-            if(requiredItems.isEmpty()) {
+            if (requiredItems.isEmpty()) {
                 this.combineRecipe(recipe);
             }
         }
