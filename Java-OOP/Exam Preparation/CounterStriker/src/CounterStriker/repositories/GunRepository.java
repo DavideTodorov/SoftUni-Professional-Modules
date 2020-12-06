@@ -4,7 +4,10 @@ import CounterStriker.models.guns.Gun;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+
+import static CounterStriker.common.ExceptionMessages.INVALID_GUN_REPOSITORY;
 
 public class GunRepository implements Repository<Gun> {
     private Map<String, Gun> models;
@@ -15,22 +18,35 @@ public class GunRepository implements Repository<Gun> {
 
 
     @Override
-    public Collection<Gun> getModels() {
-        return null;
-    }
-
-    @Override
     public void add(Gun model) {
+        if (model == null) {
+            throw new NullPointerException(INVALID_GUN_REPOSITORY);
+        }
 
+        models.put(model.getName(), model);
     }
 
     @Override
     public boolean remove(Gun model) {
-        return false;
+        return models.remove(model.getName(), model);
     }
 
     @Override
     public Gun findByName(String name) {
-        return null;
+        Gun gun = null;
+
+        for (Gun currGun : models.values()) {
+            if (currGun.getName().equals(name)) {
+                gun = currGun;
+                break;
+            }
+        }
+
+        return gun;
+    }
+
+    @Override
+    public Collection<Gun> getModels() {
+        return new HashSet<>(models.values());
     }
 }
