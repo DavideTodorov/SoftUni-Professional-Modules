@@ -1,6 +1,7 @@
 package CounterStriker.core;
 
 import CounterStriker.models.field.Field;
+import CounterStriker.models.field.FieldImpl;
 import CounterStriker.models.guns.Gun;
 import CounterStriker.models.guns.Pistol;
 import CounterStriker.models.guns.Rifle;
@@ -19,6 +20,9 @@ public class ControllerImpl implements Controller {
     private Field field;
 
     public ControllerImpl() {
+        guns = new GunRepository();
+        players = new PlayerRepository();
+        field = new FieldImpl();
     }
 
     @Override
@@ -51,24 +55,43 @@ public class ControllerImpl implements Controller {
 
         if (type.equals("Terrorist")) {
             player = new Terrorist(username, health, armor, gun);
-        }else if (type.equals("CounterTerrorist")){
+        } else if (type.equals("CounterTerrorist")) {
             player = new CounterTerrorist(username, health, armor, gun);
-        }else {
+        } else {
             throw new IllegalArgumentException(INVALID_PLAYER_TYPE);
         }
 
         players.add(player);
 
-        return String.format(SUCCESSFULLY_ADDED_PLAYER,player.getUsername());
+        return String.format(SUCCESSFULLY_ADDED_PLAYER, player.getUsername());
     }
 
     @Override
     public String startGame() {
-        return null;
+        return field.start(players.getModels());
     }
 
     @Override
     public String report() {
-        return null;
+        StringBuilder builder = new StringBuilder();
+
+        players.getModels()
+                .stream()
+                .sorted((p1, p2) -> {
+                    int result = p1.getClass().getSimpleName().compareTo(p2.getClass().getSimpleName());
+
+                    if (result == 0) {
+                        result = Integer.compare(p2.getHealth(), p1.getHealth());
+                    }
+
+                    if (result == 0) {
+                        result = p1.getUsername().compareTo(p2.getUsername());
+                    }
+
+                    return result;
+                })
+                .forEach(p -> builder.append(p.toString()).append(System.lineSeparator()));
+
+        return builder.toString().trim();
     }
 }

@@ -2,10 +2,7 @@ package CounterStriker.repositories;
 
 import CounterStriker.models.guns.Gun;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 import static CounterStriker.common.ExceptionMessages.INVALID_GUN_REPOSITORY;
 
@@ -47,6 +44,6 @@ public class GunRepository implements Repository<Gun> {
 
     @Override
     public Collection<Gun> getModels() {
-        return new HashSet<>(models.values());
+        return new ArrayList<>(models.values());
     }
 }
