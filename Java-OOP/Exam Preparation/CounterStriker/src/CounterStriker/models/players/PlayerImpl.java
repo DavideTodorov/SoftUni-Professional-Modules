@@ -2,6 +2,8 @@ package CounterStriker.models.players;
 
 import CounterStriker.models.guns.Gun;
 
+import javax.print.DocFlavor;
+
 import static CounterStriker.common.ExceptionMessages.*;
 
 public abstract class PlayerImpl implements Player {
@@ -86,23 +88,26 @@ public abstract class PlayerImpl implements Player {
 
     @Override
     public void takeDamage(int points) {
-        int currArmor = this.getArmor();
-        currArmor -= points;
+        if (isAlive) {
+            int currArmor = this.getArmor();
+            currArmor -= points;
 
-        int currHealth = this.getHealth();
+            int currHealth = this.getHealth();
 
-        if (currArmor < 0) {
-            currHealth -= currArmor;
-            this.setArmor(0);
-        } else {
-            this.setArmor(currArmor);
-        }
+            if (currArmor < 0) {
+                currHealth -= currArmor;
+                this.setArmor(0);
+            } else {
+                this.setArmor(currArmor);
+                return;
+            }
 
-        if (currHealth <= 0) {
-            this.setHealth(0);
-            this.setIsAlive();
-        } else {
-            this.setHealth(currHealth);
+            if (currHealth <= 0) {
+                this.setHealth(0);
+                this.setIsAlive();
+            } else {
+                this.setHealth(currHealth);
+            }
         }
     }
 
