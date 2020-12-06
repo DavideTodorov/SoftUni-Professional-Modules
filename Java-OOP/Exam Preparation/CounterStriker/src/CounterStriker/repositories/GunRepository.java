@@ -2,14 +2,15 @@ package CounterStriker.repositories;
 
 import CounterStriker.models.guns.Gun;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GunRepository implements Repository<Gun> {
-    private Collection<Gun> models;
+    private Map<String, Gun> models;
 
     public GunRepository() {
-        this.models = new ArrayList<>();
+        this.models = new HashMap<>();
     }
 
 

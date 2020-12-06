@@ -2,14 +2,15 @@ package CounterStriker.repositories;
 
 import CounterStriker.models.players.Player;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerRepository implements Repository<Player> {
-    private Collection<Player> models;
+    private Map<String, Player> models;
 
     public PlayerRepository() {
-        this.models = new ArrayList<>();
+        this.models = new HashMap<>();
     }
 
     @Override
