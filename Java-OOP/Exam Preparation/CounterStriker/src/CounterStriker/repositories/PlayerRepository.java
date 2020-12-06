@@ -10,7 +10,7 @@ public class PlayerRepository implements Repository<Player> {
     private Map<String, Player> models;
 
     public PlayerRepository() {
-        this.models = new HashMap<>();
+        this.models = new LinkedHashMap<>();
     }
 
     @Override

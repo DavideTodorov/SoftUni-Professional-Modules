@@ -29,7 +29,9 @@ public class FieldImpl implements Field {
             //TERRORISTS ATTACK
             for (Player terrorist : terrorists) {
                 for (Player counterTerrorist : counterTerrorists) {
-                    counterTerrorist.takeDamage(terrorist.getGun().fire());
+                    if (terrorist.isAlive()) {
+                        counterTerrorist.takeDamage(terrorist.getGun().fire());
+                    }
                 }
             }
 
@@ -49,7 +51,9 @@ public class FieldImpl implements Field {
             //COUNTER TERRORISTS ATTACK
             for (Player counterTerrorist : counterTerrorists) {
                 for (Player terrorist : terrorists) {
-                    terrorist.takeDamage(counterTerrorist.getGun().fire());
+                    if (counterTerrorist.isAlive()) {
+                        terrorist.takeDamage(counterTerrorist.getGun().fire());
+                    }
                 }
             }
 

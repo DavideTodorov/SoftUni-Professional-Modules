@@ -89,24 +89,35 @@ public abstract class PlayerImpl implements Player {
     @Override
     public void takeDamage(int points) {
         if (isAlive) {
-            int currArmor = this.getArmor();
-            currArmor -= points;
 
+            int currArmor = this.getArmor();
             int currHealth = this.getHealth();
 
-            if (currArmor < 0) {
-                currHealth -= currArmor;
-                this.setArmor(0);
-            } else {
-                this.setArmor(currArmor);
-                return;
+            if (currArmor > 0) {
+                currArmor -= points;
+
+
+                if (currArmor < 0) {
+                    currHealth -= Math.abs(currArmor);
+                    this.setHealth(currHealth);
+                    this.setArmor(0);
+                    return;
+                } else {
+                    this.setArmor(currArmor);
+                    return;
+                }
             }
 
             if (currHealth <= 0) {
                 this.setHealth(0);
                 this.setIsAlive();
             } else {
-                this.setHealth(currHealth);
+                int leftHealth = currHealth - points;
+                if (leftHealth < 0){
+                    leftHealth = 0;
+                }
+                this.setHealth(leftHealth);
+                this.setIsAlive();
             }
         }
     }
