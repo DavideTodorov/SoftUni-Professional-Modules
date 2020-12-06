@@ -7,6 +7,9 @@ public class Rifle extends GunImpl {
 
     @Override
     public int fire() {
-        return super.fire();
+        if (this.getBulletsCount() < 10){
+            return 0;
+        }
+        return 0;
     }
 }
