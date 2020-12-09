@@ -2,6 +2,7 @@ package easterRaces.entities.drivers;
 
 import easterRaces.entities.cars.Car;
 
+import static easterRaces.common.ExceptionMessages.CAR_INVALID;
 import static easterRaces.common.ExceptionMessages.INVALID_NAME;
 
 public abstract class DriverImpl implements Driver {
@@ -14,7 +15,7 @@ public abstract class DriverImpl implements Driver {
         this.setName(name);
         this.numberOfWins = 0;
         this.car = null;
-        this.canParticipate = false;
+        this.setCanParticipate(false);
     }
 
     //SETTER
@@ -24,6 +25,10 @@ public abstract class DriverImpl implements Driver {
         }
 
         this.name = name;
+    }
+
+    private void setCanParticipate(boolean b) {
+        this.canParticipate = b;
     }
 
     //METHODS FROM DRIVER INTERFACE
@@ -49,11 +54,16 @@ public abstract class DriverImpl implements Driver {
 
     @Override
     public void addCar(Car car) {
+        if (car == null) {
+            throw new IllegalArgumentException(CAR_INVALID);
+        }
 
+        this.car = car;
+        this.setCanParticipate(true);
     }
 
     @Override
     public void winRace() {
-
+        this.numberOfWins++;
     }
 }
