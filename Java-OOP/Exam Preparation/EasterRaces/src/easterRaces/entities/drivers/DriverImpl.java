@@ -5,7 +5,7 @@ import easterRaces.entities.cars.Car;
 import static easterRaces.common.ExceptionMessages.CAR_INVALID;
 import static easterRaces.common.ExceptionMessages.INVALID_NAME;
 
-public abstract class DriverImpl implements Driver {
+public  class DriverImpl implements Driver {
     private String name;
     private Car car;
     private int numberOfWins;

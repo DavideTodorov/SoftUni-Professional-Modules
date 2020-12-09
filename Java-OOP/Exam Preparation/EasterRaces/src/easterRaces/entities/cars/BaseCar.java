@@ -16,7 +16,7 @@ public abstract class BaseCar implements Car {
     //SETTERS
     private void setModel(String model) {
         if (model == null || model.trim().isEmpty() || model.length() < 4) {
-            throw new IllegalArgumentException(String.format(INVALID_MODEL, model));
+            throw new IllegalArgumentException(String.format(INVALID_MODEL, model, 4));
         }
 
         this.model = model;
@@ -59,7 +59,6 @@ public abstract class BaseCar implements Car {
 
     @Override
     public double calculateRacePoints(int laps) {
-        double result = Math.round(cubicCentimeters / horsePower * laps);
-        return Math.round(result);
+        return cubicCentimeters / horsePower * laps;
     }
 }
