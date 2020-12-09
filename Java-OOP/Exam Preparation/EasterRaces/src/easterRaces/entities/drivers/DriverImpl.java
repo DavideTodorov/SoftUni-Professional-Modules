@@ -9,12 +9,18 @@ public abstract class DriverImpl implements Driver {
     private boolean canParticipate;
 
     public DriverImpl(String name) {
-        this.name = name;
-        numberOfWins = 0;
-        car = null;
-        canParticipate = false;
+        this.setName(name);
+        this.numberOfWins = 0;
+        this.car = null;
+        this.canParticipate = false;
     }
 
+    //SETTER
+    private void setName(String name) {
+        this.name = name;
+    }
+
+    //METHODS FROM DRIVER INTERFACE
     @Override
     public String getName() {
         return null;
