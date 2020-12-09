@@ -2,6 +2,8 @@ package easterRaces.entities.drivers;
 
 import easterRaces.entities.cars.Car;
 
+import static easterRaces.common.ExceptionMessages.INVALID_NAME;
+
 public abstract class DriverImpl implements Driver {
     private String name;
     private Car car;
@@ -17,23 +19,32 @@ public abstract class DriverImpl implements Driver {
 
     //SETTER
     private void setName(String name) {
+        if (name == null || name.trim().isEmpty() || name.length() < 5) {
+            throw new IllegalArgumentException(String.format(INVALID_NAME, name, 5));
+        }
+
         this.name = name;
     }
 
     //METHODS FROM DRIVER INTERFACE
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
     @Override
     public Car getCar() {
-        return null;
+        return this.car;
     }
 
     @Override
     public int getNumberOfWins() {
-        return 0;
+        return this.numberOfWins;
+    }
+
+    @Override
+    public boolean getCanParticipate() {
+        return this.canParticipate;
     }
 
     @Override
@@ -44,10 +55,5 @@ public abstract class DriverImpl implements Driver {
     @Override
     public void winRace() {
 
-    }
-
-    @Override
-    public boolean getCanParticipate() {
-        return false;
     }
 }
