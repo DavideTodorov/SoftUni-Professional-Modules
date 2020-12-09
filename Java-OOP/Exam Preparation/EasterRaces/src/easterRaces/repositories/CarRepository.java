@@ -1,4 +1,4 @@
-package easterRaces.repositories.interfaces;
+package easterRaces.repositories;
 
 import easterRaces.entities.cars.Car;
 
