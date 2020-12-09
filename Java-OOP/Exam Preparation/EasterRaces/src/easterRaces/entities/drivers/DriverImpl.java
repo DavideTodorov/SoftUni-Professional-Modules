@@ -2,7 +2,7 @@ package easterRaces.entities.drivers;
 
 import easterRaces.entities.cars.Car;
 
-public class DriverImpl implements Driver {
+public abstract class DriverImpl implements Driver {
     private String name;
     private Car car;
     private int numberOfWins;
