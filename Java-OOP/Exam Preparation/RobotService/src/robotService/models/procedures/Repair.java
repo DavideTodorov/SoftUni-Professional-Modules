@@ -14,13 +14,14 @@ public class Repair extends BaseProcedure {
     @Override
     public void doService(Robot robot, int procedureTime) {
 
+        if (robot.getProcedureTime() < procedureTime) {
+            throw new IllegalArgumentException(INSUFFICIENT_PROCEDURE_TIME);
+        }
+
         if (robot.isRepaired()) {
             throw new IllegalArgumentException(String.format(ALREADY_REPAIRED, robot.getName()));
         }
 
-        if (robot.getProcedureTime() < procedureTime) {
-            throw new IllegalArgumentException(INSUFFICIENT_PROCEDURE_TIME);
-        }
 
         int newProcedureTime = robot.getProcedureTime() - procedureTime;
         robot.setProcedureTime(newProcedureTime);
