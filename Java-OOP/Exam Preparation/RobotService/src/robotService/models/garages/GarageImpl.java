@@ -46,7 +46,7 @@ public class GarageImpl implements Garage {
         Robot robot = robots.get(robotName);
         robot.setOwner(ownerName);
         robot.setBought(true);
-        
+
         robots.remove(robotName);
     }
 }
