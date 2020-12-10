@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class BaseProcedure implements Procedure {
-    protected Collection< Robot> robots;
+    private Collection<Robot> robots;
 
     protected BaseProcedure() {
         this.robots = new ArrayList<>();
@@ -15,6 +15,15 @@ public abstract class BaseProcedure implements Procedure {
 
     @Override
     public String history() {
-        return null;
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(this.getClass().getSimpleName()).append(System.lineSeparator());
+
+        for (Robot robot : robots) {
+            builder.append(robot.toString())
+                    .append(System.lineSeparator());
+        }
+
+        return builder.toString().trim();
     }
 }
