@@ -7,11 +7,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class GarageImpl implements Garage {
-    private int capacity;
+    private static final int CAPACITY = 10;
     private Map<String, Robot> robots;
 
     public GarageImpl() {
-        this.capacity = 10;
         this.robots = new LinkedHashMap<>();
     }
 
