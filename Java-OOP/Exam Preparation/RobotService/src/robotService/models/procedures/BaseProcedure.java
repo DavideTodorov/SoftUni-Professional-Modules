@@ -3,14 +3,14 @@ package robotService.models.procedures;
 import robotService.models.procedures.interfaces.Procedure;
 import robotService.models.robots.interfaces.Robot;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 
 public abstract class BaseProcedure implements Procedure {
-    private HashMap<String, Robot> robots;
+    private Collection< Robot> robots;
 
-    public BaseProcedure() {
-        this.robots = new HashMap<>();
+    protected BaseProcedure() {
+        this.robots = new ArrayList<>();
     }
 
     @Override
