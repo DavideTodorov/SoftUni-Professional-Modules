@@ -23,6 +23,7 @@ public class Work extends BaseProcedure {
         
         robot.setEnergy(energy);
         robot.setHappiness(happiness);
-    }
 
+        robots.add(robot);
+    }
 }

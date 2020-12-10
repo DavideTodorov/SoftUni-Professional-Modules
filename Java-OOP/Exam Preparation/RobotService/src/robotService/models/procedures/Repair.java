@@ -13,6 +13,7 @@ public class Repair extends BaseProcedure {
 
     @Override
     public void doService(Robot robot, int procedureTime) {
+
         if (robot.isRepaired()) {
             throw new IllegalArgumentException(String.format(ALREADY_REPAIRED, robot.getName()));
         }
@@ -23,7 +24,11 @@ public class Repair extends BaseProcedure {
 
         int newProcedureTime = robot.getProcedureTime() - procedureTime;
         robot.setProcedureTime(newProcedureTime);
-
         robot.setRepaired(true);
+
+        int newHappiness = robot.getHappiness() - 5;
+        robot.setHappiness(newHappiness);
+
+        robots.add(robot);
     }
 }

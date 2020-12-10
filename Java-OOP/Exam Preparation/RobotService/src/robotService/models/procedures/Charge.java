@@ -21,7 +21,10 @@ public class Charge extends BaseProcedure {
 
         int happiness = robot.getHappiness() + 12;
         int energy = robot.getEnergy() + 10;
+
         robot.setHappiness(happiness);
         robot.setEnergy(energy);
+
+        robots.add(robot);
     }
 }
