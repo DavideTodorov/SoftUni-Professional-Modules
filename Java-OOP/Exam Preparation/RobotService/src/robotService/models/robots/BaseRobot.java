@@ -2,6 +2,8 @@ package robotService.models.robots;
 
 import robotService.models.robots.interfaces.Robot;
 
+import static robotService.common.ExceptionMessages.*;
+
 public abstract class BaseRobot implements Robot {
     private String name;
     private int energy;
@@ -12,7 +14,7 @@ public abstract class BaseRobot implements Robot {
     private boolean isRepaired;
 
     public BaseRobot(String name, int energy, int happiness, int procedureTime) {
-        this.setName(name);
+        this.name = name;
         this.setEnergy(energy);
         this.setHappiness(happiness);
         this.setProcedureTime(procedureTime);
@@ -21,38 +23,43 @@ public abstract class BaseRobot implements Robot {
         this.setRepaired(false);
     }
 
-    private void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
     @Override
     public int getHappiness() {
-        return 0;
+        return this.happiness;
     }
 
     @Override
     public void setHappiness(int happiness) {
+        if (happiness < 0 || happiness > 100) {
+            throw new IllegalArgumentException(INVALID_HAPPINESS);
+        }
+
         this.happiness = happiness;
     }
 
     @Override
     public int getEnergy() {
-        return 0;
+        return this.energy;
     }
 
     @Override
     public void setEnergy(int energy) {
+        if (energy < 0 || energy > 100) {
+            throw new IllegalArgumentException(INVALID_ENERGY);
+        }
+
         this.energy = energy;
     }
 
     @Override
     public int getProcedureTime() {
-        return 0;
+        return this.procedureTime;
     }
 
     @Override
@@ -72,7 +79,7 @@ public abstract class BaseRobot implements Robot {
 
     @Override
     public boolean isRepaired() {
-        return false;
+        return this.isRepaired;
     }
 
     @Override
@@ -82,6 +89,7 @@ public abstract class BaseRobot implements Robot {
 
     @Override
     public String toString() {
-        return "BaseRobot{}";
+        return String.format(" Robot type: %s - %s - Happiness: %d - Energy: %d",
+                this.getClass().getSimpleName(), name, happiness, energy);
     }
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class BaseProcedure implements Procedure {
-    private Collection< Robot> robots;
+    protected Collection< Robot> robots;
 
     protected BaseProcedure() {
         this.robots = new ArrayList<>();
