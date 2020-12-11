@@ -2,7 +2,7 @@ package onlineShop.models.products.components;
 
 import onlineShop.models.products.BaseProduct;
 
-public abstract class BaseComponent extends BaseProduct {
+public abstract class BaseComponent extends BaseProduct implements Component {
     private int generation;
 
     protected BaseComponent(int id, String manufacturer, String model,
@@ -14,5 +14,10 @@ public abstract class BaseComponent extends BaseProduct {
     @Override
     public String toString() {
         return "BaseComponent{}";
+    }
+
+    @Override
+    public int getGeneration() {
+        return 0;
     }
 }

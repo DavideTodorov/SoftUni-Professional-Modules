@@ -2,7 +2,7 @@ package onlineShop.models.products.peripherals;
 
 import onlineShop.models.products.BaseProduct;
 
-public abstract class BasePeripheral extends BaseProduct {
+public abstract class BasePeripheral extends BaseProduct implements Peripheral {
     private String connectionType;
 
     protected BasePeripheral(int id, String manufacturer, String model,
@@ -15,5 +15,10 @@ public abstract class BasePeripheral extends BaseProduct {
     @Override
     public String toString() {
         return "BasePeripheral{}";
+    }
+
+    @Override
+    public String getConnectionType() {
+        return null;
     }
 }
