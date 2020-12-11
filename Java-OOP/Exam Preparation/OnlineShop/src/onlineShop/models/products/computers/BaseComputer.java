@@ -39,7 +39,8 @@ public class BaseComputer extends BaseProduct implements Computer {
 
         double sumFromComponents = components.stream()
                 .mapToDouble(Component::getOverallPerformance)
-                .sum();
+                .average()
+                .orElse(0);
 
         return super.getOverallPerformance() + sumFromComponents;
     }
@@ -116,7 +117,7 @@ public class BaseComputer extends BaseProduct implements Computer {
         for (Peripheral peripheral : peripherals) {
             if (peripheral.getClass().getSimpleName().equals(peripheralType)) {
                 peripheralToReturn = peripheral;
-                components.remove(peripheral);
+                peripherals.remove(peripheral);
                 isRemoved = true;
                 break;
             }

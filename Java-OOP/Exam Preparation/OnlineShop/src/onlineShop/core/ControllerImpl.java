@@ -84,6 +84,10 @@ public class ControllerImpl implements Controller {
             throw new IllegalArgumentException(EXISTING_COMPONENT_ID);
         }
 
+        if (!computerMap.containsKey(computerId)){
+            throw new IllegalArgumentException(NOT_EXISTING_COMPUTER_ID);
+        }
+
         computerMap.get(computerId).addComponent(component);
         componentMap.put(id, component);
 
@@ -93,6 +97,9 @@ public class ControllerImpl implements Controller {
 
     @Override
     public String removeComponent(String componentType, int computerId) {
+        if (!computerMap.containsKey(computerId)){
+            throw new IllegalArgumentException(NOT_EXISTING_COMPUTER_ID);
+        }
         Component component = computerMap.get(computerId).removeComponent(componentType);
         componentMap.remove(component.getId());
 
@@ -102,6 +109,7 @@ public class ControllerImpl implements Controller {
     @Override
     public String addPeripheral(int computerId, int id, String peripheralType, String manufacturer,
                                 String model, double price, double overallPerformance, String connectionType) {
+
 
         Peripheral peripheral = null;
         switch (peripheralType) {
@@ -129,6 +137,9 @@ public class ControllerImpl implements Controller {
             throw new IllegalArgumentException(EXISTING_PERIPHERAL_ID);
         }
 
+        if (!computerMap.containsKey(computerId)){
+            throw new IllegalArgumentException(NOT_EXISTING_COMPUTER_ID);
+        }
         computerMap.get(computerId).addPeripheral(peripheral);
         peripheralMap.put(id, peripheral);
 
@@ -137,6 +148,10 @@ public class ControllerImpl implements Controller {
 
     @Override
     public String removePeripheral(String peripheralType, int computerId) {
+        if (!computerMap.containsKey(computerId)){
+            throw new IllegalArgumentException(NOT_EXISTING_COMPUTER_ID);
+        }
+
         Peripheral peripheral = computerMap.get(computerId).removePeripheral(peripheralType);
         peripheralMap.remove(peripheral.getId(), peripheral);
         return String.format(REMOVED_PERIPHERAL, peripheralType, peripheral.getId());
@@ -144,6 +159,9 @@ public class ControllerImpl implements Controller {
 
     @Override
     public String buyComputer(int id) {
+        if (!computerMap.containsKey(id)){
+            throw new IllegalArgumentException(NOT_EXISTING_COMPUTER_ID);
+        }
         Computer remove = computerMap.remove(id);
         return remove.toString();
     }
@@ -161,12 +179,17 @@ public class ControllerImpl implements Controller {
             throw new IllegalArgumentException(String.format(CAN_NOT_BUY_COMPUTER, budget));
         }
 
+        Computer computer = collect.get(0);
+        computerMap.remove(computer.getId());
 
-        return collect.get(0).toString();
+        return computer.toString();
     }
 
     @Override
     public String getComputerData(int id) {
+        if (!computerMap.containsKey(id)){
+            throw new IllegalArgumentException(NOT_EXISTING_COMPUTER_ID);
+        }
         Computer computer = computerMap.get(id);
         return computer.toString();
     }

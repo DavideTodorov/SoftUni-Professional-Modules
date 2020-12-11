@@ -83,9 +83,9 @@ public abstract class BaseProduct implements Product {
 
     @Override
     public String toString() {
-        return String.format("Overall Performance: %.2f " +
+        return String.format("Overall Performance: %.2f. " +
                         "Price: %.2f - %s: %s %s " +
-                        "(Id: %d)", overallPerformance, price, this.getClass().getSimpleName(),
+                        "(Id: %d)", this.getOverallPerformance(), this.getPrice(), this.getClass().getSimpleName(),
                 manufacturer, model, id);
     }
 }
