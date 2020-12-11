@@ -11,7 +11,7 @@ public class BaseComputer extends BaseProduct implements Computer {
     private List<Component> components;
     private List<Peripheral> peripherals;
 
-    public BaseComputer(int id, String manufacturer, String model, double price, double overallPerformance) {
+    protected BaseComputer(int id, String manufacturer, String model, double price, double overallPerformance) {
         super(id, manufacturer, model, price, overallPerformance);
         this.components = new ArrayList<>();
         this.peripherals = new ArrayList<>();
