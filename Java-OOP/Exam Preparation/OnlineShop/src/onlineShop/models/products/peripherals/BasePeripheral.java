@@ -11,7 +11,7 @@ public abstract class BasePeripheral extends BaseProduct {
                 overallPerformance);
         this.connectionType = connectionType;
     }
-    
+
     @Override
     public String toString() {
         return "BasePeripheral{}";
