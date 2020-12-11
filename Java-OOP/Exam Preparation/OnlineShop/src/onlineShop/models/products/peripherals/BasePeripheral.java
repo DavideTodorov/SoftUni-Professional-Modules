@@ -14,11 +14,11 @@ public abstract class BasePeripheral extends BaseProduct implements Peripheral {
 
     @Override
     public String toString() {
-        return "BasePeripheral{}";
+        return super.toString() + String.format(" Connection Type: %s", connectionType);
     }
 
     @Override
     public String getConnectionType() {
-        return null;
+        return this.connectionType;
     }
 }

@@ -13,11 +13,11 @@ public abstract class BaseComponent extends BaseProduct implements Component {
 
     @Override
     public String toString() {
-        return "BaseComponent{}";
+        return super.toString() + String.format(" Generation: %d", generation);
     }
 
     @Override
     public int getGeneration() {
-        return 0;
+        return this.generation;
     }
 }
