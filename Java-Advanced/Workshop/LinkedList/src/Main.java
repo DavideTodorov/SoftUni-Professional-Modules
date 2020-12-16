@@ -4,9 +4,9 @@ public class Main {
 
         DoublyLinkedList linkedList = new DoublyLinkedList();
 
-        linkedList.addFirst(1);
-        linkedList.addFirst(2);
-        linkedList.addFirst(3);
+        linkedList.addLast(1);
+        linkedList.addLast(2);
+        linkedList.addLast(3);
 
         linkedList.forEach(System.out::println);
     }

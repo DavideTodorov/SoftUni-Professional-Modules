@@ -49,6 +49,21 @@ public class DoublyLinkedList {
         this.size++;
     }
 
+    public void addLast(int element) {
+        Node newNode = new Node(element);
+
+        if (size == 0) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode;
+        }
+
+        size++;
+    }
+
     public void forEach(Consumer<Integer> consumer) {
         Node curr = this.head;
 
