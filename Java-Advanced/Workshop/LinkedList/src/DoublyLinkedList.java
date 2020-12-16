@@ -22,18 +22,6 @@ public class DoublyLinkedList {
         this.size = 0;
     }
 
-    public Node getHead() {
-        return head;
-    }
-
-    public Node getTail() {
-        return tail;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
     public void addFirst(int element) {
         Node newNode = new Node(element);
 
@@ -62,6 +50,30 @@ public class DoublyLinkedList {
         }
 
         size++;
+    }
+
+    public int get(int index) {
+        if (index < 0 || index > size - 1) {
+            throw new NullPointerException(String.format("Index \"%d\" is out of bounds", index));
+        }
+
+        if (index <= size / 2) {
+            Node node = this.head;
+
+            for (int i = 0; i < index; i++) {
+                node = node.next;
+            }
+
+            return node.value;
+        } else {
+            Node node = this.tail;
+
+            for (int i = size - 1; i > index; i--) {
+                node = node.prev;
+            }
+
+            return node.value;
+        }
     }
 
     public void forEach(Consumer<Integer> consumer) {
