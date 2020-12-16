@@ -111,7 +111,6 @@ public class DoublyLinkedList {
         return value;
     }
 
-
     public void forEach(Consumer<Integer> consumer) {
         Node curr = this.head;
 
@@ -119,6 +118,20 @@ public class DoublyLinkedList {
             consumer.accept(curr.value);
             curr = curr.next;
         }
+    }
+
+    public int[] toArray() {
+        int[] arr = new int[this.size];
+
+        Node currNode = this.head;
+
+        int index = 0;
+        while (currNode != null) {
+            arr[index++] = currNode.value;
+            currNode = currNode.next;
+        }
+
+        return arr;
     }
 
     private void checkSize() {
