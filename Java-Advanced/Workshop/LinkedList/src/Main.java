@@ -9,6 +9,14 @@ public class Main {
         linkedList.addLast(3);
         linkedList.addLast(4);
         linkedList.addLast(5);
-        
+
+        try {
+            System.out.println(linkedList.removeFirst());
+            System.out.println(linkedList.removeFirst());
+            System.out.println(linkedList.removeFirst());
+        }catch (IllegalStateException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 }

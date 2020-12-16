@@ -76,6 +76,27 @@ public class DoublyLinkedList {
         }
     }
 
+    public int removeFirst() {
+        if (size == 0) {
+            throw new IllegalStateException("Cannot remove from empty LinkedList");
+        }
+
+        int value = this.head.value;
+
+        if (size == 1) {
+            this.head.next = null;
+            this.head = null;
+            this.tail = null;
+
+        } else {
+            this.head = this.head.next;
+            this.head.prev = null;
+        }
+
+        return value;
+    }
+
+
     public void forEach(Consumer<Integer> consumer) {
         Node curr = this.head;
 
