@@ -1,23 +1,24 @@
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String[] numbers = Arrays.stream();
+        IntStream numbers = IntStream.range(scanner.nextInt(), scanner.nextInt() + 1);
+        scanner.nextLine();
 
-        String evenOrOdd = scanner.nextLine();
+        int[] ints = numbers.toArray();
 
-        Predicate<Integer> returnCorrectNumbers = createPredicate(evenOrOdd);
+        Predicate<Integer> predicate = createPredicate(scanner.nextLine());
 
-        System.out.println(Arrays.stream(numbers)
-                .map(Integer::parseInt)
-                .filter(returnCorrectNumbers)
+        System.out.println(Arrays.stream(ints)
+                .boxed()
+                .filter(predicate)
                 .map(String::valueOf)
                 .collect(Collectors.joining(" ")));
     }
