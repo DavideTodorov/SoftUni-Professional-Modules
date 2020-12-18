@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -7,9 +8,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        IntPredicate isEven = e -> e % 2 == 0;
+
         String collect = Arrays.stream(scanner.nextLine().split(", "))
                 .mapToInt(Integer::parseInt)
-                .filter(p -> p % 2 == 0)
+                .filter(isEven)
                 .mapToObj(String::valueOf)
                 .collect(Collectors.joining(", "));
 
