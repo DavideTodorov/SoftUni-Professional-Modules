@@ -1,0 +1,56 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        List<String> people = Arrays.stream(scanner.nextLine().split("\\s+"))
+                .collect(Collectors.toList());
+
+        String input = scanner.nextLine();
+        while ("Party!".equals(input)) {
+            String[] tokens = input.split("\\s+");
+            String commandType = tokens[0];
+            String commandDefinition = tokens[1];
+
+            Predicate<String> predicate = null;
+
+            switch (commandType) {
+                case "Remove":
+                    if (commandDefinition.equals("StartsWith")) {
+                        String partToSearch = tokens[2];
+                        predicate = e -> e.startsWith(partToSearch);
+                    } else if (commandDefinition.equals("EndsWith")) {
+                        String partToSearch = tokens[2];
+                        predicate = e -> e.endsWith(partToSearch);
+                    } else if (commandDefinition.equals("Length")) {
+                        int length = Integer.parseInt(tokens[2]);
+                        predicate = e -> e.length() == length;
+                    }
+
+                    people.removeIf(predicate);
+                    break;
+                case "Double":
+                    if (commandDefinition.equals("StartsWith")) {
+                        String partToSearch = tokens[2];
+                        predicate = e -> e.startsWith(partToSearch);
+                    } else if (commandDefinition.equals("EndsWith")) {
+                        String partToSearch = tokens[2];
+                        predicate = e -> e.endsWith(partToSearch);
+                    } else if (commandDefinition.equals("Length")) {
+                        int length = Integer.parseInt(tokens[2]);
+                        predicate = e -> e.length() == length;
+                    }
+
+                    
+                    break;
+            }
+            input = scanner.nextLine();
+        }
+    }
+}
