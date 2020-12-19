@@ -13,8 +13,9 @@ public class Main {
                 .collect(Collectors.toList());
 
         String input = scanner.nextLine();
-        while ("Party!".equals(input)) {
+        while (!"Party!".equals(input)) {
             String[] tokens = input.split("\\s+");
+
             String commandType = tokens[0];
             String commandDefinition = tokens[1];
 
@@ -47,10 +48,18 @@ public class Main {
                         predicate = e -> e.length() == length;
                     }
 
-                    
+
                     break;
             }
             input = scanner.nextLine();
         }
+
+        if (people.isEmpty()){
+            System.out.println("Nobody is going to the party!");
+            return;
+        }
+
+        System.out.println(people.stream()
+                .collect(Collectors.joining(", ")) + " are going to the party!");
     }
 }
