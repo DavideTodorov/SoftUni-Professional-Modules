@@ -19,47 +19,48 @@ public class Main {
             String commandType = tokens[0];
             String commandDefinition = tokens[1];
 
-            Predicate<String> predicate = null;
+            Predicate<String> predicate;
 
             switch (commandType) {
                 case "Remove":
-                    if (commandDefinition.equals("StartsWith")) {
-                        String partToSearch = tokens[2];
-                        predicate = e -> e.startsWith(partToSearch);
-                    } else if (commandDefinition.equals("EndsWith")) {
-                        String partToSearch = tokens[2];
-                        predicate = e -> e.endsWith(partToSearch);
-                    } else if (commandDefinition.equals("Length")) {
-                        int length = Integer.parseInt(tokens[2]);
-                        predicate = e -> e.length() == length;
-                    }
-
+                    predicate =
+                            getPredicate(tokens, commandDefinition);
                     people.removeIf(predicate);
                     break;
-                case "Double":
-                    if (commandDefinition.equals("StartsWith")) {
-                        String partToSearch = tokens[2];
-                        predicate = e -> e.startsWith(partToSearch);
-                    } else if (commandDefinition.equals("EndsWith")) {
-                        String partToSearch = tokens[2];
-                        predicate = e -> e.endsWith(partToSearch);
-                    } else if (commandDefinition.equals("Length")) {
-                        int length = Integer.parseInt(tokens[2]);
-                        predicate = e -> e.length() == length;
-                    }
 
+                case "Double":
+                    predicate =
+                            getPredicate(tokens, commandDefinition);
 
                     break;
             }
+
             input = scanner.nextLine();
         }
 
-        if (people.isEmpty()){
+        if (people.isEmpty()) {
             System.out.println("Nobody is going to the party!");
             return;
         }
 
         System.out.println(people.stream()
                 .collect(Collectors.joining(", ")) + " are going to the party!");
+    }
+
+    private static Predicate<String> getPredicate(String[] tokens, String commandDefinition) {
+        Predicate<String> predicate = null;
+
+        if (commandDefinition.equals("StartsWith")) {
+            String partToSearch = tokens[2];
+            predicate = e -> e.startsWith(partToSearch);
+        } else if (commandDefinition.equals("EndsWith")) {
+            String partToSearch = tokens[2];
+            predicate = e -> e.endsWith(partToSearch);
+        } else if (commandDefinition.equals("Length")) {
+            int length = Integer.parseInt(tokens[2]);
+            predicate = e -> e.length() == length;
+        }
+
+        return predicate;
     }
 }
