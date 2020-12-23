@@ -31,7 +31,7 @@ public class Main {
                 case "Double":
                     predicate =
                             getPredicate(tokens, commandDefinition);
-
+                    
                     break;
             }
 
