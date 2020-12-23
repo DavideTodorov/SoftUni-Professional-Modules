@@ -22,6 +22,25 @@ public class Main {
     }
 
     public static Map<Integer, Integer> chooseCoins(int[] coins, int targetSum) {
-        // TODO
+        Arrays.sort(coins);
+        Map<Integer, Integer> coinsUsed = new LinkedHashMap<>();
+
+        for (int i = coins.length - 1; i >= 0; i--) {
+            int currCoin = coins[i];
+
+            int countOfCoins = targetSum / currCoin;
+
+            if (countOfCoins != 0) {
+                coinsUsed.put(currCoin, countOfCoins);
+            }
+
+            targetSum = targetSum % currCoin;
+
+            if (targetSum == 0){
+                break;
+            }
+        }
+
+        return coinsUsed;
     }
 }
