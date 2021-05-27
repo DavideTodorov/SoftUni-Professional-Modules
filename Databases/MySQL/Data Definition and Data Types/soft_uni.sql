@@ -44,14 +44,13 @@ FOREIGN KEY (`address_id`)
 REFERENCES `addresses`(`id`);
 
 
--- 12.Basic Insert
+-- 13.Basic Insert
 INSERT INTO `towns`(`name`)
 VALUES 
 ('Sofia'),
 ('Plovdiv'),
 ('Varna'),
 ('Burgas');
-
 
 INSERT INTO `departments`(`name`)
 VALUES 
@@ -68,3 +67,31 @@ VALUES
 (3, 'Maria', 'Petrova', 'Ivanova', 'Intern', 5, '2016-08-28', 525.25),
 (4, 'Georgi', 'Terziev', 'Ivanov', 'CEO', 2, '2007-12-09', 3000.00),
 (5, 'Peter', 'Pan', 'Pan', 'Intern', 3, '2016-08-28', 599.88);
+
+
+-- 14.Basic Select All Fields
+SELECT * FROM `towns`;
+SELECT * FROM `departments`;
+SELECT * FROM `employees`;
+
+
+-- 15. Basic Select All Fields and Order Them
+SELECT * FROM `towns` ORDER BY `name`;
+SELECT * FROM `departments` ORDER BY `name`;
+SELECT * FROM `employees` ORDER BY `salary` DESC;
+
+
+-- 16. Basic Select Some Fields
+SELECT `name` FROM `towns` ORDER BY `name`;
+SELECT `name` FROM `departments` ORDER BY `name`;
+SELECT `first_name`, `last_name`, `job_title`, `salary` FROM `employees` ORDER BY `salary` DESC;
+
+
+-- 17. Increase Employees Salary
+UPDATE `employees`
+SET `salary` = `salary` * 1.1;
+SELECT `salary` FROM `employees`;
+
+
+-- 18. Delete All Records
+DELETE FROM `employees`;
