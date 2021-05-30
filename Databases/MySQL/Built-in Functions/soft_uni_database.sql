@@ -1717,8 +1717,12 @@ ORDER BY `name`;
 
 
 -- 8.Create View Employees Hired After 2000 Year
-SELECT `first_name`, `last_name` FROM `employees`
-WHERE EXTRACT(YEAR FROM `hire_date`) > 2000;
+CREATE VIEW v_employees_hired_after_2000  AS (
+	SELECT `first_name`, `last_name` FROM `employees`
+	WHERE EXTRACT(YEAR FROM `hire_date`) > 2000
+);
+
+SELECT * FROM v_employees_hired_after_2000 ;
 
 
 -- 9.Length of Last Name
