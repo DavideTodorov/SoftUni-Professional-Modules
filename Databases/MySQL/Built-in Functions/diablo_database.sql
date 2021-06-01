@@ -4129,39 +4129,18 @@ ORDER BY `user_name`;
 
 
 -- 15.Show All Games with Duration and Part of the Day
-SET GLOBAL log_bin_trust_function_creators = 1;
-
--- Function to find the day duration
-DELIMITER $$
-USE `diablo`$$
-CREATE FUNCTION `CompareDate` (fromTable INT) 
-RETURNS VARCHAR(20)
-BEGIN
-		DECLARE result VARCHAR(20);
-        IF fromTable >= 0 AND fromTable < 12 THEN SET result = 'Morning';
-        ELSEIF fromTable >= 12 AND fromTable < 18 THEN SET result = 'Afternoon';
-        ELSEIF fromTable >= 18 AND fromTable < 24 THEN SET result = 'Evening';
-        END IF;
-        RETURN result;
-END$$
-
--- Function to find the length of the game
-DELIMITER $$
-USE `diablo`$$
-CREATE FUNCTION `CompareLength` (fromTable INT) 
-RETURNS VARCHAR(20)
-BEGIN
-		DECLARE result VARCHAR(20);
-        IF fromTable <= 3 THEN SET result = 'Extra Short';
-        ELSEIF fromTable > 3 AND fromTable <= 6 THEN SET result = 'Short';
-        ELSEIF fromTable > 6 AND fromTable <= 10 THEN SET result = 'Long';
-        ELSE SET result = 'Extra Long';
-        END IF;
-        RETURN result;
-END$$
-
-DELIMITER ;
-SELECT `name`, 
-CompareDate(EXTRACT(HOUR FROM `start`)) AS `Part of the Day`, 
-CompareLength(`duration`) AS 'Duration'
-FROM `games`; 
+SELECT 
+    `name`,
+    (CASE
+        WHEN HOUR(`start`) BETWEEN 0 AND 11 THEN 'Morning'
+        WHEN HOUR(`start`) BETWEEN 12 AND 17 THEN 'Afternoon'
+        ELSE 'Evening'
+    END) AS 'Part of the Day',
+    (CASE
+        WHEN `duration` <= 3 THEN 'Extra Short'
+        WHEN `duration` BETWEEN 4 AND 6 THEN 'Short'
+        WHEN `duration` BETWEEN 7 AND 10 THEN 'Long'
+        ELSE 'Extra Long'
+    END) AS 'Duration'
+FROM
+    `games`;
