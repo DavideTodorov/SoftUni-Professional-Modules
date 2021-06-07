@@ -868,7 +868,17 @@ ADD CONSTRAINT `fk_models_manufacturers`
 FOREIGN KEY (`manufacturer_id`)
 REFERENCES `manufacturers`(`manufacturer_id`);
 
-
+-- 09. Peaks in Rila
+SELECT 
+    `m`.`mountain_range`,
+    `p`.`peak_name`,
+    `p`.`elevation` AS `peak_elevation`
+FROM
+    `peaks` AS `p`
+        JOIN
+    `mountains` AS `m` ON `p`.`mountain_id` = `m`.`id`
+        AND `m`.`mountain_range` = 'Rila'
+ORDER BY `p`.`elevation` DESC;
 
 
 
