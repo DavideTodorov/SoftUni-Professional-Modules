@@ -1811,7 +1811,7 @@ FROM
     `departments` AS `d` ON `e`.`department_id` = `d`.`department_id`
 WHERE
     `d`.`name` IN ('Sales' , 'Finance')
-        AND `e`.`hire_date` > '1999-01-01'
+        AND DATE(`e`.`hire_date`) > '1999-01-01'
 ORDER BY `e`.`hire_date` ASC;
 
 
@@ -1828,7 +1828,7 @@ FROM
         JOIN
     `projects` AS `p` ON `ep`.`project_id` = `p`.`project_id`
 WHERE
-    `p`.`start_date` > '2002-08-13'
+    DATE(`p`.`start_date`) > '2002-08-13'
         AND `p`.`end_date` IS NULL
 ORDER BY `e`.`first_name` ASC , `project_name` ASC
 LIMIT 5;
