@@ -1,3 +1,59 @@
+
+CREATE TABLE `branches`(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(30) NOT NULL UNIQUE
+);
+
+CREATE TABLE `employees`(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    `first_name` VARCHAR(20) NOT NULL,
+    `last_name` VARCHAR(20) NOT NULL,
+    `salary` DECIMAL(10, 2) NOT NULL,
+    `started_on` DATE NOT NULL,
+    `branch_id` INT NOT NULL,
+    CONSTRAINT fk_employees_branches
+    FOREIGN KEY (`branch_id`)
+    REFERENCES branches(`id`)
+);
+
+CREATE TABLE `clients`(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    `full_name` VARCHAR(50) NOT NULL,
+    `age` INT NOT NULL
+);
+
+CREATE TABLE `employees_clients`(
+	`employee_id` INT,
+	`client_id` INT,
+    CONSTRAINT fk_employee_client
+    FOREIGN KEY (`employee_id`)
+    REFERENCES employees(`id`),
+    
+    CONSTRAINT fk_client_employee
+    FOREIGN KEY (`client_id`)
+    REFERENCES clients(`id`)
+);
+
+CREATE TABLE `bank_accounts`(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    `account_number` VARCHAR(10) NOT NULL,
+    `balance` DECIMAL(10, 2) NOT NULL,
+    `client_id` INT NOT NULL UNIQUE,
+    CONSTRAINT fk_bank_account_client
+    FOREIGN KEY (`client_id`)
+    REFERENCES clients(`id`)
+);
+
+CREATE TABLE `cards`(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    `card_number` VARCHAR(19) NOT NULL,
+    `card_status` VARCHAR(7) NOT NULL,
+    `bank_account_id` INT NOT NULL,
+    CONSTRAINT fk_cards_bank_account
+    FOREIGN KEY (`bank_account_id`)
+    REFERENCES bank_accounts(`id`)
+);
+
 INSERT INTO branches (id, name)
 VALUES
 (1,'Judy Branch'),
@@ -50,6 +106,8 @@ VALUES
 (48,'Lillian Branch'),
 (49,'Becker Branch'),
 (50,'Eliot Branch');
+
+
 
 INSERT INTO employees (id, first_name, last_name, salary, started_on, branch_id)
 VALUES
@@ -154,6 +212,8 @@ VALUES
 (99,'Deny','O''Keefe',895076.94,'2017-11-30',43),
 (100,'Courtenay','Stag',380400.32,'2017-12-26',5),
 (101,'Donald','Trump',380400.32,'2017-12-26',5);
+
+
 
 INSERT INTO clients (id, full_name, age)
 VALUES
@@ -1568,3 +1628,98 @@ VALUES
 (498,'LI56 5660 20M9 YEKS','Active',37),
 (499,'FR40 7977 8159 15WS','Active',127),
 (500,'SM80 M775 4918 653X','Active',40);
+
+-- 05. Clients
+SELECT `id`, `full_name` FROm clients ORDER BY `id`;
+
+-- 06. Newbies
+SELECT `id`, CONCAT(`first_name`, ' ', `last_name`) AS `full_name`,
+CONCAT('$', `salary`) AS salary, started_on
+FROM `employees`
+WHERE `salary` >= 100000 AND `started_on` >= '2018-01-01'
+ORDER BY `salary` DESC, `id`;
+
+
+-- 07. Cards against Humanity
+SELECT c.`id`, CONCAT(c.`card_number`, ' : ', cl.`full_name`) AS `card_token`
+FROM `cards` AS c
+JOIN `bank_accounts` AS ba
+ON c.`bank_account_id` = ba.`id`
+JOIN `clients` AS cl
+ON ba.`client_id` = cl.`id`
+ORDER BY c.`id` DESC;
+
+
+-- 08. Top 5 Employees
+SELECT CONCAT(e.`first_name`, ' ', e.`last_name`) AS full_name,
+e.`started_on`, COUNT(ec.`client_id`) AS count_of_clients
+FROM `employees_clients` AS ec
+JOIN `employees` AS e
+ON ec.`employee_id` = e.`id`
+GROUP BY ec.`employee_id`
+ORDER BY count_of_clients DESC, e.`id`
+LIMIT 5;
+
+
+-- 09. Branch cards
+SELECT b.`name`, COUNT(c.`id`) AS count_of_cards
+FROM `branches` AS b
+LEFT JOIN `employees` AS e
+ON b.`id` = e.`branch_id`
+LEFT JOIN `employees_clients` AS ec
+ON e.`id` = ec.`employee_id`
+LEFT JOIN `clients` AS cl
+ON ec.`client_id` = cl.`id`
+LEFT JOIN `bank_accounts` AS ba
+On cl.`id` = ba.`client_id`
+LEFT JOIN `cards` AS c
+ON c.`bank_account_id` = ba.`id`
+GROUP BY b.`name`
+ORDER BY `count_of_cards` DESC, b.`name`;
+
+
+-- 10. Extract card's count
+DELIMITER &&
+
+CREATE FUNCTION udf_client_cards_count(`name` VARCHAR(30))
+RETURNS INT
+DETERMINISTIC
+BEGIN
+
+	RETURN (
+		SELECT count(c.`id`)
+        FROM `cards` AS c
+        JOIN `bank_accounts` AS ba
+        ON c.`bank_account_id` = ba.`id`
+        JOIN `clients` AS cl
+        ON ba.`client_id` = cl.`id`
+        WHERE cl.`full_name` = `name`
+    );
+
+END&&
+
+	SELECT udf_client_cards_count('Baxy David');
+
+DELIMITER ;
+
+
+-- 11. Client Info
+DELIMITER &&
+
+CREATE PROCEDURE udp_clientinfo(full_name_input VARCHAR(45))
+BEGIN
+
+	SELECT c.`full_name`, c.`age`, ba.`account_number`, CONCAT('$', ba.`balance`) AS balance
+    FROM `clients` AS c
+    JOIN `bank_accounts` AS ba
+    ON c.`id` = ba.`client_id`
+    WHERE c.`full_name` = full_name_input;
+
+END&&
+
+DELIMITER ;
+
+CALL udp_clientinfo('Hunter Wesgate')
+
+
+
