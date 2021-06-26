@@ -13,7 +13,7 @@ public class GetVillainsNames {
 
         ResultSet resultSet = statement.executeQuery
                 ("""
-                        SELECT v.name, COUNT(mv.minion_id) AS minions_count
+                        SELECT v.name, COUNT(DISTINCT mv.minion_id) AS minions_count
                         FROM  villains AS v
                         JOIN minions_villains mv
                         ON v.id = mv.villain_id

@@ -52,11 +52,9 @@ public class ChangeTownNamesCasing {
                 res.add(townsAffected.getString("name"));
             }
 
-            StringBuilder sb = new StringBuilder();
-            sb.append("[");
-            sb.append(String.join(", ", res));
-            sb.append("]");
-
+            String sb = "[" +
+                    String.join(", ", res) +
+                    "]";
             System.out.println(sb);
 
         } else {

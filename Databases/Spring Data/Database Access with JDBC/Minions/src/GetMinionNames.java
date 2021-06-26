@@ -22,6 +22,7 @@ public class GetMinionNames {
                         ON m.id = mv.minion_id
                         WHERE  v.id = ?;""");
 
+        System.out.println("Enter villain id:");
         int villainId = Integer.parseInt(scanner.nextLine());
 
         preparedStatement.setInt(1, villainId);

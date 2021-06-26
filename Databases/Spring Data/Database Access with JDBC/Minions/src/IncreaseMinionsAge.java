@@ -1,5 +1,3 @@
-import com.mysql.cj.x.protobuf.MysqlxExpr;
-
 import java.sql.*;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -7,11 +5,11 @@ import java.util.Scanner;
 public class IncreaseMinionsAge {
 
     public static void main(String[] args) throws SQLException {
-        /*      8. Increase Minions Age        */ // --- TODO
+        /*      8. Increase Minions Age        */
 
         Scanner scanner = new Scanner(System.in);
 
-        String[] input = scanner.nextLine().split("\\s+");
+        Object[] input = Arrays.stream(scanner.nextLine().split("\\s+")).toArray();
 
 
         Connection connection = DriverManager.getConnection
@@ -23,19 +21,19 @@ public class IncreaseMinionsAge {
                 "FROM minions;");
 
 
-        // --- TODO
-        /*
-        minionsStatement.setArray(1, anInt);
-        minionsStatement.setArray(2, anInt);
+        // TODO: Feature not supported in MySQL
+        minionsStatement.setArray(1, connection.createArrayOf("INT", input));
+        minionsStatement.setArray(2, connection.createArrayOf("INT", input));
+
 
         ResultSet alteredMinions = minionsStatement.executeQuery();
 
-        System.out.println(anInt);
+
         while (alteredMinions.next()) {
             System.out.println(alteredMinions.getString(1) + " " + alteredMinions.getInt(2));
 
         }
-            */
+
 
     }
 }
